@@ -29,6 +29,8 @@ namespace FW_Burn
 
         string[] SOM_Serial = new string[4];
         string[] MB_Serial = new string[4];
+
+        PS_Driver MainPS = new PS_Driver();
         
         public FW_Burn()
         {
@@ -44,7 +46,20 @@ namespace FW_Burn
             {
                 listBox1.Items.Add(String.Format("Device ID: {0}, PNP Device ID: {1}, Description: {2}", usbDevice.DeviceID, usbDevice.PnpDeviceID, usbDevice.Description));                
             }
+            MainPS.GetAdressPS(ps_address);
+            MainPS.ConnectPowerSupply(ps_address);
             
+            if (MainPS.PS_Init())
+            {
+                label2.ForeColor= System.Drawing.Color.Green;
+                label2.Text = "CONNECTED";
+            }
+            else
+            {
+                label2.ForeColor = System.Drawing.Color.Red;
+                label2.Text = "DISCONNECTED";
+            }
+
             using (SqlConnection con = new SqlConnection(connectionDB)) 
             {
                     try
@@ -244,7 +259,17 @@ namespace FW_Burn
 
         private void Cmd_Burn1_Click(object sender, EventArgs e)
         {
+            DialogResult dialogResult = MessageBox.Show("CONNECT FIRST STAND USB TO MAIN BOARD", "Warning", MessageBoxButtons.OKCancel);
+            if(dialogResult ==DialogResult.OK)
+            {
 
+            }
+            else
+            {
+                textMAIN1.Clear();
+                textSOM1.Clear();
+                Cmd_Burn1.Enabled = false;
+            }
         }
     }
 }
