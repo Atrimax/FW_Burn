@@ -246,7 +246,7 @@ namespace FW_Burn
                 if (gr.IsMatch(textMAIN4.Text))
                 {
                     MB_Serial[3] = textMAIN4.Text;
-                    //textSOM4.Focus();
+                    
                     Cmd_Burn4.Enabled = true;
                 }
                 else
