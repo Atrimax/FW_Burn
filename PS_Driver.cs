@@ -72,7 +72,7 @@ namespace FW_Burn
                 System.Threading.Thread.Sleep(200);
 
                 string p_answer = src.ReadString();
-                PS_INIT_Flag = p_answer.Contains("");
+                PS_INIT_Flag = p_answer.Contains("MP710508");
             }
             catch (Exception ex)
             {
@@ -88,14 +88,24 @@ namespace FW_Burn
         public bool PS_CH_ONOFF(int channel, bool status)
         {
             bool psonoff = false;
-            
-            string command = "SOUR:CHAN:OUTP " + status.ToString()+"\n";
+            string command = string.Empty;
 
-            string b_command = "INST:NSEL " + channel.ToString() + "\n";
+            //string command = "SOUR:CHAN:OUTP " + status.ToString()+"\n";
+            if(status) 
+            {
+                command = "OUT" + channel.ToString() + ":1" + "\n";
+            }
+            else
+            {
+                command = "OUT" + channel.ToString() + ":0" + "\n";
+            }
+            
+
+            //string b_command = "INST:NSEL " + channel.ToString() + "\n";
             try 
             {
-                src.WriteString(b_command);
-                System.Threading.Thread.Sleep(200);
+                //src.WriteString(b_command);
+                //System.Threading.Thread.Sleep(200);
                 src.WriteString(command);
                 System.Threading.Thread.Sleep(200);
                 psonoff = true;
@@ -110,10 +120,11 @@ namespace FW_Burn
         }
 
         //PS must be configured to for 3.7VDC
-        public bool PS_Setup_Voltage(string voltage)
+        public bool PS_Setup_Voltage(string voltage,int chan)
         {
             bool ps_volt = false;
-            string command = "SOUR:APPL:VOLT "+voltage.ToString()+"," + voltage.ToString() + "," + voltage.ToString() + "," + voltage.ToString() + "\n";
+            //string command = "SOUR:APPL:VOLT "+voltage.ToString()+"," + voltage.ToString() + "," + voltage.ToString() + "," + voltage.ToString() + "\n";
+            string command = "VSET"+chan.ToString()+":"+voltage+"\n";
             try
             {                
                 src.WriteString(command);
@@ -129,10 +140,11 @@ namespace FW_Burn
             return ps_volt;
         }
 
-        public bool PS_Setup_Current(string current)
+        public bool PS_Setup_Current(string current, int chan)
         {
             bool ps_curr = false;
-            string command = "SOUR:APPL:CURR " + current.ToString() + "," + current.ToString() + "," + current.ToString() + "," + current.ToString() + "\n";
+            //string command = "SOUR:APPL:CURR " + current.ToString() + "," + current.ToString() + "," + current.ToString() + "," + current.ToString() + "\n";
+            string command = "ISET"+chan.ToString()+":"+current+"\n";
 
             try
             {

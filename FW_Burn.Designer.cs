@@ -198,18 +198,18 @@
             this.lbl3.AutoSize = true;
             this.lbl3.Location = new System.Drawing.Point(15, 280);
             this.lbl3.Name = "lbl3";
-            this.lbl3.Size = new System.Drawing.Size(48, 13);
+            this.lbl3.Size = new System.Drawing.Size(49, 13);
             this.lbl3.TabIndex = 15;
-            this.lbl3.Text = "(3) UUT:";
+            this.lbl3.Text = "(3) SOM:";
             // 
             // lbl4
             // 
             this.lbl4.AutoSize = true;
             this.lbl4.Location = new System.Drawing.Point(15, 382);
             this.lbl4.Name = "lbl4";
-            this.lbl4.Size = new System.Drawing.Size(48, 13);
+            this.lbl4.Size = new System.Drawing.Size(49, 13);
             this.lbl4.TabIndex = 16;
-            this.lbl4.Text = "(4) UUT:";
+            this.lbl4.Text = "(4) SOM:";
             // 
             // label5
             // 
