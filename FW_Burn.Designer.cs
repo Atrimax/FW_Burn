@@ -54,6 +54,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.textMAIN4 = new System.Windows.Forms.TextBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -198,18 +200,18 @@
             this.lbl3.AutoSize = true;
             this.lbl3.Location = new System.Drawing.Point(15, 280);
             this.lbl3.Name = "lbl3";
-            this.lbl3.Size = new System.Drawing.Size(48, 13);
+            this.lbl3.Size = new System.Drawing.Size(49, 13);
             this.lbl3.TabIndex = 15;
-            this.lbl3.Text = "(3) UUT:";
+            this.lbl3.Text = "(3) SOM:";
             // 
             // lbl4
             // 
             this.lbl4.AutoSize = true;
             this.lbl4.Location = new System.Drawing.Point(15, 382);
             this.lbl4.Name = "lbl4";
-            this.lbl4.Size = new System.Drawing.Size(48, 13);
+            this.lbl4.Size = new System.Drawing.Size(49, 13);
             this.lbl4.TabIndex = 16;
-            this.lbl4.Text = "(4) UUT:";
+            this.lbl4.Text = "(4) SOM:";
             // 
             // label5
             // 
@@ -287,11 +289,31 @@
             this.listBox1.Size = new System.Drawing.Size(177, 381);
             this.listBox1.TabIndex = 26;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(12, 487);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(44, 13);
+            this.label9.TabIndex = 27;
+            this.label9.Text = "filepath:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(56, 487);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(41, 13);
+            this.label10.TabIndex = 28;
+            this.label10.Text = "label10";
+            // 
             // FW_Burn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(483, 586);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.textMAIN4);
             this.Controls.Add(this.label8);
@@ -355,6 +377,8 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox textMAIN4;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
     }
 }
 

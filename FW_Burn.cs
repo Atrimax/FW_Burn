@@ -30,6 +30,8 @@ namespace FW_Burn
         string[] SOM_Serial = new string[4];
         string[] MB_Serial = new string[4];
 
+        string imagefile = @"C:\BurnImage\ight.img";
+
         PS_Driver MainPS = new PS_Driver();
         
         public FW_Burn()
@@ -59,6 +61,21 @@ namespace FW_Burn
                 label2.ForeColor = System.Drawing.Color.Red;
                 label2.Text = "DISCONNECTED";
             }
+            for (int i = 1; i <= 4; i++)
+            {
+                MainPS.PS_Setup_Current("1", i);
+                MainPS.PS_Setup_Voltage("3.7", i);
+            }
+            if(File.Exists(imagefile))
+            {
+                label10.Text = imagefile;
+            }
+            else { MessageBox.Show("IMage file not EXISTS!!!", "Warning"); }
+            //MainPS.PS_CH_ONOFF(3, true);
+
+            //System.Threading.Thread.Sleep(8000);
+            //MainPS.PS_CH_ONOFF(3, false);
+
 
             using (SqlConnection con = new SqlConnection(connectionDB)) 
             {
