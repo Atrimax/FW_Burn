@@ -40,6 +40,7 @@ namespace FW_Burn
             InitializeComponent();          
                         
             var usbDevices = GetUSBDevices();
+            label11.Text = string.Empty;
             /*
             foreach (var usbDevice in usbDevices)
             {
@@ -66,6 +67,18 @@ namespace FW_Burn
                 
             }                     
             
+        }
+
+        private void ShowLabel(int stat)
+        {
+            if(stat == 0)
+            {
+                label11.Text = "CONNECT USB TO THE FIRST UNIT";
+            }
+            else if(stat == 1) 
+            {
+                label11.Text = "DISCONNECT USB FROM THE FIRST UNIT";
+            }
         }
 
         private void Cmd_Exit_Click(object sender, EventArgs e)
@@ -187,7 +200,7 @@ namespace FW_Burn
                     }
                     else if (statflag[0] == 0)
                     {
-                        MessageBox.Show("THIS MAINBOARD PCBA TEST LAST FINAL RESULT IS FAIL", "Warning");
+                        MessageBox.Show("THIS MAINBOARD PCBA TEST LAST FINAL RESULT IS FAIL!!", "Warning");
                     }
                     else if (statflag[0] == 2)
                     {
@@ -310,7 +323,8 @@ namespace FW_Burn
                 DialogResult m1 = MessageBox.Show("THIS MAINBOARD ALREADY PAIRED, DO YOU WANT TO UPDATE PAIRING?","INFO",MessageBoxButtons.YesNo);
                 if(m1 == DialogResult.Yes) 
                 {
-                    MessageBox.Show("CONNECT FIRST STAND USB TO MAINBOARD","INFO");
+                    //MessageBox.Show("CONNECT FIRST STAND USB TO MAINBOARD","INFO");
+                    ShowLabel(0);
                     int pair1 = BurnTest(bootfile, imagefile);
                     SQL_Manager.UpdatePairing(connectSQLDB, MB_Serial[0], SOM_Serial[0], imagefw, pair1);
                 }
@@ -320,8 +334,8 @@ namespace FW_Burn
             {
                 if (statflag[0] == 1)
                 {
-
-                    MessageBox.Show("CONNECT FIRST STAND USB TO MAIN BOARD", "INFO");
+                    ShowLabel(0);
+                    //MessageBox.Show("CONNECT FIRST STAND USB TO MAIN BOARD", "INFO");
                     int pair1 = BurnTest(bootfile, imagefile);
                     SQL_Manager.SAVE_Pairing(connectSQLDB, MB_Serial[0], SOM_Serial[0],imagefw, pair1);
 
@@ -348,6 +362,9 @@ namespace FW_Burn
  * DeviceInformation.FindAllAsync()
  * 
  * https://stackoverflow.com/questions/6416931/can-the-physical-usb-port-be-identified-programmatically-for-a-device-in-windows
+ * https://stackoverflow.com/questions/5367557/how-to-parse-command-line-output-from-c
+ * https://stackoverflow.com/questions/206323/how-to-execute-command-line-in-c-get-std-out-results
+ * https://www.codeproject.com/Articles/170017/Solving-Problems-of-Monitoring-Standard-Output-and
  * 
  * 
  * 
