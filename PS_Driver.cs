@@ -5,7 +5,7 @@ using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Ivi.Visa.Interop;
+//using Ivi.Visa.Interop;
 
 namespace FW_Burn
 {

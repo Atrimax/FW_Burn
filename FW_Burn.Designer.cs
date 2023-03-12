@@ -107,6 +107,7 @@
             // Cmd_Burn1
             // 
             this.Cmd_Burn1.Enabled = false;
+            this.Cmd_Burn1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.Cmd_Burn1.Location = new System.Drawing.Point(165, 76);
             this.Cmd_Burn1.Name = "Cmd_Burn1";
             this.Cmd_Burn1.Size = new System.Drawing.Size(82, 75);
@@ -118,6 +119,7 @@
             // Cmd_Burn2
             // 
             this.Cmd_Burn2.Enabled = false;
+            this.Cmd_Burn2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.Cmd_Burn2.Location = new System.Drawing.Point(165, 179);
             this.Cmd_Burn2.Name = "Cmd_Burn2";
             this.Cmd_Burn2.Size = new System.Drawing.Size(82, 79);
@@ -128,6 +130,7 @@
             // Cmd_Burn3
             // 
             this.Cmd_Burn3.Enabled = false;
+            this.Cmd_Burn3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.Cmd_Burn3.Location = new System.Drawing.Point(165, 282);
             this.Cmd_Burn3.Name = "Cmd_Burn3";
             this.Cmd_Burn3.Size = new System.Drawing.Size(82, 75);
@@ -138,6 +141,7 @@
             // Cmd_Burn4
             // 
             this.Cmd_Burn4.Enabled = false;
+            this.Cmd_Burn4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.Cmd_Burn4.Location = new System.Drawing.Point(165, 381);
             this.Cmd_Burn4.Name = "Cmd_Burn4";
             this.Cmd_Burn4.Size = new System.Drawing.Size(82, 79);
@@ -147,137 +151,153 @@
             // 
             // textSOM1
             // 
+            this.textSOM1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.textSOM1.Location = new System.Drawing.Point(15, 92);
             this.textSOM1.Name = "textSOM1";
-            this.textSOM1.Size = new System.Drawing.Size(118, 20);
+            this.textSOM1.Size = new System.Drawing.Size(137, 22);
             this.textSOM1.TabIndex = 9;
             this.textSOM1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textSOM1_KeyPress);
             // 
             // textSOM2
             // 
+            this.textSOM2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.textSOM2.Location = new System.Drawing.Point(15, 197);
             this.textSOM2.Name = "textSOM2";
-            this.textSOM2.Size = new System.Drawing.Size(118, 20);
+            this.textSOM2.Size = new System.Drawing.Size(118, 22);
             this.textSOM2.TabIndex = 10;
             this.textSOM2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textSOM2_KeyPress);
             // 
             // textSOM3
             // 
+            this.textSOM3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.textSOM3.Location = new System.Drawing.Point(15, 296);
             this.textSOM3.Name = "textSOM3";
-            this.textSOM3.Size = new System.Drawing.Size(118, 20);
+            this.textSOM3.Size = new System.Drawing.Size(118, 22);
             this.textSOM3.TabIndex = 11;
             this.textSOM3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textSOM3_KeyPress);
             // 
             // textSOM4
             // 
+            this.textSOM4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.textSOM4.Location = new System.Drawing.Point(15, 398);
             this.textSOM4.Name = "textSOM4";
-            this.textSOM4.Size = new System.Drawing.Size(118, 20);
+            this.textSOM4.Size = new System.Drawing.Size(118, 22);
             this.textSOM4.TabIndex = 12;
             this.textSOM4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textSOM4_KeyPress);
             // 
             // lbl1
             // 
             this.lbl1.AutoSize = true;
+            this.lbl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.lbl1.Location = new System.Drawing.Point(15, 76);
             this.lbl1.Name = "lbl1";
-            this.lbl1.Size = new System.Drawing.Size(49, 13);
+            this.lbl1.Size = new System.Drawing.Size(66, 16);
             this.lbl1.TabIndex = 13;
             this.lbl1.Text = "(1) SOM:";
             // 
             // lbl2
             // 
             this.lbl2.AutoSize = true;
+            this.lbl2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.lbl2.Location = new System.Drawing.Point(15, 179);
             this.lbl2.Name = "lbl2";
-            this.lbl2.Size = new System.Drawing.Size(49, 13);
+            this.lbl2.Size = new System.Drawing.Size(66, 16);
             this.lbl2.TabIndex = 14;
             this.lbl2.Text = "(2) SOM:";
             // 
             // lbl3
             // 
             this.lbl3.AutoSize = true;
+            this.lbl3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.lbl3.Location = new System.Drawing.Point(15, 280);
             this.lbl3.Name = "lbl3";
-            this.lbl3.Size = new System.Drawing.Size(49, 13);
+            this.lbl3.Size = new System.Drawing.Size(66, 16);
             this.lbl3.TabIndex = 15;
             this.lbl3.Text = "(3) SOM:";
             // 
             // lbl4
             // 
             this.lbl4.AutoSize = true;
+            this.lbl4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.lbl4.Location = new System.Drawing.Point(15, 382);
             this.lbl4.Name = "lbl4";
-            this.lbl4.Size = new System.Drawing.Size(49, 13);
+            this.lbl4.Size = new System.Drawing.Size(66, 16);
             this.lbl4.TabIndex = 16;
             this.lbl4.Text = "(4) SOM:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.label5.Location = new System.Drawing.Point(15, 115);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(75, 13);
+            this.label5.Size = new System.Drawing.Size(101, 16);
             this.label5.TabIndex = 18;
             this.label5.Text = "MAINBOARD:";
             // 
             // textMAIN1
             // 
+            this.textMAIN1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.textMAIN1.Location = new System.Drawing.Point(15, 131);
             this.textMAIN1.Name = "textMAIN1";
-            this.textMAIN1.Size = new System.Drawing.Size(118, 20);
+            this.textMAIN1.Size = new System.Drawing.Size(137, 22);
             this.textMAIN1.TabIndex = 19;
             this.textMAIN1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textMAIN1_KeyPress);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.label6.Location = new System.Drawing.Point(12, 220);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(75, 13);
+            this.label6.Size = new System.Drawing.Size(101, 16);
             this.label6.TabIndex = 20;
             this.label6.Text = "MAINBOARD:";
             // 
             // textMAIN2
             // 
+            this.textMAIN2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.textMAIN2.Location = new System.Drawing.Point(15, 236);
             this.textMAIN2.Name = "textMAIN2";
-            this.textMAIN2.Size = new System.Drawing.Size(118, 20);
+            this.textMAIN2.Size = new System.Drawing.Size(118, 22);
             this.textMAIN2.TabIndex = 21;
             this.textMAIN2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textMAIN2_KeyPress);
             // 
             // textMAIN3
             // 
+            this.textMAIN3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.textMAIN3.Location = new System.Drawing.Point(15, 335);
             this.textMAIN3.Name = "textMAIN3";
-            this.textMAIN3.Size = new System.Drawing.Size(118, 20);
+            this.textMAIN3.Size = new System.Drawing.Size(118, 22);
             this.textMAIN3.TabIndex = 22;
             this.textMAIN3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textMAIN3_KeyPress);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.label7.Location = new System.Drawing.Point(12, 319);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(75, 13);
+            this.label7.Size = new System.Drawing.Size(101, 16);
             this.label7.TabIndex = 23;
             this.label7.Text = "MAINBOARD:";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.label8.Location = new System.Drawing.Point(12, 421);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(75, 13);
+            this.label8.Size = new System.Drawing.Size(101, 16);
             this.label8.TabIndex = 24;
             this.label8.Text = "MAINBOARD:";
             // 
             // textMAIN4
             // 
+            this.textMAIN4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.textMAIN4.Location = new System.Drawing.Point(15, 440);
             this.textMAIN4.Name = "textMAIN4";
-            this.textMAIN4.Size = new System.Drawing.Size(118, 20);
+            this.textMAIN4.Size = new System.Drawing.Size(118, 22);
             this.textMAIN4.TabIndex = 25;
             this.textMAIN4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textMAIN4_KeyPress);
             // 
@@ -294,14 +314,14 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(12, 487);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(44, 13);
+            this.label9.Size = new System.Drawing.Size(62, 13);
             this.label9.TabIndex = 27;
-            this.label9.Text = "filepath:";
+            this.label9.Text = "image path:";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(56, 487);
+            this.label10.Location = new System.Drawing.Point(75, 487);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(41, 13);
             this.label10.TabIndex = 28;
