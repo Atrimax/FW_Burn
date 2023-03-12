@@ -41,6 +41,8 @@ namespace FW_Burn
                         
             var usbDevices = GetUSBDevices();
             label11.Text = string.Empty;
+            this.ActiveControl = textSOM1;
+            textSOM1.Focus();
             /*
             foreach (var usbDevice in usbDevices)
             {
