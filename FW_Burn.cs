@@ -20,7 +20,7 @@ namespace FW_Burn
     public partial class FW_Burn : Form
     {
         string connectSQLDB = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnectionString"].ToString();
-        
+        string imagefw = System.Configuration.ConfigurationManager.AppSettings["imageversion"].ToString();
         //string ps_address = string.Empty;
         string pattern = @"\AFI-\d{4}-MB\d{5}\Z";
         string mac_pattern = @"\A[0-9A-Fa-f]{12}\Z"; //\A^[a-fA-F0-9]{12}\Z
@@ -32,51 +32,27 @@ namespace FW_Burn
         string imagefile = System.Configuration.ConfigurationManager.AppSettings["imagefile"].ToString(); //@"C:\BurnImage\ight.img";
         string bootfile = System.Configuration.ConfigurationManager.AppSettings["bootfile"].ToString();
 
-        //PS_Driver MainPS = new PS_Driver();
+        
         SQL_Driver SQL_Manager = new SQL_Driver();
         
         public FW_Burn()
         {
             InitializeComponent();          
-
-
-            //ps_address = System.Configuration.ConfigurationManager.AppSettings["ps_address"];
-
-            
+                        
             var usbDevices = GetUSBDevices();
             /*
             foreach (var usbDevice in usbDevices)
             {
                 listBox1.Items.Add(String.Format("Device ID: {0}, PNP Device ID: {1}, Description: {2}", usbDevice.DeviceID, usbDevice.PnpDeviceID, usbDevice.Description));                
             }*/
-            //MainPS.GetAdressPS(ps_address);
-            //MainPS.ConnectPowerSupply(ps_address);
+                       
             
-            /*if (MainPS.PS_Init())
-            {
-                label2.ForeColor= System.Drawing.Color.Green;
-                label2.Text = "CONNECTED";
-            }
-            else
-            {
-                label2.ForeColor = System.Drawing.Color.Red;
-                label2.Text = "DISCONNECTED";
-            }*/
-            /*
-            for (int i = 1; i <= 4; i++)
-            {
-                MainPS.PS_Setup_Current("1", i);
-                MainPS.PS_Setup_Voltage("3.7", i);
-            }*/
             if(File.Exists(imagefile) && File.Exists(bootfile))
             {
                 label10.Text = imagefile;
             }
             else { MessageBox.Show("Image/Boot file not EXISTS!!!", "Warning"); }
-            //MainPS.PS_CH_ONOFF(3, true);
-
-            //System.Threading.Thread.Sleep(8000);
-            //MainPS.PS_CH_ONOFF(3, false);
+            
             bool connectflag = SQL_Manager.DBConnected(connectSQLDB);
             if(connectflag) 
             {
@@ -126,8 +102,7 @@ namespace FW_Burn
                 Regex mc = new Regex(mac_pattern);
                 if (mc.IsMatch(textSOM1.Text))
                 {
-                    SOM_Serial[0] = textSOM1.Text;
-                    
+                    SOM_Serial[0] = textSOM1.Text;                    
                     textMAIN1.Focus();
                     
                 }
@@ -252,8 +227,40 @@ namespace FW_Burn
                 }
             }
         }
-        private int BurnTest(int status, string bootf, string imagef)
+        private int BurnTest(string bootf, string imagef)
         {
+            try
+            {
+                string commt = @"/C C:\BurnImage\uuu.exe -b -emmc_all " + bootf + " " + imagef;
+                // create the ProcessStartInfo using "cmd" as the program to be run, and "/c " as the parameters.
+                // Incidentally, /c tells cmd that we want it to execute the command that follows, and then exit.
+                System.Diagnostics.ProcessStartInfo procStartInfo = new System.Diagnostics.ProcessStartInfo("cmd", commt);
+                // The following commands are needed to redirect the standard output. 
+                //This means that it will be redirected to the Process.StandardOutput StreamReader.
+                procStartInfo.RedirectStandardOutput = true;
+                procStartInfo.WorkingDirectory = @"C:\BurnImage\";
+                procStartInfo.UseShellExecute = false;
+                // Do not create the black window.
+                procStartInfo.CreateNoWindow = false;
+                // Now we create a process, assign its ProcessStartInfo and start it
+                System.Diagnostics.Process proc = new System.Diagnostics.Process();
+                proc.StartInfo = procStartInfo;
+                   
+                
+                proc.Start();
+
+                // Get the output into a string
+                string result = proc.StandardOutput.ReadToEnd();
+
+                // Display the command output.
+                Console.WriteLine(result);
+            }
+            catch (Exception objException)
+            {
+                // Log the exception
+                Console.WriteLine("ExecuteCommandSync failed" + objException.Message);
+            }
+
             return 0;
         }
 
@@ -297,21 +304,35 @@ namespace FW_Burn
 
         private void Cmd_Burn1_Click(object sender, EventArgs e)
         {
-            if (statflag[0] == 1)
+            int fmb = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[0]);
+            if (fmb == 1)
             {
-
-                DialogResult dialogResult = MessageBox.Show("CONNECT FIRST STAND USB TO MAIN BOARD", "Warning", MessageBoxButtons.OKCancel);
-                if (dialogResult == DialogResult.OK)
+                DialogResult m1 = MessageBox.Show("THIS MAINBOARD ALREADY PAIRED, DO YOU WANT TO UPDATE PAIRING?","INFO",MessageBoxButtons.YesNo);
+                if(m1 == DialogResult.Yes) 
                 {
-
+                    MessageBox.Show("CONNECT FIRST STAND USB TO MAINBOARD","INFO");
+                    int pair1 = BurnTest(bootfile, imagefile);
+                    SQL_Manager.UpdatePairing(connectSQLDB, MB_Serial[0], SOM_Serial[0], imagefw, pair1);
                 }
-                else
+
+            }
+            else if(fmb == -1) 
+            {
+                if (statflag[0] == 1)
                 {
+
+                    MessageBox.Show("CONNECT FIRST STAND USB TO MAIN BOARD", "INFO");
+                    int pair1 = BurnTest(bootfile, imagefile);
+                    SQL_Manager.SAVE_Pairing(connectSQLDB, MB_Serial[0], SOM_Serial[0],imagefw, pair1);
+
+
                     textMAIN1.Clear();
                     textSOM1.Clear();
                     Cmd_Burn1.Enabled = false;
+                    
                 }
             }
+            
         }
             
     }
@@ -389,4 +410,70 @@ namespace FW_Burn
   }
 }
  * 
+ * 
+ * 
+ * 
+ * public static void ExecuteCommandSync(object command)
+    {
+        try
+        {
+            // create the ProcessStartInfo using "cmd" as the program to be run, and "/c " as the parameters.
+            // Incidentally, /c tells cmd that we want it to execute the command that follows, and then exit.
+            System.Diagnostics.ProcessStartInfo procStartInfo = new System.Diagnostics.ProcessStartInfo("cmd", "/c " + command);
+            // The following commands are needed to redirect the standard output. 
+            //This means that it will be redirected to the Process.StandardOutput StreamReader.
+            procStartInfo.RedirectStandardOutput =  true;
+            procStartInfo.UseShellExecute = false;
+            // Do not create the black window.
+            procStartInfo.CreateNoWindow = true;
+            // Now we create a process, assign its ProcessStartInfo and start it
+            System.Diagnostics.Process proc = new System.Diagnostics.Process();
+            proc.StartInfo = procStartInfo;
+            proc.Start();
+
+            // Get the output into a string
+            string result = proc.StandardOutput.ReadToEnd();
+
+            // Display the command output.
+            Console.WriteLine(result);
+        }
+        catch (Exception objException)
+        {
+            // Log the exception
+            Console.WriteLine("ExecuteCommandSync failed" + objException.Message);
+        }
+    }
+
+    /// <summary>
+    /// Execute the command Asynchronously.
+    /// </summary>
+    /// <param name="command">string command.</param>
+    public static void ExecuteCommandAsync(string command)
+    {
+        try
+        {
+            //Asynchronously start the Thread to process the Execute command request.
+            Thread objThread = new Thread(new ParameterizedThreadStart(ExecuteCommandSync));
+            //Make the thread as background thread.
+            objThread.IsBackground = true;
+            //Set the Priority of the thread.
+            objThread.Priority = ThreadPriority.AboveNormal;
+            //Start the thread.
+            objThread.Start(command);
+        }
+        catch (ThreadStartException )
+        {
+            // Log the exception
+        }
+        catch (ThreadAbortException )
+        {
+            // Log the exception
+        }
+        catch (Exception )
+        {
+            // Log the exception
+        }
+    }
+
+}
  * */

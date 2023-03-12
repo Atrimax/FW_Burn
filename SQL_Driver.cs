@@ -54,15 +54,108 @@ namespace FW_Burn
                         findmain = 2; //STILL SAVE THIS BOARD TO DB
                     }
 
-                    
+
                 }
-            
+
 
             }
-            catch (Exception ex) { ex.Message.ToString();  findmain = -1; }
+            catch (Exception ex) { ex.Message.ToString(); findmain = -1; }
 
             return findmain;
-            
+
+        }
+        public int FindMB_Pair(string connectDB, string MBSerial)
+        {
+            int pairstat = -1;
+            string query = string.Empty;
+            query = "SELECT Pair_Status FROM Parts_Pair WHERE MB_SN='" + MBSerial + "'";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectDB))
+                {
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    SqlDataReader dt = cmd.ExecuteReader();
+                    if (dt.HasRows)
+                    {
+                        while (dt.Read())
+                        {
+                            pairstat = (int)dt["Pair_Status"];
+                        }
+                    }
+                    else
+                    {
+                        pairstat = -1;
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            { ex.Message.ToString(); return pairstat = -1; }
+
+            return pairstat;
+        }
+
+        public void UpdatePairing(string connectDB, string mbsn, string somsn, string somfwver, int pairstatus)
+        {
+            string query = string.Empty;
+            query  = query = "UPDATE Parts_Pair SET SOM_FW_VER=@SOM_FW_VER, SOM_SN=@SOM_SN, Pair_Status=@Pair_Status WHERE MB_SN='" + mbsn + "'";
+            using (SqlConnection conn = new SqlConnection(connectDB))
+            {
+                try
+                {
+                    //SqlDataAdapter adapter = new SqlDataAdapter();
+                    SqlCommand sc = new SqlCommand(query, conn);
+                    {
+                        sc.Parameters.AddWithValue("@SOM_SN", somsn);
+                        sc.Parameters.AddWithValue("@SOM_FW_VER", somfwver);
+                        sc.Parameters.AddWithValue("@Pair_Status", pairstatus);
+                        sc.ExecuteNonQuery();
+                    }
+
+                    //adapter.UpdateCommand = sc;
+                    //conn.Open();
+                    //adapter.UpdateCommand.ExecuteNonQuery();
+
+                }
+                catch (Exception ex)
+                {
+                    ex.Message.ToString();
+                    throw ex;
+                }
+            }
+        }
+
+        public void SAVE_Pairing(string connectDB, string mbsn, string somsn, string somfwver, int pairstatus)
+        {
+            string query = string.Empty;
+            query = "INSERT INTO Parts_Pair (MB_SN, SOM_FW_VER, SOM_SN, Pair_Status, Operator_FW, Date_Pair) VALUES (MB_SN, SOM_FW_VER, SOM_SN, Pair_Status, Operator_FW, Date_Pair)";
+            //@Wifi_SN, @Operator_FW, @Date_Pair)";
+            try
+            { 
+                using (SqlConnection connectConn = new SqlConnection(connectDB))
+                {
+                    using (SqlCommand cmd = new SqlCommand(query, connectConn))
+                    {
+                            
+                            cmd.Parameters.AddWithValue(@"MB_SN", SqlDbType.VarChar).Value = mbsn;
+                            cmd.Parameters.AddWithValue(@"SOM_FW_VER", SqlDbType.VarChar).Value = somfwver;
+                            cmd.Parameters.AddWithValue(@"SOM_SN", SqlDbType.VarChar).Value = somsn;
+                            
+                            cmd.Parameters.AddWithValue(@"Pair_Status", SqlDbType.Int).Value = pairstatus;
+                            
+                            cmd.Parameters.AddWithValue(@"Operator_FW", SqlDbType.VarChar).Value = "admin";
+                            cmd.Parameters.AddWithValue(@"Date_Pair", SqlDbType.SmallDateTime).Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                            connectConn.Open();
+                            int rt = cmd.ExecuteNonQuery();
+                            //saveflag = true;
+                                             
+                    }
+                }
+
+            }
+            catch (Exception ex) { ex.Message.ToString(); }
         }
 
         public bool DBConnected(string connectionSQL)
