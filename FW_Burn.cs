@@ -11,9 +11,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Management;
 using System.Text.RegularExpressions;
-
-
-
+using System.Diagnostics;
 
 namespace FW_Burn
 {
@@ -32,9 +30,17 @@ namespace FW_Burn
         string imagefile = System.Configuration.ConfigurationManager.AppSettings["imagefile"].ToString(); //@"C:\BurnImage\ight.img";
         string bootfile = System.Configuration.ConfigurationManager.AppSettings["bootfile"].ToString();
 
+        private Process myProcess;
+        private TaskCompletionSource<bool> eventHandled;
+        
+
+        
+
+        bool fw_update = false; 
         
         SQL_Driver SQL_Manager = new SQL_Driver();
-        
+        private static bool piko;
+
         public FW_Burn()
         {
             InitializeComponent();          
@@ -207,8 +213,12 @@ namespace FW_Burn
                     else if (statflag[0] == 2)
                     {
                         DialogResult mflag = MessageBox.Show("THIS MAIN BOARD NOT TESTED! DO YOU WANT TO PAIR IT WITH SOM?", "Warning", MessageBoxButtons.YesNo);
-                        if(mflag == DialogResult.Yes)
+                        if (mflag == DialogResult.Yes)
+                        {
                             statflag[0] = 1;
+                            Cmd_Burn1.Enabled = true;
+                            Cmd_Burn1.Focus();
+                        }
                         else
                             statflag[0] = 0;
                         
@@ -242,41 +252,127 @@ namespace FW_Burn
                 }
             }
         }
+
+        static void cmd_DataReceived(object sender, DataReceivedEventArgs e)
+        {
+            //Console.WriteLine("Output from other process");
+            //Console.WriteLine(e.Data);
+            if(e.Data.Contains("Success 1") && e.Data.Contains("Failure 0"))
+            {
+                piko = true;
+                
+            }
+            else if(e.Data.Contains("Failure 1") && e.Data.Contains("Success 0"))
+            {
+                piko = false;
+            }
+                         
+        }
+
+        static void cmd_Error(object sender, DataReceivedEventArgs e)
+        {
+            //Console.WriteLine("Error from other process");
+            //Console.WriteLine(e.Data);
+        }
         private int BurnTest(string bootf, string imagef)
         {
             try
             {
-                string commt = @"/C C:\BurnImage\uuu.exe -b -emmc_all " + bootf + " " + imagef;
+                ///string commt = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all " + bootf + " " + imagef;
                 // create the ProcessStartInfo using "cmd" as the program to be run, and "/c " as the parameters.
                 // Incidentally, /c tells cmd that we want it to execute the command that follows, and then exit.
-                System.Diagnostics.ProcessStartInfo procStartInfo = new System.Diagnostics.ProcessStartInfo("cmd", commt);
+                System.Diagnostics.ProcessStartInfo procStartInfo = new System.Diagnostics.ProcessStartInfo();
+                procStartInfo.FileName = @"C:\BurnImage\uuu.exe";
+                procStartInfo.Arguments = @"/C -m 1:21 -m 1:181 -b emmc_all " + bootf + " " + imagef; 
                 // The following commands are needed to redirect the standard output. 
                 //This means that it will be redirected to the Process.StandardOutput StreamReader.
                 procStartInfo.RedirectStandardOutput = true;
                 procStartInfo.WorkingDirectory = @"C:\BurnImage\";
-                procStartInfo.UseShellExecute = false;
+                procStartInfo.UseShellExecute = true;// false;
                 // Do not create the black window.
                 procStartInfo.CreateNoWindow = false;
                 // Now we create a process, assign its ProcessStartInfo and start it
                 System.Diagnostics.Process proc = new System.Diagnostics.Process();
                 proc.StartInfo = procStartInfo;
-                   
-                
+                proc.ErrorDataReceived += cmd_Error;
+                proc.OutputDataReceived += cmd_DataReceived;
+                proc.EnableRaisingEvents = true;
+
+
                 proc.Start();
 
                 // Get the output into a string
                 string result = proc.StandardOutput.ReadToEnd();
 
-                // Display the command output.
-                Console.WriteLine(result);
+                proc.WaitForExit();
+                
             }
             catch (Exception objException)
             {
                 // Log the exception
-                Console.WriteLine("ExecuteCommandSync failed" + objException.Message);
+                //Console.WriteLine("ExecuteCommandSync failed" + objException.Message);
             }
 
             return 0;
+        }
+        private void myProcess_Exited(object sender, System.EventArgs e)
+        {
+            
+            /*
+            Console.WriteLine(
+                $"Exit time    : {myProcess.ExitTime}\n" +
+                $"Exit code    : {myProcess.ExitCode}\n" +
+                $"Elapsed time : {Math.Round((myProcess.ExitTime - myProcess.StartTime).TotalMilliseconds)}");
+            eventHandled.TrySetResult(true);*/
+            MessageBox.Show("this Flashing ended","Warning");
+            eventHandled.TrySetResult(true);
+        }
+        public void AppendTextBox(string value)
+        {
+            if (InvokeRequired)
+            {
+                this.Invoke(new Action<string>(AppendTextBox), new object[] { value });
+                return;
+            }
+            richTextBox1.Text = value;
+        }
+
+        public async Task BurnTest1(string bootf, string imagef)
+        {
+            eventHandled = new TaskCompletionSource<bool>();
+
+            using (myProcess = new Process())
+            {
+                try
+                {
+                    // Start a process to print a file and raise an event when done.
+                    //myProcess.StartInfo.FileName = @"C:\BurnImage\uuu.exe";
+                    myProcess.StartInfo.FileName = @"cmd.exe";
+                    myProcess.StartInfo.Arguments = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all " + bootf + " " + imagef;
+                    myProcess.StartInfo.CreateNoWindow = false;
+                    myProcess.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
+                    myProcess.StartInfo.WorkingDirectory = @"C:\BurnImage\";
+
+
+                    myProcess.StartInfo.UseShellExecute = false;
+                    myProcess.StartInfo.RedirectStandardOutput = true;
+                    myProcess.EnableRaisingEvents = false;
+                    myProcess.Exited += new EventHandler(myProcess_Exited);
+                    myProcess.Start();
+
+                    string output = myProcess.StandardOutput.ReadToEnd();
+                    AppendTextBox(output);
+                    myProcess.WaitForExit();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString(), "Warning");
+                    return;
+                }
+
+                // Wait for Exited event, but not more than 5 minutes seconds.
+                await Task.WhenAny(eventHandled.Task, Task.Delay(320000));
+            }
         }
 
         private void textMAIN3_KeyPress(object sender, KeyPressEventArgs e)
@@ -317,7 +413,7 @@ namespace FW_Burn
             }
         }
 
-        private void Cmd_Burn1_Click(object sender, EventArgs e)
+        private async void Cmd_Burn1_Click(object sender, EventArgs e)
         {
             int fmb = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[0]);
             if (fmb == 1)
@@ -327,8 +423,10 @@ namespace FW_Burn
                 {
                     //MessageBox.Show("CONNECT FIRST STAND USB TO MAINBOARD","INFO");
                     ShowLabel(0);
-                    int pair1 = BurnTest(bootfile, imagefile);
-                    SQL_Manager.UpdatePairing(connectSQLDB, MB_Serial[0], SOM_Serial[0], imagefw, pair1);
+                    //int pair1 = BurnTest(bootfile, imagefile);
+                    await BurnTest1(bootfile, imagefile);
+                    
+                    //SQL_Manager.UpdatePairing(connectSQLDB, MB_Serial[0], SOM_Serial[0], imagefw, pair1);
                 }
 
             }
@@ -338,8 +436,8 @@ namespace FW_Burn
                 {
                     ShowLabel(0);
                     //MessageBox.Show("CONNECT FIRST STAND USB TO MAIN BOARD", "INFO");
-                    int pair1 = BurnTest(bootfile, imagefile);
-                    SQL_Manager.SAVE_Pairing(connectSQLDB, MB_Serial[0], SOM_Serial[0],imagefw, pair1);
+                    //int pair1 = BurnTest(bootfile, imagefile);
+                    //SQL_Manager.SAVE_Pairing(connectSQLDB, MB_Serial[0], SOM_Serial[0],imagefw, pair1);
 
 
                     textMAIN1.Clear();

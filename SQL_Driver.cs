@@ -30,7 +30,9 @@ namespace FW_Burn
                 using (SqlConnection conn = new SqlConnection(connectDB))
                 {
                     SqlCommand cmd = new SqlCommand(query, conn);
+                    conn.Open();
                     SqlDataReader dt = cmd.ExecuteReader();
+                    
                     if (dt.HasRows)
                     {
                         while (dt.Read())
@@ -74,6 +76,7 @@ namespace FW_Burn
                 using (SqlConnection conn = new SqlConnection(connectDB))
                 {
                     SqlCommand cmd = new SqlCommand(query, conn);
+                    conn.Open();
                     SqlDataReader dt = cmd.ExecuteReader();
                     if (dt.HasRows)
                     {
@@ -105,6 +108,7 @@ namespace FW_Burn
                 try
                 {
                     //SqlDataAdapter adapter = new SqlDataAdapter();
+                    conn.Open();
                     SqlCommand sc = new SqlCommand(query, conn);
                     {
                         sc.Parameters.AddWithValue("@SOM_SN", somsn);
@@ -133,9 +137,10 @@ namespace FW_Burn
             //@Wifi_SN, @Operator_FW, @Date_Pair)";
             try
             { 
-                using (SqlConnection connectConn = new SqlConnection(connectDB))
+                using (SqlConnection conn = new SqlConnection(connectDB))
                 {
-                    using (SqlCommand cmd = new SqlCommand(query, connectConn))
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                             
                             cmd.Parameters.AddWithValue(@"MB_SN", SqlDbType.VarChar).Value = mbsn;
@@ -147,7 +152,6 @@ namespace FW_Burn
                             cmd.Parameters.AddWithValue(@"Operator_FW", SqlDbType.VarChar).Value = "admin";
                             cmd.Parameters.AddWithValue(@"Date_Pair", SqlDbType.SmallDateTime).Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
-                            connectConn.Open();
                             int rt = cmd.ExecuteNonQuery();
                             //saveflag = true;
                                              
