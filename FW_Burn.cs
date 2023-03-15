@@ -347,8 +347,8 @@ namespace FW_Burn
                 {
                     // Start a process to print a file and raise an event when done.
                     //myProcess.StartInfo.FileName = @"C:\BurnImage\uuu.exe";
-                    myProcess.StartInfo.FileName = @"cmd.exe";
-                    myProcess.StartInfo.Arguments = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all " + bootf + " " + imagef;
+                    /*myProcess.StartInfo.FileName = @"cmd.exe";
+                    //myProcess.StartInfo.Arguments = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all " + bootf + " " + imagef;
                     myProcess.StartInfo.CreateNoWindow = false;
                     myProcess.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
                     myProcess.StartInfo.WorkingDirectory = @"C:\BurnImage\";
@@ -360,8 +360,17 @@ namespace FW_Burn
                     myProcess.Exited += new EventHandler(myProcess_Exited);
                     myProcess.Start();
 
-                    string output = myProcess.StandardOutput.ReadToEnd();
-                    AppendTextBox(output);
+                    string output = myProcess.StandardOutput.ReadToEnd();*/
+                    System.Diagnostics.Process process = new System.Diagnostics.Process();
+                    System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+                    startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+                    startInfo.FileName = "cmd.exe";
+                    startInfo.Arguments = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all C:\BurnImage\imx-boot-sd.bin-mainboard C:\BurnImage\scanner-scanner_image-0.1.2.img";
+                    process.StartInfo = startInfo;
+                    process.Start();
+                    //string output = myProcess.StandardOutput.ReadToEnd();
+                    System.Threading.Thread.Sleep(10000);
+                    //AppendTextBox(output);
                     myProcess.WaitForExit();
                 }
                 catch (Exception ex)
