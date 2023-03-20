@@ -13,9 +13,13 @@ namespace FW_Burn
     internal class SQL_Driver
     {
         string connectSQL = string.Empty;
+        string username = string.Empty;
 
         public string DBconnection
         { get { return connectSQL; } set { connectSQL = value; } }
+
+        public string UserN
+        { get { return username; } set { username = value; } }
 
 
         public int FindMB_Status(string connectDB, string MBSerial)
@@ -99,10 +103,10 @@ namespace FW_Burn
             return pairstat;
         }
 
-        public void UpdatePairing(string connectDB, string mbsn, string somsn, string somfwver, int pairstatus)
+        public void UpdatePairing(string connectDB, string mbsn, string somsn, string somfwver, int pairstatus, string opername)
         {
             string query = string.Empty;
-            query  = query = "UPDATE Parts_Pair SET SOM_FW_VER=@SOM_FW_VER, SOM_SN=@SOM_SN, Pair_Status=@Pair_Status WHERE MB_SN='" + mbsn + "'";
+            query  = query = "UPDATE Parts_Pair SET SOM_FW_VER=@SOM_FW_VER, SOM_SN=@SOM_SN, Pair_Status=@Pair_Status, Operator_FW=@Operator_FW, Date_Pair=@Date_Pair WHERE MB_SN='" + mbsn + "'";
             using (SqlConnection conn = new SqlConnection(connectDB))
             {
                 try
@@ -114,13 +118,11 @@ namespace FW_Burn
                         sc.Parameters.AddWithValue("@SOM_SN", somsn);
                         sc.Parameters.AddWithValue("@SOM_FW_VER", somfwver);
                         sc.Parameters.AddWithValue("@Pair_Status", pairstatus);
+                        sc.Parameters.AddWithValue(@"Operator_FW", SqlDbType.VarChar).Value = opername;
+                        sc.Parameters.AddWithValue(@"Date_Pair", SqlDbType.SmallDateTime).Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                         sc.ExecuteNonQuery();
                     }
-
-                    //adapter.UpdateCommand = sc;
-                    //conn.Open();
-                    //adapter.UpdateCommand.ExecuteNonQuery();
-
+                                        
                 }
                 catch (Exception ex)
                 {
@@ -130,10 +132,10 @@ namespace FW_Burn
             }
         }
 
-        public void SAVE_Pairing(string connectDB, string mbsn, string somsn, string somfwver, int pairstatus)
+        public void SAVE_Pairing(string connectDB, string mbsn, string somsn, string somfwver, int pairstatus, string opername)
         {
             string query = string.Empty;
-            query = "INSERT INTO Parts_Pair (MB_SN, SOM_FW_VER, SOM_SN, Pair_Status, Operator_FW, Date_Pair) VALUES (MB_SN, SOM_FW_VER, SOM_SN, Pair_Status, Operator_FW, Date_Pair)";
+            query = "INSERT INTO Parts_Pair (MB_SN, SOM_FW_VER, SOM_SN, Pair_Status, Operator_FW, Date_Pair) VALUES (@MB_SN, @SOM_FW_VER, @SOM_SN, @Pair_Status, @Operator_FW, @Date_Pair)";
             //@Wifi_SN, @Operator_FW, @Date_Pair)";
             try
             { 
@@ -149,17 +151,16 @@ namespace FW_Burn
                             
                             cmd.Parameters.AddWithValue(@"Pair_Status", SqlDbType.Int).Value = pairstatus;
                             
-                            cmd.Parameters.AddWithValue(@"Operator_FW", SqlDbType.VarChar).Value = "admin";
+                            cmd.Parameters.AddWithValue(@"Operator_FW", SqlDbType.VarChar).Value = opername;
                             cmd.Parameters.AddWithValue(@"Date_Pair", SqlDbType.SmallDateTime).Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
-                            int rt = cmd.ExecuteNonQuery();
-                            //saveflag = true;
-                                             
+                            cmd.ExecuteNonQuery();
+                            //saveflag = true;                                             
                     }
                 }
 
             }
-            catch (Exception ex) { ex.Message.ToString(); }
+            catch (Exception ex) { ex.Message.ToString(); throw ex; }
         }
 
         public bool DBConnected(string connectionSQL)
@@ -183,6 +184,46 @@ namespace FW_Burn
                 MessageBox.Show(ex.ToString(), "Warning");
                 status = false;
             }
+            return status;
+        }
+
+        //check login name and password vs db data, return status of user
+        public int login_check(string connectDB, string userl, string passl)
+        {
+            int status = -1;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectDB))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("select * from Logins where Name='" + userl + "' and Password='" + passl + "'", conn);
+                    SqlDataReader dt = cmd.ExecuteReader();
+                    if (dt.HasRows)
+                    {
+                        while (dt.Read())
+                        {
+                            string namedb = dt["Name"].ToString();
+                            string passdb = dt["Password"].ToString();
+                            status = int.Parse(dt["Status"].ToString());
+                        }
+
+                    }
+                    else
+                    {
+                        //MessageBox.Show("The name or password is NOT CORRECT!!!", "Warning");
+                        //textBox1.Text = string.Empty; textBox2.Text = string.Empty;
+                        status = 99;
+                        //textBox1.Focus();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.ToString(), "Warning");
+                status = 99;
+            }
+
             return status;
         }
     }
