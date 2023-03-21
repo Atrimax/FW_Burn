@@ -35,8 +35,7 @@ namespace FW_Burn
         string imagefile = System.Configuration.ConfigurationManager.AppSettings["imagefile"].ToString(); //@"C:\BurnImage\ight.img";
         string bootfile = System.Configuration.ConfigurationManager.AppSettings["bootfile"].ToString();
 
-        private Process myProcess;
-        
+                
 
         delegate void SetProgressBarCallback(int countnum);
         delegate void SetLabelCallback(string countnum);
@@ -535,9 +534,7 @@ namespace FW_Burn
                 }
             }
         }
-
-        
-        
+               
 
         static void cmd_Error(object sender, DataReceivedEventArgs e)
         {
