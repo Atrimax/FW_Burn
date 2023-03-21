@@ -74,17 +74,17 @@
             this.Status3 = new System.Windows.Forms.Label();
             this.Status4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.cmd_Login = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -558,10 +558,70 @@
             this.groupBox1.Enabled = false;
             this.groupBox1.Location = new System.Drawing.Point(25, 84);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1132, 526);
+            this.groupBox1.Size = new System.Drawing.Size(1089, 526);
             this.groupBox1.TabIndex = 50;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "BURN STATION:";
+            // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.button4.Location = new System.Drawing.Point(957, 343);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(90, 76);
+            this.button4.TabIndex = 55;
+            this.button4.Text = "PAIR 4 UNIT";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.button3.Location = new System.Drawing.Point(957, 241);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(90, 77);
+            this.button3.TabIndex = 54;
+            this.button3.Text = "PAIR 3 UNIT";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.button2.Location = new System.Drawing.Point(957, 145);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(90, 73);
+            this.button2.TabIndex = 53;
+            this.button2.Text = "PAIR 2 UNIT";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.button1.Location = new System.Drawing.Point(957, 37);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(91, 77);
+            this.button1.TabIndex = 52;
+            this.button1.Text = "PAIR1 UNIT";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(83, 494);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(41, 13);
+            this.label12.TabIndex = 51;
+            this.label12.Text = "label12";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(15, 494);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(59, 13);
+            this.label11.TabIndex = 50;
+            this.label11.Text = "Image FW:";
             // 
             // label1
             // 
@@ -612,71 +672,11 @@
             this.cmd_Login.UseVisualStyleBackColor = true;
             this.cmd_Login.Click += new System.EventHandler(this.cmd_Login_Click);
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(15, 494);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(59, 13);
-            this.label11.TabIndex = 50;
-            this.label11.Text = "Image FW:";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(83, 494);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(41, 13);
-            this.label12.TabIndex = 51;
-            this.label12.Text = "label12";
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.button1.Location = new System.Drawing.Point(957, 37);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(91, 77);
-            this.button1.TabIndex = 52;
-            this.button1.Text = "PAIR1 UNIT";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.button2.Location = new System.Drawing.Point(957, 145);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(90, 73);
-            this.button2.TabIndex = 53;
-            this.button2.Text = "PAIR 2 UNIT";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button3
-            // 
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.button3.Location = new System.Drawing.Point(957, 241);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(90, 77);
-            this.button3.TabIndex = 54;
-            this.button3.Text = "PAIR 3 UNIT";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.button4.Location = new System.Drawing.Point(957, 343);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(90, 76);
-            this.button4.TabIndex = 55;
-            this.button4.Text = "PAIR 4 UNIT";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
             // FW_Burn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1236, 643);
+            this.ClientSize = new System.Drawing.Size(1171, 643);
             this.Controls.Add(this.cmd_Login);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);

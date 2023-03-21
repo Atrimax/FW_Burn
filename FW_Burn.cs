@@ -40,6 +40,10 @@ namespace FW_Burn
 
         delegate void SetProgressBarCallback(int countnum);
         delegate void SetLabelCallback(string countnum);
+
+        delegate void SetProgressBarCallback2(int countnum2);
+        delegate void SetLabelCallback2(string countnum2);
+
         private Process proc = new Process();
         private Process proc2 = new Process();
         public TaskCompletionSource<bool> eventHandled;
@@ -64,8 +68,7 @@ namespace FW_Burn
             foreach (var usbDevice in usbDevices)
             {
                 listBox1.Items.Add(String.Format("Device ID: {0}, PNP Device ID: {1}, Description: {2}", usbDevice.DeviceID, usbDevice.PnpDeviceID, usbDevice.Description));                
-            }*/
-                       
+            }*/                       
             
             if(File.Exists(imagefile) && File.Exists(bootfile))
             {
@@ -87,7 +90,7 @@ namespace FW_Burn
                 
             }                     
             
-        }       
+        }      
 
         private void ShowLabel(int labelnum, int stat)
         {
@@ -138,6 +141,7 @@ namespace FW_Burn
             
         }
 
+        //first progressbar
         private void SetProgressBar(int cnum)
         {
             // InvokeRequired required compares the thread ID of the
@@ -154,7 +158,7 @@ namespace FW_Burn
                 this.progressBar1.Value = cnum;
             }
         }
-
+        //second progressbar
         private void SetProgressBar2(int cnum2)
         {
             // InvokeRequired required compares the thread ID of the
@@ -162,7 +166,7 @@ namespace FW_Burn
             // If these threads are different, it returns true.
             if (this.progressBar2.InvokeRequired)
             {
-                SetProgressBarCallback d2 = new SetProgressBarCallback(SetProgressBar2);
+                SetProgressBarCallback2 d2 = new SetProgressBarCallback2(SetProgressBar2);
                 this.Invoke(d2, new object[] { cnum2 });
             }
             else
@@ -200,7 +204,7 @@ namespace FW_Burn
             // If these threads are different, it returns true.
             if (this.Status2.InvokeRequired)
             {
-                SetLabelCallback d2 = new SetLabelCallback(SetLabel2);
+                SetLabelCallback2 d2 = new SetLabelCallback2(SetLabel2);
                 this.Invoke(d2, new object[] { cnum2 });
             }
             else
@@ -562,8 +566,8 @@ namespace FW_Burn
         private async Task RunWithRedirect(string arguments)
         {
             eventHandled = new TaskCompletionSource<bool>();
-            int rpt  = 0; int exitCode;
-            //Process proc = new Process();
+            int exitCode;
+            
             ProcessStartInfo startInfo = new ProcessStartInfo();
             proc.StartInfo = startInfo;
             startInfo.FileName = "cmd.exe";
@@ -585,30 +589,30 @@ namespace FW_Burn
             exitCode = proc.ExitCode;
         }
 
-        private async Task RunWithRedirect1(string arguments)
+        private async Task RunWithRedirect2(string arguments2)
         {
             eventHandled2 = new TaskCompletionSource<bool>();
-            int rpt = 0; int exitCode;
+            int exitCode2;
             //Process proc = new Process();
-            ProcessStartInfo startInfo1 = new ProcessStartInfo();
-            proc2.StartInfo = startInfo1;
-            startInfo1.FileName = "cmd.exe";
-            startInfo1.Arguments = arguments;
-            startInfo1.UseShellExecute = false;
-            startInfo1.RedirectStandardOutput = true;
-            startInfo1.StandardOutputEncoding = Encoding.UTF8;
-            startInfo1.CreateNoWindow = true;
+            ProcessStartInfo startInfo2 = new ProcessStartInfo();
+            proc2.StartInfo = startInfo2;
+            startInfo2.FileName = "cmd.exe";
+            startInfo2.Arguments = arguments2;
+            startInfo2.UseShellExecute = false;
+            startInfo2.RedirectStandardOutput = true;
+            startInfo2.StandardOutputEncoding = Encoding.UTF8;
+            startInfo2.CreateNoWindow = true;
 
-            proc2.ErrorDataReceived += proc1_DataReceived;
-            proc2.OutputDataReceived += proc1_DataReceived;
-            proc2.Exited += new EventHandler(proc1_Exited);
+            proc2.ErrorDataReceived += proc2_DataReceived;
+            proc2.OutputDataReceived += proc2_DataReceived;
+            proc2.Exited += new EventHandler(proc2_Exited);
             proc2.Start();
 
             proc2.BeginOutputReadLine();
 
 
             await Task.WhenAny(eventHandled2.Task);
-            exitCode = proc2.ExitCode;
+            exitCode2 = proc2.ExitCode;
         }
         private void ParseOutString(string datastring)
         {
@@ -617,9 +621,7 @@ namespace FW_Burn
                 if (datastring.Contains("100%1:181>Okay"))
                 {
                     SetLabel("DONE");
-                    //proc.Kill();
-                    //textSOM1.Clear();
-                    //textMAIN1.Clear();
+                    
                 }
                 else if (datastring.Contains("1:181>Start Cmd:FB: done"))
                 {
@@ -629,20 +631,20 @@ namespace FW_Burn
             }
         }
 
-        private void ParseOutString2(string datastring)
+        private void ParseOutString2(string datastring2)
         {
-            if (datastring != string.Empty)
+            if (datastring2 != string.Empty)
             {
-                if (datastring.Contains("100%1:182>Okay"))
+                if (datastring2.Contains("100%1:182>Okay"))
                 {
-                    SetLabel("DONE");
+                    SetLabel2("DONE");
                     //proc.Kill();
                     //textSOM1.Clear();
                     //textMAIN1.Clear();
                 }
-                else if (datastring.Contains("1:182>Start Cmd:FB: done"))
+                else if (datastring2.Contains("1:182>Start Cmd:FB: done"))
                 {
-                    SetLabel("DONE");
+                    SetLabel2("DONE");
 
                 }
             }
@@ -673,11 +675,11 @@ namespace FW_Burn
                 //BeginInvoke(new Action(() => richTextBox1.Text += (Environment.NewLine + e.Data))); //textOut
         }
 
-        void proc1_DataReceived(object sender, DataReceivedEventArgs e)
+        void proc2_DataReceived(object sender, DataReceivedEventArgs e2)
         {
-            if (e.Data != null)
+            if (e2.Data != null)
             {
-                string oot2 = Environment.NewLine + e.Data;
+                string oot2 = Environment.NewLine + e2.Data;
                 if (oot2.Contains("%"))
                 {
                     string[] kt2 = oot2.Split('%');
@@ -695,9 +697,8 @@ namespace FW_Burn
                     ParseOutString2(oot2);
                 }
             }
-            //BeginInvoke(new Action(() => richTextBox1.Text += (Environment.NewLine + e.Data))); //textOut
+            
         }
-
 
 
         // Handle Exited event and display process information.
@@ -706,63 +707,17 @@ namespace FW_Burn
             //string stpak = String.Format("Exit time: {0}, Exit code: {1}, Elapsed time: {2}", proc.ExitTime, proc.ExitCode, Math.Round((proc.ExitTime - proc.StartTime).TotalMilliseconds));
                 
             bool rtt = eventHandled.TrySetResult(true);
-            //lbl_Info1.Text = stpak;
+            
         }
 
-        private void proc1_Exited(object sender, System.EventArgs e)
+        private void proc2_Exited(object sender, System.EventArgs e)
         {
             //string stpak = String.Format("Exit time: {0}, Exit code: {1}, Elapsed time: {2}", proc.ExitTime, proc.ExitCode, Math.Round((proc.ExitTime - proc.StartTime).TotalMilliseconds));
 
             bool rtt2 = eventHandled2.TrySetResult(true);
-            //lbl_Info1.Text = stpak;
+            
         }
-        public async Task BurnTest1(string bootf, string imagef)
-        {
-            //eventHandled = new TaskCompletionSource<bool>();
-
-            using (myProcess = new Process())
-            {
-                try
-                {
-                    // Start a process to print a file and raise an event when done.
-                    //myProcess.StartInfo.FileName = @"C:\BurnImage\uuu.exe";
-                    /*myProcess.StartInfo.FileName = @"cmd.exe";
-                    //myProcess.StartInfo.Arguments = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all " + bootf + " " + imagef;
-                    myProcess.StartInfo.CreateNoWindow = false;
-                    myProcess.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
-                    myProcess.StartInfo.WorkingDirectory = @"C:\BurnImage\";
-
-
-                    myProcess.StartInfo.UseShellExecute = false;
-                    myProcess.StartInfo.RedirectStandardOutput = true;
-                    myProcess.EnableRaisingEvents = false;
-                    myProcess.Exited += new EventHandler(myProcess_Exited);
-                    myProcess.Start();
-
-                    string output = myProcess.StandardOutput.ReadToEnd();*/
-                    System.Diagnostics.Process process = new System.Diagnostics.Process();
-                    System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-                    startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
-                    startInfo.FileName = "cmd.exe";
-                    startInfo.Arguments = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all C:\BurnImage\imx-boot-sd.bin-mainboard C:\BurnImage\scanner-scanner_image-0.1.2.img";
-                    process.StartInfo = startInfo;
-                    process.Start();
-                    //string output = myProcess.StandardOutput.ReadToEnd();
-                    System.Threading.Thread.Sleep(10000);
-                    //AppendTextBox(output);
-                    myProcess.WaitForExit();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message.ToString(), "Warning");
-                    return;
-                }
-
-                // Wait for Exited event, but not more than 5 minutes seconds.
-                //await Task.WhenAny(eventHandled.Task, Task.Delay(320000));
-            }
-        }
-
+        
         private void textMAIN3_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
@@ -972,7 +927,7 @@ namespace FW_Burn
 
         private void Cmd_Burn2_Click(object sender, EventArgs e)
         {
-            string cmdline = string.Empty;
+            string cmdline2 = string.Empty;
             int fmb = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[1]);
             if (fmb == 1)
             {
@@ -985,8 +940,8 @@ namespace FW_Burn
                     //int pair1 = BurnTest(bootfile, imagefile);
                     //await BurnTest1(bootfile, imagefile);
                     //cmdline = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all C:\BurnImage\imx-boot-sd.bin-mainboard C:\BurnImage\scanner-scanner_image-0.1.2.img";
-                    cmdline = cmdtext(2, bootfile, imagefile);
-                    _ = RunWithRedirect1(cmdline);
+                    cmdline2 = cmdtext(2, bootfile, imagefile);
+                    _ = RunWithRedirect2(cmdline2);
                     //SQL_Manager.UpdatePairing(connectSQLDB, MB_Serial[0], SOM_Serial[0], imagefw, pair1);
                 }
 
@@ -1000,8 +955,8 @@ namespace FW_Burn
                 //int pair1 = BurnTest(bootfile, imagefile);
                 //await BurnTest1(bootfile, imagefile);
                 //cmdline = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all C:\BurnImage\imx-boot-sd.bin-mainboard C:\BurnImage\scanner-scanner_image-0.1.2.img";
-                cmdline = cmdtext(2, bootfile, imagefile);
-                _ = RunWithRedirect1(cmdline);
+                cmdline2 = cmdtext(2, bootfile, imagefile);
+                _ = RunWithRedirect2(cmdline2);
             }
         }
     }
