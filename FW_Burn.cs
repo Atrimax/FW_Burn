@@ -1127,6 +1127,8 @@ namespace FW_Burn
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //proc.Kill();
+            proc.Close();
             if(Status1.Text == "DONE")
             {
                 int  p1 = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[0]);
@@ -1159,6 +1161,7 @@ namespace FW_Burn
 
         private void button2_Click(object sender, EventArgs e)
         {
+            proc2.Close();
             if (Status2.Text == "DONE")
             {
                 int p2 = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[1]);
@@ -1226,6 +1229,7 @@ namespace FW_Burn
 
         private void button3_Click(object sender, EventArgs e)
         {
+            proc3.Close();
             if (Status3.Text == "DONE")
             {
                 int p3 = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[2]);
@@ -1258,6 +1262,7 @@ namespace FW_Burn
 
         private void button4_Click(object sender, EventArgs e)
         {
+            proc4.Close();
             if (Status4.Text == "DONE")
             {
                 int p4 = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[3]);
