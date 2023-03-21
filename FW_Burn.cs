@@ -536,109 +536,8 @@ namespace FW_Burn
             }
         }
 
-        private void textMAIN1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if(e.KeyChar == 13) 
-            {
-                Regex gr = new Regex(pattern);
-                if (gr.IsMatch(textMAIN1.Text))
-                {
-                    MB_Serial[0] = textMAIN1.Text;
-                    statflag[0] = SQL_Manager.FindMB_Status(connectSQLDB, MB_Serial[0]);
-                    if (statflag[0] == 1)
-                    {
-                        textSOM2.Focus(); ShowMAIN(0, statflag[0]); //verified serial number 
-                        ShowLabel(0, 0);
-                        Cmd_Burn1.Enabled = true;
-                    }
-                    else if (statflag[0] == 0)
-                    {
-                        MessageBox.Show("THIS MAINBOARD PCBA TEST LAST FINAL RESULT IS FAIL!!", "Warning");
-                    }
-                    else if (statflag[0] == 2)
-                    {
-                        DialogResult mflag = MessageBox.Show("THIS MAIN BOARD NOT TESTED! DO YOU WANT TO PAIR IT WITH SOM?", "Warning", MessageBoxButtons.YesNo);
-                        if (mflag == DialogResult.Yes)
-                        {
-                            //statflag[0] = 1;
-                            ShowMAIN(0, statflag[0]); //verified serial number
-                            ShowLabel(0, 0);
-                            Cmd_Burn1.Enabled = true;
-                            Cmd_Burn1.Focus();
-                        }
-                        else
-                            statflag[0] = 0;
-                        
-                    }
-
-
-                }
-                else
-                {
-                    MessageBox.Show("The MAIN BOARD Serial is Wrong", "Warning");
-                    textMAIN1.Clear(); textMAIN1.Focus(); lbl_Info1.Text = "";labelMAIN1.Text = "";
-                }
-            }
-        }
-        private void textMAIN2_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == 13)
-            {
-                Regex gr = new Regex(pattern);
-                if (gr.IsMatch(textMAIN2.Text))
-                {
-                    MB_Serial[1] = textMAIN2.Text;
-                    statflag[1] = SQL_Manager.FindMB_Status(connectSQLDB, MB_Serial[1]);
-                    if (statflag[1] == 1)
-                    {
-                        textSOM3.Focus(); ShowMAIN(1, statflag[1]); //verified serial number 
-                        ShowLabel(1, 0);
-                        Cmd_Burn2.Enabled = true;
-                    }
-                    else if (statflag[1] == 0)
-                    {
-                        MessageBox.Show("THIS MAINBOARD PCBA TEST LAST FINAL RESULT IS FAIL!!", "Warning");
-                    }
-                    else if (statflag[1] == 2)
-                    {
-                        DialogResult mflag = MessageBox.Show("THIS MAIN BOARD NOT TESTED! DO YOU WANT TO PAIR IT WITH SOM?", "Warning", MessageBoxButtons.YesNo);
-                        if (mflag == DialogResult.Yes)
-                        {
-                            //statflag[0] = 1;
-                            ShowMAIN(1, statflag[1]); //verified serial number
-                            ShowLabel(1, 0);
-                            Cmd_Burn2.Enabled = true;
-                            Cmd_Burn2.Focus();
-                        }
-                        else
-                            statflag[1] = 0;
-
-                    }
-
-
-                }
-                else
-                {
-                    MessageBox.Show("The MAIN BOARD Serial is Wrong", "Warning");
-                    textMAIN2.Clear(); textMAIN2.Focus(); lbl_Info2.Text = ""; labelMAIN2.Text = "";
-                }
-            }
-        }
-        static void cmd_DataReceived(object sender, DataReceivedEventArgs e)
-        {
-            /*Console.WriteLine("Output from other process");
-            Console.WriteLine(e.Data);
-            if(e.Data.Contains("Success 1") && e.Data.Contains("Failure 0"))
-            {
-                piko = true;
-                
-            }
-            else if(e.Data.Contains("Failure 1") && e.Data.Contains("Success 0"))
-            {
-                piko = false;
-            }*/
-                         
-        }
+        
+        
 
         static void cmd_Error(object sender, DataReceivedEventArgs e)
         {
@@ -950,7 +849,94 @@ namespace FW_Burn
             bool rtt4 = eventHandled4.TrySetResult(true);
 
         }
+        private void textMAIN1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                Regex gr = new Regex(pattern);
+                if (gr.IsMatch(textMAIN1.Text))
+                {
+                    MB_Serial[0] = textMAIN1.Text;
+                    statflag[0] = SQL_Manager.FindMB_Status(connectSQLDB, MB_Serial[0]);
+                    if (statflag[0] == 1)
+                    {
+                        textSOM2.Focus(); ShowMAIN(0, statflag[0]); //verified serial number 
+                        ShowLabel(0, 0);
+                        Cmd_Burn1.Enabled = true;
+                    }
+                    else if (statflag[0] == 0)
+                    {
+                        MessageBox.Show("THIS MAINBOARD PCBA TEST LAST FINAL RESULT IS FAIL!!", "Warning");
+                    }
+                    else if (statflag[0] == 2)
+                    {
+                        DialogResult mflag = MessageBox.Show("THIS MAIN BOARD NOT TESTED! DO YOU WANT TO PAIR IT WITH SOM?", "Warning", MessageBoxButtons.YesNo);
+                        if (mflag == DialogResult.Yes)
+                        {
+                            //statflag[0] = 1;
+                            ShowMAIN(0, statflag[0]); //verified serial number
+                            ShowLabel(0, 0);
+                            Cmd_Burn1.Enabled = true;
+                            Cmd_Burn1.Focus();
+                        }
+                        else
+                            statflag[0] = 0;
 
+                    }
+
+
+                }
+                else
+                {
+                    MessageBox.Show("The MAIN BOARD Serial is Wrong", "Warning");
+                    textMAIN1.Clear(); textMAIN1.Focus(); lbl_Info1.Text = ""; labelMAIN1.Text = "";
+                }
+            }
+        }
+        private void textMAIN2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                Regex gr = new Regex(pattern);
+                if (gr.IsMatch(textMAIN2.Text))
+                {
+                    MB_Serial[1] = textMAIN2.Text;
+                    statflag[1] = SQL_Manager.FindMB_Status(connectSQLDB, MB_Serial[1]);
+                    if (statflag[1] == 1)
+                    {
+                        textSOM3.Focus(); ShowMAIN(1, statflag[1]); //verified serial number 
+                        ShowLabel(1, 0);
+                        Cmd_Burn2.Enabled = true;
+                    }
+                    else if (statflag[1] == 0)
+                    {
+                        MessageBox.Show("THIS MAINBOARD PCBA TEST LAST FINAL RESULT IS FAIL!!", "Warning");
+                    }
+                    else if (statflag[1] == 2)
+                    {
+                        DialogResult mflag = MessageBox.Show("THIS MAIN BOARD NOT TESTED! DO YOU WANT TO PAIR IT WITH SOM?", "Warning", MessageBoxButtons.YesNo);
+                        if (mflag == DialogResult.Yes)
+                        {
+                            //statflag[0] = 1;
+                            ShowMAIN(1, statflag[1]); //verified serial number
+                            ShowLabel(1, 0);
+                            Cmd_Burn2.Enabled = true;
+                            Cmd_Burn2.Focus();
+                        }
+                        else
+                            statflag[1] = 0;
+
+                    }
+
+
+                }
+                else
+                {
+                    MessageBox.Show("The MAIN BOARD Serial is Wrong", "Warning");
+                    textMAIN2.Clear(); textMAIN2.Focus(); lbl_Info2.Text = ""; labelMAIN2.Text = "";
+                }
+            }
+        }
         private void textMAIN3_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
@@ -959,13 +945,35 @@ namespace FW_Burn
                 if (gr.IsMatch(textMAIN3.Text))
                 {
                     MB_Serial[2] = textMAIN3.Text;
-                    textSOM3.Focus();
-                    Cmd_Burn3.Enabled = true;
+                    statflag[2] = SQL_Manager.FindMB_Status(connectSQLDB, MB_Serial[2]);
+                    if (statflag[2] == 1)
+                    {
+                        textSOM4.Focus(); ShowMAIN(2, statflag[2]); //verified serial number 
+                        ShowLabel(2, 0);
+                        Cmd_Burn3.Enabled = true;
+                    }
+                    else if (statflag[2] == 0)
+                    {
+                        MessageBox.Show("THIS MAINBOARD PCBA TEST LAST FINAL RESULT IS FAIL!!", "Warning");
+                    }
+                    else if (statflag[2] == 2)
+                    {
+                        DialogResult mflag = MessageBox.Show("THIS MAIN BOARD NOT TESTED! DO YOU WANT TO PAIR IT WITH SOM?", "Warning", MessageBoxButtons.YesNo);
+                        if (mflag == DialogResult.Yes)
+                        {
+                            ShowMAIN(2, statflag[2]); //verified serial number
+                            ShowLabel(2, 0);
+                            Cmd_Burn3.Enabled = true;
+                            Cmd_Burn3.Focus();
+                        }
+                        else
+                            statflag[2] = 0;
+                    }
                 }
                 else
                 {
                     MessageBox.Show("The MAIN BOARD Serial is Wrong", "Warning");
-                    textMAIN3.Clear(); textMAIN3.Focus();
+                    textMAIN3.Clear(); textMAIN3.Focus(); lbl_Info3.Text = ""; labelMAIN3.Text = "";
                 }
             }
         }
@@ -978,13 +986,36 @@ namespace FW_Burn
                 if (gr.IsMatch(textMAIN4.Text))
                 {
                     MB_Serial[3] = textMAIN4.Text;
-                    
-                    Cmd_Burn4.Enabled = true;
+                    statflag[3] = SQL_Manager.FindMB_Status(connectSQLDB, MB_Serial[3]);
+                    if (statflag[3] == 1)
+                    {
+                        //textSOM2.Focus();
+                        ShowMAIN(3, statflag[3]); //verified serial number 
+                        ShowLabel(3, 0);
+                        Cmd_Burn4.Enabled = true;
+                    }
+                    else if (statflag[3] == 0)
+                    {
+                        MessageBox.Show("THIS MAINBOARD PCBA TEST LAST FINAL RESULT IS FAIL!!", "Warning");
+                    }
+                    else if (statflag[3] == 2)
+                    {
+                        DialogResult mflag = MessageBox.Show("THIS MAIN BOARD NOT TESTED! DO YOU WANT TO PAIR IT WITH SOM?", "Warning", MessageBoxButtons.YesNo);
+                        if (mflag == DialogResult.Yes)
+                        {
+                            ShowMAIN(3, statflag[3]); //verified serial number
+                            ShowLabel(3, 0);
+                            Cmd_Burn4.Enabled = true;
+                            Cmd_Burn4.Focus();
+                        }
+                        else
+                            statflag[3] = 0;
+                    }
                 }
                 else
                 {
                     MessageBox.Show("The MAIN BOARD Serial is Wrong", "Warning");
-                    textMAIN4.Clear(); textMAIN4.Focus();
+                    textMAIN4.Clear(); textMAIN4.Focus(); lbl_Info4.Text = ""; labelMAIN4.Text = "";
                 }
             }
         }
@@ -1144,7 +1175,7 @@ namespace FW_Burn
                 }
                 else if (p2 == -1)
                 {
-                    SQL_Manager.SAVE_Pairing(connectSQLDB, MB_Serial[1], SOM_Serial[1], imagefw, 1, usr);
+                    SQL_Manager.SAVE_Pairing(connectSQLDB, MB_Serial[1], SOM_Serial[1], imagefw, 1, usr); //version sql driver v18.12.9
                     Status2.Text = "";
                     ShowLabel(1, 1);
                     textSOM2.Clear();
