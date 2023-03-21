@@ -44,17 +44,23 @@ namespace FW_Burn
         delegate void SetProgressBarCallback2(int countnum2);
         delegate void SetLabelCallback2(string countnum2);
 
+        delegate void SetProgressBarCallback3(int countnum3);
+        delegate void SetLabelCallback3(string countnum3);
+
+        delegate void SetProgressBarCallback4(int countnum4);
+        delegate void SetLabelCallback4(string countnum4);
+
         private Process proc = new Process();
         private Process proc2 = new Process();
+        private Process proc3 = new Process();
+        private Process proc4 = new Process();
+
         public TaskCompletionSource<bool> eventHandled;
         public TaskCompletionSource<bool> eventHandled2;
+        public TaskCompletionSource<bool> eventHandled3;
+        public TaskCompletionSource<bool> eventHandled4;
 
-
-
-        bool fw_update = false; 
-        
-        SQL_Driver SQL_Manager = new SQL_Driver();
-        private static bool piko;
+        SQL_Driver SQL_Manager = new SQL_Driver();        
 
         public FW_Burn()
         {
@@ -176,6 +182,39 @@ namespace FW_Burn
             }
         }
 
+        private void SetProgressBar3(int cnum3)
+        {
+            // InvokeRequired required compares the thread ID of the
+            // calling thread to the thread ID of the creating thread.
+            // If these threads are different, it returns true.
+            if (this.progressBar3.InvokeRequired)
+            {
+                SetProgressBarCallback3 d3 = new SetProgressBarCallback3(SetProgressBar3);
+                this.Invoke(d3, new object[] { cnum3 });
+            }
+            else
+            {
+
+                this.progressBar3.Value = cnum3;
+            }
+        }
+        private void SetProgressBar4(int cnum4)
+        {
+            // InvokeRequired required compares the thread ID of the
+            // calling thread to the thread ID of the creating thread.
+            // If these threads are different, it returns true.
+            if (this.progressBar4.InvokeRequired)
+            {
+                SetProgressBarCallback4 d4 = new SetProgressBarCallback4(SetProgressBar4);
+                this.Invoke(d4, new object[] { cnum4 });
+            }
+            else
+            {
+
+                this.progressBar4.Value = cnum4;
+            }
+        }
+
         private void SetLabel(string cnum)
         {
             // InvokeRequired required compares the thread ID of the
@@ -216,6 +255,50 @@ namespace FW_Burn
                 }
                 else
                     this.Status2.Text = cnum2 + "%";
+            }
+        }
+
+        private void SetLabel3(string cnum3)
+        {
+            // InvokeRequired required compares the thread ID of the
+            // calling thread to the thread ID of the creating thread.
+            // If these threads are different, it returns true.
+            if (this.Status3.InvokeRequired)
+            {
+                SetLabelCallback3 d3 = new SetLabelCallback3(SetLabel3);
+                this.Invoke(d3, new object[] { cnum3 });
+            }
+            else
+            {
+                if (cnum3.Contains("DONE"))
+                {
+                    this.Status3.Text = cnum3;
+                    this.button3.Enabled = true;
+                }
+                else
+                    this.Status3.Text = cnum3 + "%";
+            }
+        }
+
+        private void SetLabel4(string cnum4)
+        {
+            // InvokeRequired required compares the thread ID of the
+            // calling thread to the thread ID of the creating thread.
+            // If these threads are different, it returns true.
+            if (this.Status4.InvokeRequired)
+            {
+                SetLabelCallback4 d4 = new SetLabelCallback4(SetLabel4);
+                this.Invoke(d4, new object[] { cnum4 });
+            }
+            else
+            {
+                if (cnum4.Contains("DONE"))
+                {
+                    this.Status4.Text = cnum4;
+                    this.button4.Enabled = true;
+                }
+                else
+                    this.Status4.Text = cnum4 + "%";
             }
         }
 
@@ -614,6 +697,58 @@ namespace FW_Burn
             await Task.WhenAny(eventHandled2.Task);
             exitCode2 = proc2.ExitCode;
         }
+
+        private async Task RunWithRedirect3(string arguments3)
+        {
+            eventHandled3 = new TaskCompletionSource<bool>();
+            int exitCode3;
+            //Process proc = new Process();
+            ProcessStartInfo startInfo3 = new ProcessStartInfo();
+            proc3.StartInfo = startInfo3;
+            startInfo3.FileName = "cmd.exe";
+            startInfo3.Arguments = arguments3;
+            startInfo3.UseShellExecute = false;
+            startInfo3.RedirectStandardOutput = true;
+            startInfo3.StandardOutputEncoding = Encoding.UTF8;
+            startInfo3.CreateNoWindow = true;
+
+            proc3.ErrorDataReceived += proc3_DataReceived;
+            proc3.OutputDataReceived += proc3_DataReceived;
+            proc3.Exited += new EventHandler(proc3_Exited);
+            proc3.Start();
+
+            proc3.BeginOutputReadLine();
+
+
+            await Task.WhenAny(eventHandled3.Task);
+            exitCode3 = proc3.ExitCode;
+        }
+
+        private async Task RunWithRedirect4(string arguments4)
+        {
+            eventHandled4 = new TaskCompletionSource<bool>();
+            int exitCode4;
+            
+            ProcessStartInfo startInfo4 = new ProcessStartInfo();
+            proc4.StartInfo = startInfo4;
+            startInfo4.FileName = "cmd.exe";
+            startInfo4.Arguments = arguments4;
+            startInfo4.UseShellExecute = false;
+            startInfo4.RedirectStandardOutput = true;
+            startInfo4.StandardOutputEncoding = Encoding.UTF8;
+            startInfo4.CreateNoWindow = true;
+
+            proc4.ErrorDataReceived += proc4_DataReceived;
+            proc4.OutputDataReceived += proc4_DataReceived;
+            proc4.Exited += new EventHandler(proc4_Exited);
+            proc4.Start();
+
+            proc4.BeginOutputReadLine();
+
+
+            await Task.WhenAny(eventHandled4.Task);
+            exitCode4 = proc4.ExitCode;
+        }
         private void ParseOutString(string datastring)
         {
             if(datastring != string.Empty)
@@ -645,6 +780,40 @@ namespace FW_Burn
                 else if (datastring2.Contains("1:182>Start Cmd:FB: done"))
                 {
                     SetLabel2("DONE");
+
+                }
+            }
+        }
+
+        private void ParseOutString3(string datastring3)
+        {
+            if (datastring3 != string.Empty)
+            {
+                if (datastring3.Contains("100%1:183>Okay"))
+                {
+                    SetLabel3("DONE");
+                    
+                }
+                else if (datastring3.Contains("1:183>Start Cmd:FB: done"))
+                {
+                    SetLabel3("DONE");
+
+                }
+            }
+        }
+
+        private void ParseOutString4(string datastring4)
+        {
+            if (datastring4 != string.Empty)
+            {
+                if (datastring4.Contains("100%1:184>Okay"))
+                {
+                    SetLabel4("DONE");
+                    
+                }
+                else if (datastring4.Contains("1:184>Start Cmd:FB: done"))
+                {
+                    SetLabel4("DONE");
 
                 }
             }
@@ -700,6 +869,56 @@ namespace FW_Burn
             
         }
 
+        void proc3_DataReceived(object sender, DataReceivedEventArgs e3)
+        {
+            if (e3.Data != null)
+            {
+                string oot3 = Environment.NewLine + e3.Data;
+                if (oot3.Contains("%"))
+                {
+                    string[] kt3 = oot3.Split('%');
+                    SetProgressBar3(int.Parse(kt3[0]));
+                    SetLabel3(kt3[0]);
+
+                }
+                else if (oot3.Contains("100%1:183>Okay"))
+                {
+                    ParseOutString3(oot3);
+
+                }
+                else if (oot3.Contains("1:183>Start Cmd:FB: done"))
+                {
+                    ParseOutString3(oot3);
+                }
+            }
+
+        }
+
+        void proc4_DataReceived(object sender, DataReceivedEventArgs e4)
+        {
+            if (e4.Data != null)
+            {
+                string oot4 = Environment.NewLine + e4.Data;
+                if (oot4.Contains("%"))
+                {
+                    string[] kt4 = oot4.Split('%');
+                    SetProgressBar4(int.Parse(kt4[0]));
+                    SetLabel4(kt4[0]);
+
+                }
+                else if (oot4.Contains("100%1:184>Okay"))
+                {
+                    ParseOutString4(oot4);
+
+                }
+                else if (oot4.Contains("1:184>Start Cmd:FB: done"))
+                {
+                    ParseOutString4(oot4);
+                }
+            }
+
+        }
+
 
         // Handle Exited event and display process information.
         private void proc_Exited(object sender, System.EventArgs e)
@@ -717,7 +936,21 @@ namespace FW_Burn
             bool rtt2 = eventHandled2.TrySetResult(true);
             
         }
-        
+        private void proc3_Exited(object sender, System.EventArgs e)
+        {
+            //string stpak = String.Format("Exit time: {0}, Exit code: {1}, Elapsed time: {2}", proc.ExitTime, proc.ExitCode, Math.Round((proc.ExitTime - proc.StartTime).TotalMilliseconds));
+
+            bool rtt3 = eventHandled3.TrySetResult(true);
+
+        }
+        private void proc4_Exited(object sender, System.EventArgs e)
+        {
+            //string stpak = String.Format("Exit time: {0}, Exit code: {1}, Elapsed time: {2}", proc.ExitTime, proc.ExitCode, Math.Round((proc.ExitTime - proc.StartTime).TotalMilliseconds));
+
+            bool rtt4 = eventHandled4.TrySetResult(true);
+
+        }
+
         private void textMAIN3_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
@@ -959,6 +1192,140 @@ namespace FW_Burn
                 _ = RunWithRedirect2(cmdline2);
             }
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (Status3.Text == "DONE")
+            {
+                int p3 = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[2]);
+                if (p3 == 1)
+                {
+                    SQL_Manager.UpdatePairing(connectSQLDB, MB_Serial[2], SOM_Serial[2], imagefw, 1, usr);
+                    Status3.Text = "";
+                    ShowLabel(2, 1);
+                    textSOM3.Clear();
+                    textMAIN3.Clear();
+                    progressBar3.Value = 0;
+                    labelSOM3.Text = "";
+                    labelMAIN3.Text = "";
+                }
+                else if (p3 == -1)
+                {
+                    SQL_Manager.SAVE_Pairing(connectSQLDB, MB_Serial[2], SOM_Serial[2], imagefw, 1, usr);
+                    Status3.Text = "";
+                    ShowLabel(2, 1);
+                    textSOM3.Clear();
+                    textMAIN3.Clear();
+                    progressBar3.Value = 0;
+                    labelSOM3.Text = "";
+                    labelMAIN3.Text = "";
+                }
+                button3.Enabled = false;
+
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (Status4.Text == "DONE")
+            {
+                int p4 = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[3]);
+                if (p4 == 1)
+                {
+                    SQL_Manager.UpdatePairing(connectSQLDB, MB_Serial[3], SOM_Serial[3], imagefw, 1, usr);
+                    Status4.Text = "";
+                    ShowLabel(3, 1);
+                    textSOM4.Clear();
+                    textMAIN4.Clear();
+                    progressBar4.Value = 0;
+                    labelSOM4.Text = "";
+                    labelMAIN4.Text = "";
+                }
+                else if (p4 == -1)
+                {
+                    SQL_Manager.SAVE_Pairing(connectSQLDB, MB_Serial[3], SOM_Serial[3], imagefw, 1, usr);
+                    Status4.Text = "";
+                    ShowLabel(3, 1);
+                    textSOM4.Clear();
+                    textMAIN4.Clear();
+                    progressBar4.Value = 0;
+                    labelSOM4.Text = "";
+                    labelMAIN4.Text = "";
+                }
+                button4.Enabled = false;
+
+            }
+        }
+
+        private void Cmd_Burn3_Click(object sender, EventArgs e)
+        {
+            string cmdline3 = string.Empty;
+            int fmb = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[2]);
+            if (fmb == 1)
+            {
+                DialogResult m1 = MessageBox.Show("THIS MAINBOARD ALREADY PAIRED, DO YOU WANT TO UPDATE PAIRING?", "INFO", MessageBoxButtons.YesNo);
+                if (m1 == DialogResult.Yes)
+                {
+                    Cmd_Burn3.Enabled = false;
+                    //MessageBox.Show("CONNECT FIRST STAND USB TO MAINBOARD","INFO");
+
+                    //int pair1 = BurnTest(bootfile, imagefile);
+                    //await BurnTest1(bootfile, imagefile);
+                    //cmdline = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all C:\BurnImage\imx-boot-sd.bin-mainboard C:\BurnImage\scanner-scanner_image-0.1.2.img";
+                    cmdline3 = cmdtext(3, bootfile, imagefile);
+                    _ = RunWithRedirect3(cmdline3);
+                    //SQL_Manager.UpdatePairing(connectSQLDB, MB_Serial[0], SOM_Serial[0], imagefw, pair1);
+                }
+
+
+            }
+            else if (fmb == -1)
+            {
+                Cmd_Burn3.Enabled = false;
+                //MessageBox.Show("CONNECT FIRST STAND USB TO MAINBOARD","INFO");
+
+                //int pair1 = BurnTest(bootfile, imagefile);
+                //await BurnTest1(bootfile, imagefile);
+                //cmdline = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all C:\BurnImage\imx-boot-sd.bin-mainboard C:\BurnImage\scanner-scanner_image-0.1.2.img";
+                cmdline3 = cmdtext(3, bootfile, imagefile);
+                _ = RunWithRedirect3(cmdline3);
+            }
+        }
+
+        private void Cmd_Burn4_Click(object sender, EventArgs e)
+        {
+            string cmdline4 = string.Empty;
+            int fmb = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[3]);
+            if (fmb == 1)
+            {
+                DialogResult m1 = MessageBox.Show("THIS MAINBOARD ALREADY PAIRED, DO YOU WANT TO UPDATE PAIRING?", "INFO", MessageBoxButtons.YesNo);
+                if (m1 == DialogResult.Yes)
+                {
+                    Cmd_Burn4.Enabled = false;
+                    //MessageBox.Show("CONNECT FIRST STAND USB TO MAINBOARD","INFO");
+
+                    //int pair1 = BurnTest(bootfile, imagefile);
+                    //await BurnTest1(bootfile, imagefile);
+                    //cmdline = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all C:\BurnImage\imx-boot-sd.bin-mainboard C:\BurnImage\scanner-scanner_image-0.1.2.img";
+                    cmdline4 = cmdtext(4, bootfile, imagefile);
+                    _ = RunWithRedirect4(cmdline4);
+                    //SQL_Manager.UpdatePairing(connectSQLDB, MB_Serial[0], SOM_Serial[0], imagefw, pair1);
+                }
+
+
+            }
+            else if (fmb == -1)
+            {
+                Cmd_Burn4.Enabled = false;
+                //MessageBox.Show("CONNECT FIRST STAND USB TO MAINBOARD","INFO");
+
+                //int pair1 = BurnTest(bootfile, imagefile);
+                //await BurnTest1(bootfile, imagefile);
+                //cmdline = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all C:\BurnImage\imx-boot-sd.bin-mainboard C:\BurnImage\scanner-scanner_image-0.1.2.img";
+                cmdline4 = cmdtext(4, bootfile, imagefile);
+                _ = RunWithRedirect4(cmdline4);
+            }
+        }
     }
 
         
@@ -975,6 +1342,8 @@ namespace FW_Burn
  * https://stackoverflow.com/questions/5367557/how-to-parse-command-line-output-from-c
  * https://stackoverflow.com/questions/206323/how-to-execute-command-line-in-c-get-std-out-results
  * https://www.codeproject.com/Articles/170017/Solving-Problems-of-Monitoring-Standard-Output-and
+ * 
+ * https://stackoverflow.com/questions/20997771/run-a-given-number-of-the-same-process-concurrently
  * 
  * 
  ------------------------------------------------------------------------------------------------------------------------ 

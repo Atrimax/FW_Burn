@@ -151,6 +151,7 @@
             this.Cmd_Burn3.TabIndex = 7;
             this.Cmd_Burn3.Text = "BURN 3 UUT";
             this.Cmd_Burn3.UseVisualStyleBackColor = true;
+            this.Cmd_Burn3.Click += new System.EventHandler(this.Cmd_Burn3_Click);
             // 
             // Cmd_Burn4
             // 
@@ -162,6 +163,7 @@
             this.Cmd_Burn4.TabIndex = 8;
             this.Cmd_Burn4.Text = "BURN4 UUT";
             this.Cmd_Burn4.UseVisualStyleBackColor = true;
+            this.Cmd_Burn4.Click += new System.EventHandler(this.Cmd_Burn4_Click);
             // 
             // textSOM1
             // 
@@ -572,6 +574,7 @@
             this.button4.TabIndex = 55;
             this.button4.Text = "PAIR 4 UNIT";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button3
             // 
@@ -582,6 +585,7 @@
             this.button3.TabIndex = 54;
             this.button3.Text = "PAIR 3 UNIT";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
