@@ -15,6 +15,7 @@ using System.Diagnostics;
 using static System.Windows.Forms.AxHost;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+using System.Security.Cryptography;
 
 namespace FW_Burn
 {
@@ -49,15 +50,12 @@ namespace FW_Burn
         delegate void SetProgressBarCallback4(int countnum4);
         delegate void SetLabelCallback4(string countnum4);
 
-        private Process proc = new Process();
-        private Process proc2 = new Process();
-        private Process proc3 = new Process();
-        private Process proc4 = new Process();
+        
 
-        public TaskCompletionSource<bool> eventHandled;
-        public TaskCompletionSource<bool> eventHandled2;
-        public TaskCompletionSource<bool> eventHandled3;
-        public TaskCompletionSource<bool> eventHandled4;
+        public TaskCompletionSource<bool> eventHandled = new TaskCompletionSource<bool>();
+        public TaskCompletionSource<bool> eventHandled2 = new TaskCompletionSource<bool>();
+        public TaskCompletionSource<bool> eventHandled3 = new TaskCompletionSource<bool>();
+        public TaskCompletionSource<bool> eventHandled4 = new TaskCompletionSource<bool>();
 
         SQL_Driver SQL_Manager = new SQL_Driver();        
 
@@ -544,7 +542,8 @@ namespace FW_Burn
 
         private async Task RunWithRedirect(string arguments)
         {
-            eventHandled = new TaskCompletionSource<bool>();
+            Process proc = new Process();
+        
             int exitCode;
             
             ProcessStartInfo startInfo = new ProcessStartInfo();
@@ -563,16 +562,18 @@ namespace FW_Burn
 
             proc.BeginOutputReadLine();
 
-
+            
             await Task.WhenAny(eventHandled.Task);
-            exitCode = proc.ExitCode;
+            //exitCode = proc.ExitCode;
+           
         }
 
         private async Task RunWithRedirect2(string arguments2)
         {
-            eventHandled2 = new TaskCompletionSource<bool>();
+            Process proc2 = new Process();
+        
             int exitCode2;
-            //Process proc = new Process();
+            
             ProcessStartInfo startInfo2 = new ProcessStartInfo();
             proc2.StartInfo = startInfo2;
             startInfo2.FileName = "cmd.exe";
@@ -592,13 +593,14 @@ namespace FW_Burn
 
             await Task.WhenAny(eventHandled2.Task);
             exitCode2 = proc2.ExitCode;
+            
         }
 
         private async Task RunWithRedirect3(string arguments3)
         {
-            eventHandled3 = new TaskCompletionSource<bool>();
+            Process proc3 = new Process();
             int exitCode3;
-            //Process proc = new Process();
+            
             ProcessStartInfo startInfo3 = new ProcessStartInfo();
             proc3.StartInfo = startInfo3;
             startInfo3.FileName = "cmd.exe";
@@ -618,11 +620,12 @@ namespace FW_Burn
 
             await Task.WhenAny(eventHandled3.Task);
             exitCode3 = proc3.ExitCode;
+            
         }
 
         private async Task RunWithRedirect4(string arguments4)
         {
-            eventHandled4 = new TaskCompletionSource<bool>();
+            Process proc4 = new Process();
             int exitCode4;
             
             ProcessStartInfo startInfo4 = new ProcessStartInfo();
@@ -644,12 +647,13 @@ namespace FW_Burn
 
             await Task.WhenAny(eventHandled4.Task);
             exitCode4 = proc4.ExitCode;
+            
         }
         private void ParseOutString(string datastring)
         {
             if(datastring != string.Empty)
             {
-                if (datastring.Contains("100%1:181>Okay"))
+                if (datastring.Contains("1:181>Start Cmd:FB: ucmd mmc partconf ${emmc_dev} ${emmc_ack} 1 0"))
                 {
                     SetLabel("DONE");
                     
@@ -666,7 +670,7 @@ namespace FW_Burn
         {
             if (datastring2 != string.Empty)
             {
-                if (datastring2.Contains("100%1:182>Okay"))
+                if (datastring2.Contains("1:182>Start Cmd:FB: ucmd mmc partconf ${emmc_dev} ${emmc_ack} 1 0"))
                 {
                     SetLabel2("DONE");
                     //proc.Kill();
@@ -685,7 +689,7 @@ namespace FW_Burn
         {
             if (datastring3 != string.Empty)
             {
-                if (datastring3.Contains("100%1:183>Okay"))
+                if (datastring3.Contains("1:183>Start Cmd:FB: ucmd mmc partconf ${emmc_dev} ${emmc_ack} 1 0"))
                 {
                     SetLabel3("DONE");
                     
@@ -702,7 +706,7 @@ namespace FW_Burn
         {
             if (datastring4 != string.Empty)
             {
-                if (datastring4.Contains("100%1:184>Okay"))
+                if (datastring4.Contains("1:181>Start Cmd:FB: ucmd mmc partconf ${emmc_dev} ${emmc_ack} 1 0"))
                 {
                     SetLabel4("DONE");
                     
@@ -727,7 +731,7 @@ namespace FW_Burn
                     SetLabel(kt[0]);
                     
                 }
-                else if(oot.Contains("100%1:181>Okay"))
+                else if(oot.Contains("1:181>Start Cmd:FB: ucmd mmc partconf ${emmc_dev} ${emmc_ack} 1 0"))
                 {
                     ParseOutString(oot);
                     
@@ -752,7 +756,7 @@ namespace FW_Burn
                     SetLabel2(kt2[0]);
 
                 }
-                else if (oot2.Contains("100%1:182>Okay"))
+                else if (oot2.Contains("1:182>Start Cmd:FB: ucmd mmc partconf ${emmc_dev} ${emmc_ack} 1 0"))
                 {
                     ParseOutString2(oot2);
 
@@ -777,7 +781,7 @@ namespace FW_Burn
                     SetLabel3(kt3[0]);
 
                 }
-                else if (oot3.Contains("100%1:183>Okay"))
+                else if (oot3.Contains("1:183>Start Cmd:FB: ucmd mmc partconf ${emmc_dev} ${emmc_ack} 1 0"))
                 {
                     ParseOutString3(oot3);
 
@@ -802,7 +806,7 @@ namespace FW_Burn
                     SetLabel4(kt4[0]);
 
                 }
-                else if (oot4.Contains("100%1:184>Okay"))
+                else if (oot4.Contains("1:184>Start Cmd:FB: ucmd mmc partconf ${emmc_dev} ${emmc_ack} 1 0"))
                 {
                     ParseOutString4(oot4);
 
@@ -821,7 +825,7 @@ namespace FW_Burn
         {
             //string stpak = String.Format("Exit time: {0}, Exit code: {1}, Elapsed time: {2}", proc.ExitTime, proc.ExitCode, Math.Round((proc.ExitTime - proc.StartTime).TotalMilliseconds));
                 
-            bool rtt = eventHandled.TrySetResult(true);
+            bool tty = eventHandled.TrySetResult(true);
             
         }
 
@@ -1050,15 +1054,11 @@ namespace FW_Burn
                 if(m1 == DialogResult.Yes) 
                 {
                     Cmd_Burn1.Enabled = false;
-                    //MessageBox.Show("CONNECT FIRST STAND USB TO MAINBOARD","INFO");
-
-                    //int pair1 = BurnTest(bootfile, imagefile);
-                    //await BurnTest1(bootfile, imagefile);
+                    
                     //cmdline = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all C:\BurnImage\imx-boot-sd.bin-mainboard C:\BurnImage\scanner-scanner_image-0.1.2.img";
                     cmdline = cmdtext(1, bootfile, imagefile);
-                    _ = RunWithRedirect(cmdline);
-                    //SQL_Manager.UpdatePairing(connectSQLDB, MB_Serial[0], SOM_Serial[0], imagefw, pair1);
-         
+                    _=RunWithRedirect(cmdline);
+                   
                     
                 }
 
@@ -1068,7 +1068,7 @@ namespace FW_Burn
             {
                 Cmd_Burn1.Enabled = false;
                 cmdline = cmdtext(1, bootfile, imagefile);
-                _ = RunWithRedirect(cmdline);
+                _=RunWithRedirect(cmdline);
             }
             
         }
@@ -1124,12 +1124,7 @@ namespace FW_Burn
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(proc != null || proc.HasExited == false)
-            {
-                //proc.Close();
-                proc.Kill();
-            }
-            
+                        
             if(Status1.Text == "DONE")
             {
                 int  p1 = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[0]);
@@ -1162,11 +1157,7 @@ namespace FW_Burn
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (proc2 != null || proc2.HasExited == false)
-            {
-                //proc.Close();
-                proc2.Kill();
-            }
+            
             if (Status2.Text == "DONE")
             {
                 int p2 = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[1]);
@@ -1210,7 +1201,7 @@ namespace FW_Burn
                     
                     //cmdline = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all C:\BurnImage\imx-boot-sd.bin-mainboard C:\BurnImage\scanner-scanner_image-0.1.2.img";
                     cmdline2 = cmdtext(2, bootfile, imagefile);
-                    _ = RunWithRedirect2(cmdline2);
+                    _=RunWithRedirect2(cmdline2);
                    
                 }
 
@@ -1225,17 +1216,13 @@ namespace FW_Burn
                 //await BurnTest1(bootfile, imagefile);
                 //cmdline = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all C:\BurnImage\imx-boot-sd.bin-mainboard C:\BurnImage\scanner-scanner_image-0.1.2.img";
                 cmdline2 = cmdtext(2, bootfile, imagefile);
-                _ = RunWithRedirect2(cmdline2);
+                _=RunWithRedirect2(cmdline2);
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (proc3 != null || proc3.HasExited == false)
-            {
-                //proc.Close();
-                proc3.Kill();
-            }
+            
             if (Status3.Text == "DONE")
             {
                 int p3 = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[2]);
@@ -1268,11 +1255,7 @@ namespace FW_Burn
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (proc4 != null || proc4.HasExited == false)
-            {
-                //proc.Close();
-                proc4.Kill();
-            }
+            
             if (Status4.Text == "DONE")
             {
                 int p4 = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[3]);
@@ -1313,14 +1296,11 @@ namespace FW_Burn
                 if (m1 == DialogResult.Yes)
                 {
                     Cmd_Burn3.Enabled = false;
-                    //MessageBox.Show("CONNECT FIRST STAND USB TO MAINBOARD","INFO");
-
-                    //int pair1 = BurnTest(bootfile, imagefile);
-                    //await BurnTest1(bootfile, imagefile);
+                    
                     //cmdline = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all C:\BurnImage\imx-boot-sd.bin-mainboard C:\BurnImage\scanner-scanner_image-0.1.2.img";
                     cmdline3 = cmdtext(3, bootfile, imagefile);
-                    _ = RunWithRedirect3(cmdline3);
-                    //SQL_Manager.UpdatePairing(connectSQLDB, MB_Serial[0], SOM_Serial[0], imagefw, pair1);
+                    _=RunWithRedirect3(cmdline3);
+                    
                 }
 
 
@@ -1328,13 +1308,10 @@ namespace FW_Burn
             else if (fmb == -1)
             {
                 Cmd_Burn3.Enabled = false;
-                //MessageBox.Show("CONNECT FIRST STAND USB TO MAINBOARD","INFO");
-
-                //int pair1 = BurnTest(bootfile, imagefile);
-                //await BurnTest1(bootfile, imagefile);
+                
                 //cmdline = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all C:\BurnImage\imx-boot-sd.bin-mainboard C:\BurnImage\scanner-scanner_image-0.1.2.img";
                 cmdline3 = cmdtext(3, bootfile, imagefile);
-                _ = RunWithRedirect3(cmdline3);
+               _= RunWithRedirect3(cmdline3);
             }
         }
 
@@ -1354,7 +1331,7 @@ namespace FW_Burn
                     //await BurnTest1(bootfile, imagefile);
                     //cmdline = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all C:\BurnImage\imx-boot-sd.bin-mainboard C:\BurnImage\scanner-scanner_image-0.1.2.img";
                     cmdline4 = cmdtext(4, bootfile, imagefile);
-                    _ = RunWithRedirect4(cmdline4);
+                    _=RunWithRedirect4(cmdline4);
                     //SQL_Manager.UpdatePairing(connectSQLDB, MB_Serial[0], SOM_Serial[0], imagefw, pair1);
                 }
 
@@ -1369,7 +1346,7 @@ namespace FW_Burn
                 //await BurnTest1(bootfile, imagefile);
                 //cmdline = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all C:\BurnImage\imx-boot-sd.bin-mainboard C:\BurnImage\scanner-scanner_image-0.1.2.img";
                 cmdline4 = cmdtext(4, bootfile, imagefile);
-                _ = RunWithRedirect4(cmdline4);
+                _=RunWithRedirect4(cmdline4);
             }
         }
     }
