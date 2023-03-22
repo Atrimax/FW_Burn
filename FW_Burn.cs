@@ -1124,8 +1124,12 @@ namespace FW_Burn
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //proc.Kill();
-            proc.Close();
+            if(proc != null || proc.HasExited == false)
+            {
+                //proc.Close();
+                proc.Kill();
+            }
+            
             if(Status1.Text == "DONE")
             {
                 int  p1 = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[0]);
@@ -1158,7 +1162,11 @@ namespace FW_Burn
 
         private void button2_Click(object sender, EventArgs e)
         {
-            proc2.Close();
+            if (proc2 != null || proc2.HasExited == false)
+            {
+                //proc.Close();
+                proc2.Kill();
+            }
             if (Status2.Text == "DONE")
             {
                 int p2 = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[1]);
@@ -1199,14 +1207,11 @@ namespace FW_Burn
                 if (m1 == DialogResult.Yes)
                 {
                     Cmd_Burn2.Enabled = false;
-                    //MessageBox.Show("CONNECT FIRST STAND USB TO MAINBOARD","INFO");
-
-                    //int pair1 = BurnTest(bootfile, imagefile);
-                    //await BurnTest1(bootfile, imagefile);
+                    
                     //cmdline = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all C:\BurnImage\imx-boot-sd.bin-mainboard C:\BurnImage\scanner-scanner_image-0.1.2.img";
                     cmdline2 = cmdtext(2, bootfile, imagefile);
                     _ = RunWithRedirect2(cmdline2);
-                    //SQL_Manager.UpdatePairing(connectSQLDB, MB_Serial[0], SOM_Serial[0], imagefw, pair1);
+                   
                 }
 
 
@@ -1226,7 +1231,11 @@ namespace FW_Burn
 
         private void button3_Click(object sender, EventArgs e)
         {
-            proc3.Close();
+            if (proc3 != null || proc3.HasExited == false)
+            {
+                //proc.Close();
+                proc3.Kill();
+            }
             if (Status3.Text == "DONE")
             {
                 int p3 = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[2]);
@@ -1259,7 +1268,11 @@ namespace FW_Burn
 
         private void button4_Click(object sender, EventArgs e)
         {
-            proc4.Close();
+            if (proc4 != null || proc4.HasExited == false)
+            {
+                //proc.Close();
+                proc4.Kill();
+            }
             if (Status4.Text == "DONE")
             {
                 int p4 = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[3]);
