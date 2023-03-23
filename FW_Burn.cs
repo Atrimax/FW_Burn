@@ -313,11 +313,13 @@ namespace FW_Burn
                     {
                         labelMAIN1.ForeColor = Color.Green;
                         labelMAIN1.Text = "PASSED";
+                        textMAIN1.Enabled = false;
                     }
                     else
                     {
                         labelMAIN1.ForeColor = Color.Blue;
                         labelMAIN1.Text = "NOT TESTED";
+                        textMAIN1.Enabled = false;
                     }
                     break;
                 case 1:
@@ -330,11 +332,13 @@ namespace FW_Burn
                     {
                         labelMAIN2.ForeColor = Color.Green;
                         labelMAIN2.Text = "PASSED";
+                        textMAIN2.Enabled = false;
                     }
                     else
                     {
                         labelMAIN2.ForeColor = Color.Blue;
                         labelMAIN2.Text = "NOT TESTED";
+                        textMAIN2.Enabled = false;
                     }
                     break;
                 case 2:
@@ -347,11 +351,13 @@ namespace FW_Burn
                     {
                         labelMAIN3.ForeColor = Color.Green;
                         labelMAIN3.Text = "PASSED";
+                        textMAIN3.Enabled = false;
                     }
                     else
                     {
                         labelMAIN3.ForeColor = Color.Blue;
                         labelMAIN3.Text = "NOT TESTED";
+                        textMAIN3.Enabled = false;
                     }
                     break;
                 case 3:
@@ -364,11 +370,13 @@ namespace FW_Burn
                     {
                         labelMAIN4.ForeColor = Color.Green;
                         labelMAIN4.Text = "PASSED";
+                        textMAIN4.Enabled = false;
                     }
                     else
                     {
                         labelMAIN4.ForeColor = Color.Blue;
                         labelMAIN4.Text = "NOT TESTED";
+                        textMAIN4.Enabled = false;
                     }
                     break;
             }
@@ -388,6 +396,7 @@ namespace FW_Burn
                     {
                         labelSOM1.ForeColor= Color.Green;
                         labelSOM1.Text = "Verified";
+                        textSOM1.Enabled = false;
                     }
                     break;
                 case 1:
@@ -400,6 +409,7 @@ namespace FW_Burn
                     {
                         labelSOM2.ForeColor = Color.Green;
                         labelSOM2.Text = "Verified";
+                        textSOM2.Enabled = false;
                     }
                     break;
                 case 2:
@@ -412,6 +422,7 @@ namespace FW_Burn
                     {
                         labelSOM3.ForeColor = Color.Green;
                         labelSOM3.Text = "Verified";
+                        textSOM3.Enabled = false;
                     }
                     break;
                 case 3:
@@ -424,6 +435,7 @@ namespace FW_Burn
                     {
                         labelSOM4.ForeColor = Color.Green;
                         labelSOM4.Text = "Verified";
+                        textSOM4.Enabled = false;
                     }
                     break;
             }
@@ -882,10 +894,7 @@ namespace FW_Burn
                         }
                         else
                             statflag[0] = 0;
-
                     }
-
-
                 }
                 else
                 {
@@ -926,10 +935,7 @@ namespace FW_Burn
                         }
                         else
                             statflag[1] = 0;
-
                     }
-
-
                 }
                 else
                 {
@@ -1151,6 +1157,8 @@ namespace FW_Burn
                     labelMAIN1.Text = "";
                 }
                 button1.Enabled = false;
+                textSOM1.Enabled = true;
+                textMAIN1.Enabled = true;
                 
             }
         }
@@ -1184,6 +1192,8 @@ namespace FW_Burn
                     labelMAIN2.Text = "";
                 }
                 button2.Enabled = false;
+                textSOM2.Enabled = true;
+                textMAIN2.Enabled = true;
 
             }
         }
@@ -1249,6 +1259,8 @@ namespace FW_Burn
                     labelMAIN3.Text = "";
                 }
                 button3.Enabled = false;
+                textSOM3.Enabled = true;
+                textMAIN3.Enabled = true;
 
             }
         }
@@ -1282,6 +1294,8 @@ namespace FW_Burn
                     labelMAIN4.Text = "";
                 }
                 button4.Enabled = false;
+                textSOM4.Enabled = true;
+                textMAIN4.Enabled = true;
 
             }
         }
