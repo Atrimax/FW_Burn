@@ -91,22 +91,22 @@ namespace FW_Burn
                     }
                     else
                     {
-                        pairstat = -1;
+                        pairstat = 0;
                     }
 
                 }
 
             }
             catch (Exception ex)
-            { ex.Message.ToString(); return pairstat = -1; }
+            { ex.Message.ToString(); }
 
             return pairstat;
         }
 
-        public void UpdatePairing(string connectDB, string mbsn, string somsn, string somfwver, int pairstatus, string opername)
+        public void UpdatePairing(string connectDB, string mbsn, string somsn, string somfwver, int pairstatus, string wifimac, string opername)
         {
             string query = string.Empty;
-            query  = query = "UPDATE Parts_Pair SET SOM_FW_VER=@SOM_FW_VER, SOM_SN=@SOM_SN, Pair_Status=@Pair_Status, Operator_FW=@Operator_FW, Date_Pair=@Date_Pair WHERE MB_SN='" + mbsn + "'";
+            query  = query = "UPDATE Parts_Pair SET SOM_FW_VER=@SOM_FW_VER, SOM_SN=@SOM_SN, Pair_Status=@Pair_Status, Wifi_SN=@Wifi_SN, Operator_FW=@Operator_FW, Date_Pair=@Date_Pair WHERE MB_SN='" + mbsn + "'";
             using (SqlConnection conn = new SqlConnection(connectDB))
             {
                 try
@@ -118,6 +118,7 @@ namespace FW_Burn
                         sc.Parameters.AddWithValue("@SOM_SN", somsn);
                         sc.Parameters.AddWithValue("@SOM_FW_VER", somfwver);
                         sc.Parameters.AddWithValue("@Pair_Status", pairstatus);
+                        sc.Parameters.AddWithValue("@Wifi_SN", wifimac);
                         sc.Parameters.AddWithValue(@"Operator_FW", SqlDbType.VarChar).Value = opername;
                         sc.Parameters.AddWithValue(@"Date_Pair", SqlDbType.SmallDateTime).Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                         sc.ExecuteNonQuery();
@@ -132,10 +133,10 @@ namespace FW_Burn
             }
         }
 
-        public void SAVE_Pairing(string connectDB, string mbsn, string somsn, string somfwver, int pairstatus, string opername)
+        public void SAVE_Pairing(string connectDB, string mbsn, string somsn, string somfwver, int pairstatus, string wifimac, string opername)
         {
             string query = string.Empty;
-            query = "INSERT INTO Parts_Pair (MB_SN, SOM_FW_VER, SOM_SN, Pair_Status, Operator_FW, Date_Pair) VALUES (@MB_SN, @SOM_FW_VER, @SOM_SN, @Pair_Status, @Operator_FW, @Date_Pair)";
+            query = "INSERT INTO Parts_Pair (MB_SN, SOM_FW_VER, SOM_SN, Pair_Status, Wifi_SN, Operator_FW, Date_Pair) VALUES (@MB_SN, @SOM_FW_VER, @SOM_SN, @Pair_Status, @Wifi_SN, @Operator_FW, @Date_Pair)";
             //@Wifi_SN, @Operator_FW, @Date_Pair)";
             try
             { 
@@ -145,17 +146,17 @@ namespace FW_Burn
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                             
-                            cmd.Parameters.AddWithValue(@"MB_SN", SqlDbType.VarChar).Value = mbsn;
-                            cmd.Parameters.AddWithValue(@"SOM_FW_VER", SqlDbType.VarChar).Value = somfwver;
-                            cmd.Parameters.AddWithValue(@"SOM_SN", SqlDbType.VarChar).Value = somsn;
+                        cmd.Parameters.AddWithValue(@"MB_SN", SqlDbType.VarChar).Value = mbsn;
+                        cmd.Parameters.AddWithValue(@"SOM_FW_VER", SqlDbType.VarChar).Value = somfwver;
+                        cmd.Parameters.AddWithValue(@"SOM_SN", SqlDbType.VarChar).Value = somsn;
                             
-                            cmd.Parameters.AddWithValue(@"Pair_Status", SqlDbType.Int).Value = pairstatus;
-                            
-                            cmd.Parameters.AddWithValue(@"Operator_FW", SqlDbType.VarChar).Value = opername;
-                            cmd.Parameters.AddWithValue(@"Date_Pair", SqlDbType.SmallDateTime).Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        cmd.Parameters.AddWithValue(@"Pair_Status", SqlDbType.Int).Value = pairstatus;
+                        cmd.Parameters.AddWithValue(@"Wifi_SN", SqlDbType.VarChar).Value = wifimac;
+                        cmd.Parameters.AddWithValue(@"Operator_FW", SqlDbType.VarChar).Value = opername;
+                        cmd.Parameters.AddWithValue(@"Date_Pair", SqlDbType.SmallDateTime).Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
-                            cmd.ExecuteNonQuery();
-                            //saveflag = true;                                             
+                        cmd.ExecuteNonQuery();
+                                                                     
                     }
                 }
 

@@ -85,6 +85,19 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.cmd_Login = new System.Windows.Forms.Button();
+            this.wlbl4 = new System.Windows.Forms.Label();
+            this.textMAC4 = new System.Windows.Forms.TextBox();
+            this.labelW4 = new System.Windows.Forms.Label();
+            this.labelW3 = new System.Windows.Forms.Label();
+            this.textMAC3 = new System.Windows.Forms.TextBox();
+            this.wlbl3 = new System.Windows.Forms.Label();
+            this.wlbl2 = new System.Windows.Forms.Label();
+            this.textMAC2 = new System.Windows.Forms.TextBox();
+            this.labelW2 = new System.Windows.Forms.Label();
+            this.wlbl1 = new System.Windows.Forms.Label();
+            this.textMAC1 = new System.Windows.Forms.TextBox();
+            this.labelW1 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -102,7 +115,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(22, 623);
+            this.label3.Location = new System.Drawing.Point(22, 718);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 3;
@@ -111,7 +124,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(86, 623);
+            this.label4.Location = new System.Drawing.Point(86, 718);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 13);
             this.label4.TabIndex = 4;
@@ -121,7 +134,7 @@
             // 
             this.Cmd_Burn1.Enabled = false;
             this.Cmd_Burn1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.Cmd_Burn1.Location = new System.Drawing.Point(578, 37);
+            this.Cmd_Burn1.Location = new System.Drawing.Point(576, 40);
             this.Cmd_Burn1.Name = "Cmd_Burn1";
             this.Cmd_Burn1.Size = new System.Drawing.Size(82, 77);
             this.Cmd_Burn1.TabIndex = 5;
@@ -133,7 +146,7 @@
             // 
             this.Cmd_Burn2.Enabled = false;
             this.Cmd_Burn2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.Cmd_Burn2.Location = new System.Drawing.Point(578, 140);
+            this.Cmd_Burn2.Location = new System.Drawing.Point(576, 177);
             this.Cmd_Burn2.Name = "Cmd_Burn2";
             this.Cmd_Burn2.Size = new System.Drawing.Size(82, 79);
             this.Cmd_Burn2.TabIndex = 6;
@@ -145,7 +158,7 @@
             // 
             this.Cmd_Burn3.Enabled = false;
             this.Cmd_Burn3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.Cmd_Burn3.Location = new System.Drawing.Point(578, 241);
+            this.Cmd_Burn3.Location = new System.Drawing.Point(576, 315);
             this.Cmd_Burn3.Name = "Cmd_Burn3";
             this.Cmd_Burn3.Size = new System.Drawing.Size(82, 77);
             this.Cmd_Burn3.TabIndex = 7;
@@ -157,7 +170,7 @@
             // 
             this.Cmd_Burn4.Enabled = false;
             this.Cmd_Burn4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.Cmd_Burn4.Location = new System.Drawing.Point(578, 343);
+            this.Cmd_Burn4.Location = new System.Drawing.Point(576, 455);
             this.Cmd_Burn4.Name = "Cmd_Burn4";
             this.Cmd_Burn4.Size = new System.Drawing.Size(82, 80);
             this.Cmd_Burn4.TabIndex = 8;
@@ -168,7 +181,7 @@
             // textSOM1
             // 
             this.textSOM1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.textSOM1.Location = new System.Drawing.Point(18, 53);
+            this.textSOM1.Location = new System.Drawing.Point(18, 40);
             this.textSOM1.Name = "textSOM1";
             this.textSOM1.Size = new System.Drawing.Size(137, 22);
             this.textSOM1.TabIndex = 9;
@@ -177,7 +190,7 @@
             // textSOM2
             // 
             this.textSOM2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.textSOM2.Location = new System.Drawing.Point(18, 158);
+            this.textSOM2.Location = new System.Drawing.Point(18, 177);
             this.textSOM2.Name = "textSOM2";
             this.textSOM2.Size = new System.Drawing.Size(137, 22);
             this.textSOM2.TabIndex = 10;
@@ -186,7 +199,7 @@
             // textSOM3
             // 
             this.textSOM3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.textSOM3.Location = new System.Drawing.Point(18, 257);
+            this.textSOM3.Location = new System.Drawing.Point(18, 315);
             this.textSOM3.Name = "textSOM3";
             this.textSOM3.Size = new System.Drawing.Size(137, 22);
             this.textSOM3.TabIndex = 11;
@@ -195,7 +208,7 @@
             // textSOM4
             // 
             this.textSOM4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.textSOM4.Location = new System.Drawing.Point(18, 359);
+            this.textSOM4.Location = new System.Drawing.Point(20, 455);
             this.textSOM4.Name = "textSOM4";
             this.textSOM4.Size = new System.Drawing.Size(137, 22);
             this.textSOM4.TabIndex = 12;
@@ -205,7 +218,7 @@
             // 
             this.lbl1.AutoSize = true;
             this.lbl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.lbl1.Location = new System.Drawing.Point(18, 37);
+            this.lbl1.Location = new System.Drawing.Point(18, 24);
             this.lbl1.Name = "lbl1";
             this.lbl1.Size = new System.Drawing.Size(66, 16);
             this.lbl1.TabIndex = 13;
@@ -215,7 +228,7 @@
             // 
             this.lbl2.AutoSize = true;
             this.lbl2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.lbl2.Location = new System.Drawing.Point(18, 140);
+            this.lbl2.Location = new System.Drawing.Point(18, 159);
             this.lbl2.Name = "lbl2";
             this.lbl2.Size = new System.Drawing.Size(66, 16);
             this.lbl2.TabIndex = 14;
@@ -225,7 +238,7 @@
             // 
             this.lbl3.AutoSize = true;
             this.lbl3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.lbl3.Location = new System.Drawing.Point(18, 241);
+            this.lbl3.Location = new System.Drawing.Point(18, 299);
             this.lbl3.Name = "lbl3";
             this.lbl3.Size = new System.Drawing.Size(66, 16);
             this.lbl3.TabIndex = 15;
@@ -235,7 +248,7 @@
             // 
             this.lbl4.AutoSize = true;
             this.lbl4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.lbl4.Location = new System.Drawing.Point(18, 343);
+            this.lbl4.Location = new System.Drawing.Point(20, 439);
             this.lbl4.Name = "lbl4";
             this.lbl4.Size = new System.Drawing.Size(66, 16);
             this.lbl4.TabIndex = 16;
@@ -245,7 +258,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label5.Location = new System.Drawing.Point(18, 76);
+            this.label5.Location = new System.Drawing.Point(18, 63);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(101, 16);
             this.label5.TabIndex = 18;
@@ -254,7 +267,7 @@
             // textMAIN1
             // 
             this.textMAIN1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.textMAIN1.Location = new System.Drawing.Point(18, 92);
+            this.textMAIN1.Location = new System.Drawing.Point(18, 79);
             this.textMAIN1.Name = "textMAIN1";
             this.textMAIN1.Size = new System.Drawing.Size(137, 22);
             this.textMAIN1.TabIndex = 19;
@@ -264,7 +277,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label6.Location = new System.Drawing.Point(15, 181);
+            this.label6.Location = new System.Drawing.Point(15, 200);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(101, 16);
             this.label6.TabIndex = 20;
@@ -273,7 +286,7 @@
             // textMAIN2
             // 
             this.textMAIN2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.textMAIN2.Location = new System.Drawing.Point(18, 197);
+            this.textMAIN2.Location = new System.Drawing.Point(18, 216);
             this.textMAIN2.Name = "textMAIN2";
             this.textMAIN2.Size = new System.Drawing.Size(137, 22);
             this.textMAIN2.TabIndex = 21;
@@ -282,7 +295,7 @@
             // textMAIN3
             // 
             this.textMAIN3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.textMAIN3.Location = new System.Drawing.Point(18, 296);
+            this.textMAIN3.Location = new System.Drawing.Point(18, 354);
             this.textMAIN3.Name = "textMAIN3";
             this.textMAIN3.Size = new System.Drawing.Size(137, 22);
             this.textMAIN3.TabIndex = 22;
@@ -292,7 +305,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label7.Location = new System.Drawing.Point(15, 280);
+            this.label7.Location = new System.Drawing.Point(15, 338);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(101, 16);
             this.label7.TabIndex = 23;
@@ -302,7 +315,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.label8.Location = new System.Drawing.Point(15, 382);
+            this.label8.Location = new System.Drawing.Point(17, 478);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(101, 16);
             this.label8.TabIndex = 24;
@@ -311,7 +324,7 @@
             // textMAIN4
             // 
             this.textMAIN4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.textMAIN4.Location = new System.Drawing.Point(18, 401);
+            this.textMAIN4.Location = new System.Drawing.Point(20, 497);
             this.textMAIN4.Name = "textMAIN4";
             this.textMAIN4.Size = new System.Drawing.Size(137, 22);
             this.textMAIN4.TabIndex = 25;
@@ -320,25 +333,26 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(15, 448);
+            this.label9.Location = new System.Drawing.Point(15, 574);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(62, 13);
+            this.label9.Size = new System.Drawing.Size(77, 16);
             this.label9.TabIndex = 27;
             this.label9.Text = "image path:";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(83, 448);
+            this.label10.Location = new System.Drawing.Point(98, 574);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(41, 13);
+            this.label10.Size = new System.Drawing.Size(51, 16);
             this.label10.TabIndex = 28;
             this.label10.Text = "label10";
             // 
             // labelSOM1
             // 
             this.labelSOM1.AutoSize = true;
-            this.labelSOM1.Location = new System.Drawing.Point(165, 58);
+            this.labelSOM1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.labelSOM1.Location = new System.Drawing.Point(165, 45);
             this.labelSOM1.Name = "labelSOM1";
             this.labelSOM1.Size = new System.Drawing.Size(46, 13);
             this.labelSOM1.TabIndex = 29;
@@ -346,14 +360,14 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(666, 58);
+            this.progressBar1.Location = new System.Drawing.Point(664, 61);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(254, 18);
             this.progressBar1.TabIndex = 31;
             // 
             // progressBar2
             // 
-            this.progressBar2.Location = new System.Drawing.Point(666, 163);
+            this.progressBar2.Location = new System.Drawing.Point(664, 200);
             this.progressBar2.Name = "progressBar2";
             this.progressBar2.Size = new System.Drawing.Size(254, 18);
             this.progressBar2.TabIndex = 32;
@@ -361,7 +375,8 @@
             // labelMAIN1
             // 
             this.labelMAIN1.AutoSize = true;
-            this.labelMAIN1.Location = new System.Drawing.Point(165, 97);
+            this.labelMAIN1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.labelMAIN1.Location = new System.Drawing.Point(165, 84);
             this.labelMAIN1.Name = "labelMAIN1";
             this.labelMAIN1.Size = new System.Drawing.Size(46, 13);
             this.labelMAIN1.TabIndex = 33;
@@ -370,7 +385,8 @@
             // labelSOM2
             // 
             this.labelSOM2.AutoSize = true;
-            this.labelSOM2.Location = new System.Drawing.Point(165, 163);
+            this.labelSOM2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.labelSOM2.Location = new System.Drawing.Point(165, 182);
             this.labelSOM2.Name = "labelSOM2";
             this.labelSOM2.Size = new System.Drawing.Size(46, 13);
             this.labelSOM2.TabIndex = 34;
@@ -379,7 +395,8 @@
             // labelMAIN2
             // 
             this.labelMAIN2.AutoSize = true;
-            this.labelMAIN2.Location = new System.Drawing.Point(165, 202);
+            this.labelMAIN2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.labelMAIN2.Location = new System.Drawing.Point(165, 221);
             this.labelMAIN2.Name = "labelMAIN2";
             this.labelMAIN2.Size = new System.Drawing.Size(46, 13);
             this.labelMAIN2.TabIndex = 35;
@@ -388,7 +405,8 @@
             // labelSOM3
             // 
             this.labelSOM3.AutoSize = true;
-            this.labelSOM3.Location = new System.Drawing.Point(165, 262);
+            this.labelSOM3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.labelSOM3.Location = new System.Drawing.Point(165, 320);
             this.labelSOM3.Name = "labelSOM3";
             this.labelSOM3.Size = new System.Drawing.Size(46, 13);
             this.labelSOM3.TabIndex = 36;
@@ -397,7 +415,8 @@
             // labelMAIN3
             // 
             this.labelMAIN3.AutoSize = true;
-            this.labelMAIN3.Location = new System.Drawing.Point(165, 301);
+            this.labelMAIN3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.labelMAIN3.Location = new System.Drawing.Point(165, 359);
             this.labelMAIN3.Name = "labelMAIN3";
             this.labelMAIN3.Size = new System.Drawing.Size(46, 13);
             this.labelMAIN3.TabIndex = 37;
@@ -406,7 +425,8 @@
             // labelSOM4
             // 
             this.labelSOM4.AutoSize = true;
-            this.labelSOM4.Location = new System.Drawing.Point(165, 364);
+            this.labelSOM4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.labelSOM4.Location = new System.Drawing.Point(167, 460);
             this.labelSOM4.Name = "labelSOM4";
             this.labelSOM4.Size = new System.Drawing.Size(46, 13);
             this.labelSOM4.TabIndex = 38;
@@ -415,7 +435,8 @@
             // labelMAIN4
             // 
             this.labelMAIN4.AutoSize = true;
-            this.labelMAIN4.Location = new System.Drawing.Point(165, 406);
+            this.labelMAIN4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.labelMAIN4.Location = new System.Drawing.Point(167, 502);
             this.labelMAIN4.Name = "labelMAIN4";
             this.labelMAIN4.Size = new System.Drawing.Size(46, 13);
             this.labelMAIN4.TabIndex = 39;
@@ -424,7 +445,8 @@
             // lbl_Info1
             // 
             this.lbl_Info1.AutoSize = true;
-            this.lbl_Info1.Location = new System.Drawing.Point(304, 69);
+            this.lbl_Info1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.lbl_Info1.Location = new System.Drawing.Point(304, 56);
             this.lbl_Info1.Name = "lbl_Info1";
             this.lbl_Info1.Size = new System.Drawing.Size(41, 13);
             this.lbl_Info1.TabIndex = 40;
@@ -432,14 +454,14 @@
             // 
             // progressBar3
             // 
-            this.progressBar3.Location = new System.Drawing.Point(666, 262);
+            this.progressBar3.Location = new System.Drawing.Point(664, 336);
             this.progressBar3.Name = "progressBar3";
             this.progressBar3.Size = new System.Drawing.Size(254, 18);
             this.progressBar3.TabIndex = 41;
             // 
             // progressBar4
             // 
-            this.progressBar4.Location = new System.Drawing.Point(666, 364);
+            this.progressBar4.Location = new System.Drawing.Point(664, 476);
             this.progressBar4.Name = "progressBar4";
             this.progressBar4.Size = new System.Drawing.Size(254, 18);
             this.progressBar4.TabIndex = 42;
@@ -447,7 +469,8 @@
             // lbl_Info2
             // 
             this.lbl_Info2.AutoSize = true;
-            this.lbl_Info2.Location = new System.Drawing.Point(305, 163);
+            this.lbl_Info2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.lbl_Info2.Location = new System.Drawing.Point(305, 182);
             this.lbl_Info2.Name = "lbl_Info2";
             this.lbl_Info2.Size = new System.Drawing.Size(41, 13);
             this.lbl_Info2.TabIndex = 43;
@@ -456,7 +479,8 @@
             // lbl_Info3
             // 
             this.lbl_Info3.AutoSize = true;
-            this.lbl_Info3.Location = new System.Drawing.Point(305, 267);
+            this.lbl_Info3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.lbl_Info3.Location = new System.Drawing.Point(304, 321);
             this.lbl_Info3.Name = "lbl_Info3";
             this.lbl_Info3.Size = new System.Drawing.Size(41, 13);
             this.lbl_Info3.TabIndex = 44;
@@ -465,7 +489,8 @@
             // lbl_Info4
             // 
             this.lbl_Info4.AutoSize = true;
-            this.lbl_Info4.Location = new System.Drawing.Point(307, 363);
+            this.lbl_Info4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.lbl_Info4.Location = new System.Drawing.Point(304, 458);
             this.lbl_Info4.Name = "lbl_Info4";
             this.lbl_Info4.Size = new System.Drawing.Size(41, 13);
             this.lbl_Info4.TabIndex = 45;
@@ -474,41 +499,53 @@
             // Status1
             // 
             this.Status1.AutoSize = true;
-            this.Status1.Location = new System.Drawing.Point(769, 28);
+            this.Status1.Location = new System.Drawing.Point(767, 31);
             this.Status1.Name = "Status1";
-            this.Status1.Size = new System.Drawing.Size(41, 13);
+            this.Status1.Size = new System.Drawing.Size(51, 16);
             this.Status1.TabIndex = 46;
             this.Status1.Text = "label11";
             // 
             // Status2
             // 
             this.Status2.AutoSize = true;
-            this.Status2.Location = new System.Drawing.Point(769, 129);
+            this.Status2.Location = new System.Drawing.Point(767, 166);
             this.Status2.Name = "Status2";
-            this.Status2.Size = new System.Drawing.Size(41, 13);
+            this.Status2.Size = new System.Drawing.Size(51, 16);
             this.Status2.TabIndex = 47;
             this.Status2.Text = "label11";
             // 
             // Status3
             // 
             this.Status3.AutoSize = true;
-            this.Status3.Location = new System.Drawing.Point(769, 232);
+            this.Status3.Location = new System.Drawing.Point(767, 306);
             this.Status3.Name = "Status3";
-            this.Status3.Size = new System.Drawing.Size(41, 13);
+            this.Status3.Size = new System.Drawing.Size(51, 16);
             this.Status3.TabIndex = 48;
             this.Status3.Text = "label11";
             // 
             // Status4
             // 
             this.Status4.AutoSize = true;
-            this.Status4.Location = new System.Drawing.Point(769, 332);
+            this.Status4.Location = new System.Drawing.Point(767, 444);
             this.Status4.Name = "Status4";
-            this.Status4.Size = new System.Drawing.Size(41, 13);
+            this.Status4.Size = new System.Drawing.Size(51, 16);
             this.Status4.TabIndex = 49;
             this.Status4.Text = "label11";
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.labelW1);
+            this.groupBox1.Controls.Add(this.textMAC1);
+            this.groupBox1.Controls.Add(this.wlbl1);
+            this.groupBox1.Controls.Add(this.labelW2);
+            this.groupBox1.Controls.Add(this.textMAC2);
+            this.groupBox1.Controls.Add(this.wlbl2);
+            this.groupBox1.Controls.Add(this.wlbl3);
+            this.groupBox1.Controls.Add(this.textMAC3);
+            this.groupBox1.Controls.Add(this.labelW3);
+            this.groupBox1.Controls.Add(this.labelW4);
+            this.groupBox1.Controls.Add(this.textMAC4);
+            this.groupBox1.Controls.Add(this.wlbl4);
             this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.button2);
@@ -558,9 +595,10 @@
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Enabled = false;
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.groupBox1.Location = new System.Drawing.Point(25, 84);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1089, 526);
+            this.groupBox1.Size = new System.Drawing.Size(1089, 623);
             this.groupBox1.TabIndex = 50;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "BURN STATION:";
@@ -569,9 +607,9 @@
             // 
             this.button4.Enabled = false;
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.button4.Location = new System.Drawing.Point(957, 343);
+            this.button4.Location = new System.Drawing.Point(955, 455);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(90, 76);
+            this.button4.Size = new System.Drawing.Size(90, 80);
             this.button4.TabIndex = 55;
             this.button4.Text = "PAIR 4 UNIT";
             this.button4.UseVisualStyleBackColor = true;
@@ -581,7 +619,7 @@
             // 
             this.button3.Enabled = false;
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.button3.Location = new System.Drawing.Point(957, 241);
+            this.button3.Location = new System.Drawing.Point(955, 315);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(90, 77);
             this.button3.TabIndex = 54;
@@ -593,7 +631,7 @@
             // 
             this.button2.Enabled = false;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.button2.Location = new System.Drawing.Point(957, 145);
+            this.button2.Location = new System.Drawing.Point(955, 182);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(90, 73);
             this.button2.TabIndex = 53;
@@ -605,7 +643,7 @@
             // 
             this.button1.Enabled = false;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.button1.Location = new System.Drawing.Point(957, 37);
+            this.button1.Location = new System.Drawing.Point(955, 40);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(91, 77);
             this.button1.TabIndex = 52;
@@ -616,18 +654,18 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(83, 494);
+            this.label12.Location = new System.Drawing.Point(93, 596);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(41, 13);
+            this.label12.Size = new System.Drawing.Size(51, 16);
             this.label12.TabIndex = 51;
             this.label12.Text = "label12";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(15, 494);
+            this.label11.Location = new System.Drawing.Point(15, 596);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(59, 13);
+            this.label11.Size = new System.Drawing.Size(72, 16);
             this.label11.TabIndex = 50;
             this.label11.Text = "Image FW:";
             // 
@@ -680,11 +718,143 @@
             this.cmd_Login.UseVisualStyleBackColor = true;
             this.cmd_Login.Click += new System.EventHandler(this.cmd_Login_Click);
             // 
+            // wlbl4
+            // 
+            this.wlbl4.AutoSize = true;
+            this.wlbl4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.wlbl4.Location = new System.Drawing.Point(20, 522);
+            this.wlbl4.Name = "wlbl4";
+            this.wlbl4.Size = new System.Drawing.Size(74, 16);
+            this.wlbl4.TabIndex = 56;
+            this.wlbl4.Text = "WIFI MAC";
+            // 
+            // textMAC4
+            // 
+            this.textMAC4.Enabled = false;
+            this.textMAC4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.textMAC4.Location = new System.Drawing.Point(20, 540);
+            this.textMAC4.Name = "textMAC4";
+            this.textMAC4.Size = new System.Drawing.Size(137, 22);
+            this.textMAC4.TabIndex = 57;
+            this.textMAC4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textMAC4_KeyPress);
+            // 
+            // labelW4
+            // 
+            this.labelW4.AutoSize = true;
+            this.labelW4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.labelW4.Location = new System.Drawing.Point(167, 546);
+            this.labelW4.Name = "labelW4";
+            this.labelW4.Size = new System.Drawing.Size(46, 13);
+            this.labelW4.TabIndex = 58;
+            this.labelW4.Text = "connect";
+            // 
+            // labelW3
+            // 
+            this.labelW3.AutoSize = true;
+            this.labelW3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.labelW3.Location = new System.Drawing.Point(165, 405);
+            this.labelW3.Name = "labelW3";
+            this.labelW3.Size = new System.Drawing.Size(46, 13);
+            this.labelW3.TabIndex = 59;
+            this.labelW3.Text = "connect";
+            // 
+            // textMAC3
+            // 
+            this.textMAC3.Enabled = false;
+            this.textMAC3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.textMAC3.Location = new System.Drawing.Point(20, 402);
+            this.textMAC3.Name = "textMAC3";
+            this.textMAC3.Size = new System.Drawing.Size(137, 22);
+            this.textMAC3.TabIndex = 60;
+            this.textMAC3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textMAC3_KeyPress);
+            // 
+            // wlbl3
+            // 
+            this.wlbl3.AutoSize = true;
+            this.wlbl3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.wlbl3.Location = new System.Drawing.Point(18, 379);
+            this.wlbl3.Name = "wlbl3";
+            this.wlbl3.Size = new System.Drawing.Size(74, 16);
+            this.wlbl3.TabIndex = 61;
+            this.wlbl3.Text = "WIFI MAC";
+            // 
+            // wlbl2
+            // 
+            this.wlbl2.AutoSize = true;
+            this.wlbl2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.wlbl2.Location = new System.Drawing.Point(18, 241);
+            this.wlbl2.Name = "wlbl2";
+            this.wlbl2.Size = new System.Drawing.Size(74, 16);
+            this.wlbl2.TabIndex = 62;
+            this.wlbl2.Text = "WIFI MAC";
+            // 
+            // textMAC2
+            // 
+            this.textMAC2.Enabled = false;
+            this.textMAC2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.textMAC2.Location = new System.Drawing.Point(20, 265);
+            this.textMAC2.Name = "textMAC2";
+            this.textMAC2.Size = new System.Drawing.Size(137, 22);
+            this.textMAC2.TabIndex = 63;
+            this.textMAC2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textMAC2_KeyPress);
+            // 
+            // labelW2
+            // 
+            this.labelW2.AutoSize = true;
+            this.labelW2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.labelW2.Location = new System.Drawing.Point(165, 265);
+            this.labelW2.Name = "labelW2";
+            this.labelW2.Size = new System.Drawing.Size(46, 13);
+            this.labelW2.TabIndex = 64;
+            this.labelW2.Text = "connect";
+            // 
+            // wlbl1
+            // 
+            this.wlbl1.AutoSize = true;
+            this.wlbl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.wlbl1.Location = new System.Drawing.Point(18, 104);
+            this.wlbl1.Name = "wlbl1";
+            this.wlbl1.Size = new System.Drawing.Size(74, 16);
+            this.wlbl1.TabIndex = 65;
+            this.wlbl1.Text = "WIFI MAC";
+            // 
+            // textMAC1
+            // 
+            this.textMAC1.Enabled = false;
+            this.textMAC1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.textMAC1.Location = new System.Drawing.Point(20, 125);
+            this.textMAC1.Name = "textMAC1";
+            this.textMAC1.Size = new System.Drawing.Size(137, 22);
+            this.textMAC1.TabIndex = 66;
+            this.textMAC1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textMAC1_KeyPress);
+            // 
+            // labelW1
+            // 
+            this.labelW1.AutoSize = true;
+            this.labelW1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.labelW1.Location = new System.Drawing.Point(165, 126);
+            this.labelW1.Name = "labelW1";
+            this.labelW1.Size = new System.Drawing.Size(46, 13);
+            this.labelW1.TabIndex = 67;
+            this.labelW1.Text = "connect";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(228, 717);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(85, 17);
+            this.checkBox1.TabIndex = 56;
+            this.checkBox1.Text = "WIFI Enable";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // FW_Burn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1171, 643);
+            this.ClientSize = new System.Drawing.Size(1164, 741);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.cmd_Login);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
@@ -763,6 +933,19 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textMAC4;
+        private System.Windows.Forms.Label wlbl4;
+        private System.Windows.Forms.Label wlbl3;
+        private System.Windows.Forms.TextBox textMAC3;
+        private System.Windows.Forms.Label labelW3;
+        private System.Windows.Forms.Label labelW4;
+        private System.Windows.Forms.Label labelW2;
+        private System.Windows.Forms.TextBox textMAC2;
+        private System.Windows.Forms.Label wlbl2;
+        private System.Windows.Forms.Label labelW1;
+        private System.Windows.Forms.TextBox textMAC1;
+        private System.Windows.Forms.Label wlbl1;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 

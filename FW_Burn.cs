@@ -31,6 +31,7 @@ namespace FW_Burn
         string pwd = string.Empty;
         string[] SOM_Serial = new string[4];
         string[] MB_Serial = new string[4];
+        string[] WIFI_Serial = new string[4];
         int[] statflag = new int[4];
 
         string imagefile = System.Configuration.ConfigurationManager.AppSettings["imagefile"].ToString(); //@"C:\BurnImage\ight.img";
@@ -436,6 +437,65 @@ namespace FW_Burn
                         labelSOM4.ForeColor = Color.Green;
                         labelSOM4.Text = "Verified";
                         textSOM4.Enabled = false;
+                    }
+                    break;
+            }
+        }
+
+        private void ShowMAC(int macnum, int state)
+        {
+            switch (macnum)
+            {
+                case 0:
+                    if (state == 0)
+                    {
+                        labelW1.ForeColor = Color.Red;
+                        labelW1.Text = "Not Verified";
+                    }
+                    else if (state == 1)
+                    {
+                        labelW1.ForeColor = Color.Green;
+                        labelW1.Text = "Verified";
+                        textMAC1.Enabled = false;
+                    }
+                    break;
+                case 1:
+                    if (state == 0)
+                    {
+                        labelW2.ForeColor = Color.Red;
+                        labelW2.Text = "Not Verified";
+                    }
+                    else if (state == 1)
+                    {
+                        labelW2.ForeColor = Color.Green;
+                        labelW2.Text = "Verified";
+                        textMAC2.Enabled = false;
+                    }
+                    break;
+                case 2:
+                    if (state == 0)
+                    {
+                        labelW3.ForeColor = Color.Red;
+                        labelW3.Text = "Not Verified";
+                    }
+                    else if (state == 1)
+                    {
+                        labelW3.ForeColor = Color.Green;
+                        labelW3.Text = "Verified";
+                        textMAC3.Enabled = false;
+                    }
+                    break;
+                case 3:
+                    if (state == 0)
+                    {
+                        labelW4.ForeColor = Color.Red;
+                        labelW4.Text = "Not Verified";
+                    }
+                    else if (state == 1)
+                    {
+                        labelW4.ForeColor = Color.Green;
+                        labelW4.Text = "Verified";
+                        textMAC4.Enabled = false;
                     }
                     break;
             }
@@ -869,6 +929,46 @@ namespace FW_Burn
                 Regex gr = new Regex(pattern);
                 if (gr.IsMatch(textMAIN1.Text))
                 {
+                    int statMB = SQL_Manager.FindMB_Pair(connectSQLDB, textMAIN1.Text);
+                    if(statMB == -1 || statMB == 0)
+                    {
+                        MB_Serial[0] = textMAIN1.Text;
+                        ShowMAIN(0, 1);
+                        if (checkBox1.Checked)
+                            textMAC1.Focus();
+                        else
+                        {
+                            Cmd_Burn1.Enabled = true;
+                            textSOM2.Focus();
+                        }
+                    }
+                    else if (statMB == 1)
+                    {
+                        DialogResult mflag = MessageBox.Show("THIS MAIN BOARD ALREADY PAIRED! DO YOU WANT TO PAIR IT AGAIN?", "Warning", MessageBoxButtons.YesNo);
+                        if (mflag == DialogResult.Yes)
+                        {
+                            
+                            ShowMAIN(0, 1); //verified serial number
+                            //ShowLabel(0, 0);
+                            //Cmd_Burn1.Enabled = true;
+                            //Cmd_Burn1.Focus();
+                        }
+
+                    }
+                    
+
+
+                }
+                else
+                {
+                    MessageBox.Show("The MAINBOARD Serial is Wrong", "Warning");
+                    textMAIN1.Clear(); textMAIN1.Focus(); lbl_Info1.Text = ""; labelMAIN1.Text = "";
+                }
+
+                /*
+                Regex gr = new Regex(pattern);
+                if (gr.IsMatch(textMAIN1.Text))
+                {
                     MB_Serial[0] = textMAIN1.Text;
                     statflag[0] = SQL_Manager.FindMB_Status(connectSQLDB, MB_Serial[0]);
                     if (statflag[0] == 1)
@@ -900,7 +1000,7 @@ namespace FW_Burn
                 {
                     MessageBox.Show("The MAIN BOARD Serial is Wrong", "Warning");
                     textMAIN1.Clear(); textMAIN1.Focus(); lbl_Info1.Text = ""; labelMAIN1.Text = "";
-                }
+                }*/
             }
         }
         private void textMAIN2_KeyPress(object sender, KeyPressEventArgs e)
@@ -1136,29 +1236,34 @@ namespace FW_Burn
                 int  p1 = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[0]);
                 if(p1 == 1)
                 {
-                    SQL_Manager.UpdatePairing(connectSQLDB, MB_Serial[0], SOM_Serial[0], imagefw, 1, usr);
+                    SQL_Manager.UpdatePairing(connectSQLDB, MB_Serial[0], SOM_Serial[0], imagefw, 1, WIFI_Serial[0], usr);
                     Status1.Text = "";
                     ShowLabel(0, 1);
                     textSOM1.Clear();
                     textMAIN1.Clear();
+                    textMAC1.Clear();
                     progressBar1.Value = 0;
                     labelSOM1.Text = "";
                     labelMAIN1.Text = "";
+                    if (checkBox1.Checked) labelW1.Text = "";
                 }
                 else if(p1 == -1)
                 {
-                    SQL_Manager.SAVE_Pairing(connectSQLDB, MB_Serial[0], SOM_Serial[0], imagefw, 1, usr);
+                    SQL_Manager.SAVE_Pairing(connectSQLDB, MB_Serial[0], SOM_Serial[0], imagefw, 1, WIFI_Serial[0], usr);
                     Status1.Text = "";
                     ShowLabel(0, 1);
                     textSOM1.Clear();
                     textMAIN1.Clear();
+                    textMAC1.Clear();
                     progressBar1.Value = 0;
                     labelSOM1.Text = "";
                     labelMAIN1.Text = "";
+                    if (checkBox1.Checked) labelW1.Text = "";
                 }
                 button1.Enabled = false;
                 textSOM1.Enabled = true;
                 textMAIN1.Enabled = true;
+                if (checkBox1.Checked) textMAC1.Enabled = true;
                 
             }
         }
@@ -1171,29 +1276,34 @@ namespace FW_Burn
                 int p2 = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[1]);
                 if (p2 == 1)
                 {
-                    SQL_Manager.UpdatePairing(connectSQLDB, MB_Serial[1], SOM_Serial[1], imagefw, 1, usr);
+                    SQL_Manager.UpdatePairing(connectSQLDB, MB_Serial[1], SOM_Serial[1], imagefw, 1, WIFI_Serial[1], usr);
                     Status2.Text = "";
                     ShowLabel(1, 1);
                     textSOM2.Clear();
                     textMAIN2.Clear();
+                    textMAC2.Clear();
                     progressBar2.Value = 0;
                     labelSOM2.Text = "";
                     labelMAIN2.Text = "";
+                    if (checkBox1.Checked) labelW2.Text = "";
                 }
                 else if (p2 == -1)
                 {
-                    SQL_Manager.SAVE_Pairing(connectSQLDB, MB_Serial[1], SOM_Serial[1], imagefw, 1, usr); //version sql driver v18.12.9
+                    SQL_Manager.SAVE_Pairing(connectSQLDB, MB_Serial[1], SOM_Serial[1], imagefw, 1, WIFI_Serial[1], usr); //version sql driver v18.12.9
                     Status2.Text = "";
                     ShowLabel(1, 1);
                     textSOM2.Clear();
                     textMAIN2.Clear();
+                    textMAC2.Clear();
                     progressBar2.Value = 0;
                     labelSOM2.Text = "";
                     labelMAIN2.Text = "";
+                    if (checkBox1.Checked) labelW2.Text = "";
                 }
                 button2.Enabled = false;
                 textSOM2.Enabled = true;
                 textMAIN2.Enabled = true;
+                if (checkBox1.Checked) textMAC2.Enabled = true;
 
             }
         }
@@ -1238,29 +1348,34 @@ namespace FW_Burn
                 int p3 = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[2]);
                 if (p3 == 1)
                 {
-                    SQL_Manager.UpdatePairing(connectSQLDB, MB_Serial[2], SOM_Serial[2], imagefw, 1, usr);
+                    SQL_Manager.UpdatePairing(connectSQLDB, MB_Serial[2], SOM_Serial[2], imagefw, 1, WIFI_Serial[2], usr);
                     Status3.Text = "";
                     ShowLabel(2, 1);
                     textSOM3.Clear();
                     textMAIN3.Clear();
+                    textMAC3.Clear();
                     progressBar3.Value = 0;
                     labelSOM3.Text = "";
                     labelMAIN3.Text = "";
+                    if (checkBox1.Checked) labelW3.Text = "";
                 }
                 else if (p3 == -1)
                 {
-                    SQL_Manager.SAVE_Pairing(connectSQLDB, MB_Serial[2], SOM_Serial[2], imagefw, 1, usr);
+                    SQL_Manager.SAVE_Pairing(connectSQLDB, MB_Serial[2], SOM_Serial[2], imagefw, 1, WIFI_Serial[2], usr);
                     Status3.Text = "";
                     ShowLabel(2, 1);
                     textSOM3.Clear();
                     textMAIN3.Clear();
+                    textMAC3.Clear();
                     progressBar3.Value = 0;
                     labelSOM3.Text = "";
                     labelMAIN3.Text = "";
+                    if (checkBox1.Checked) labelW3.Text = "";
                 }
                 button3.Enabled = false;
                 textSOM3.Enabled = true;
                 textMAIN3.Enabled = true;
+                if (checkBox1.Checked) textMAC3.Enabled = true;
 
             }
         }
@@ -1273,29 +1388,36 @@ namespace FW_Burn
                 int p4 = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[3]);
                 if (p4 == 1)
                 {
-                    SQL_Manager.UpdatePairing(connectSQLDB, MB_Serial[3], SOM_Serial[3], imagefw, 1, usr);
+                     
+                        
+                    SQL_Manager.UpdatePairing(connectSQLDB, MB_Serial[3], SOM_Serial[3], imagefw, 1, WIFI_Serial[3], usr);
                     Status4.Text = "";
                     ShowLabel(3, 1);
                     textSOM4.Clear();
                     textMAIN4.Clear();
+                    textMAC4.Clear();
                     progressBar4.Value = 0;
                     labelSOM4.Text = "";
                     labelMAIN4.Text = "";
+                    if (checkBox1.Checked) labelW4.Text = "";
                 }
                 else if (p4 == -1)
                 {
-                    SQL_Manager.SAVE_Pairing(connectSQLDB, MB_Serial[3], SOM_Serial[3], imagefw, 1, usr);
+                    SQL_Manager.SAVE_Pairing(connectSQLDB, MB_Serial[3], SOM_Serial[3], imagefw, 1, WIFI_Serial[3], usr);
                     Status4.Text = "";
                     ShowLabel(3, 1);
                     textSOM4.Clear();
                     textMAIN4.Clear();
+                    textMAC4.Clear();
                     progressBar4.Value = 0;
                     labelSOM4.Text = "";
                     labelMAIN4.Text = "";
+                    if (checkBox1.Checked) labelW4.Text = "";
                 }
                 button4.Enabled = false;
                 textSOM4.Enabled = true;
                 textMAIN4.Enabled = true;
+                if (checkBox1.Checked) textMAC4.Enabled = true;
 
             }
         }
@@ -1363,6 +1485,132 @@ namespace FW_Burn
                 _=RunWithRedirect4(cmdline4);
             }
         }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked) 
+            {
+                textMAC1.Enabled = true;
+                textMAC2.Enabled = true;
+                textMAC3.Enabled = true;
+                textMAC4.Enabled = true;
+            }
+            else
+            { 
+                textMAC1.Enabled = false;
+                textMAC2.Enabled = false;
+                textMAC3.Enabled = false;
+                textMAC4.Enabled = false;
+            }
+        }
+
+        private void textMAC1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                Regex mc = new Regex(mac_pattern);
+                if (mc.IsMatch(textMAC1.Text))
+                {
+
+                    WIFI_Serial[0] = getFormatMac(textMAC1.Text).ToUpper();
+                    textMAC1.Text = WIFI_Serial[0];
+                    ShowMAC(0, 1);
+                    Cmd_Burn1.Enabled = true;
+                    textSOM2.Focus();
+
+                }
+                else
+                {
+                    MessageBox.Show("The WIFI MAC ADDRESS is Wrong", "Warning");
+                    textMAC1.Clear(); textMAC1.Focus(); labelW1.Text = ""; Cmd_Burn1.Enabled = false;
+                }
+            }
+        }
+
+        
+
+        private void textMAC2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                Regex mc = new Regex(mac_pattern);
+                if (mc.IsMatch(textMAC2.Text))
+                {
+
+                    WIFI_Serial[1] = getFormatMac(textMAC2.Text).ToUpper();
+                    textMAC2.Text = WIFI_Serial[1];
+                    ShowMAC(1, 1);
+                    Cmd_Burn2.Enabled = true;
+                    textSOM3.Focus();
+
+                }
+                else
+                {
+                    MessageBox.Show("The WIFI MAC ADDRESS is Wrong", "Warning");
+                    textMAC2.Clear(); textMAC2.Focus(); labelW2.Text = ""; Cmd_Burn2.Enabled = false;
+                }
+            }
+        }
+
+        private void textMAC3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                Regex mc = new Regex(mac_pattern);
+                if (mc.IsMatch(textMAC3.Text))
+                {
+
+                    WIFI_Serial[2] = getFormatMac(textMAC3.Text).ToUpper();
+                    textMAC3.Text = WIFI_Serial[2];
+                    ShowMAC(2, 1);
+                    Cmd_Burn3.Enabled = true;
+                    textSOM4.Focus();
+
+                }
+                else
+                {
+                    MessageBox.Show("The WIFI MAC ADDRESS is Wrong", "Warning");
+                    textMAC3.Clear(); textMAC3.Focus(); labelW3.Text = ""; Cmd_Burn3.Enabled = false;
+                }
+            }
+        }
+
+        private void textMAC4_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                Regex mc = new Regex(mac_pattern);
+                if (mc.IsMatch(textMAC4.Text))
+                {
+
+                    WIFI_Serial[3] = getFormatMac(textMAC4.Text).ToUpper();
+                    textMAC4.Text = WIFI_Serial[3];
+                    ShowMAC(3, 1);
+                    Cmd_Burn4.Enabled = true;
+                    //textSOM2.Focus();
+
+                }
+                else
+                {
+                    MessageBox.Show("The WIFI MAC ADDRESS is Wrong", "Warning");
+                    textMAC4.Clear(); textMAC4.Focus(); labelW4.Text = ""; Cmd_Burn4.Enabled = false;
+                }
+            }
+        }
+
+        public string getFormatMac(string MacAddress)
+        {
+            string MacwithColons = "";
+            for (int i = 0; i < MacAddress.Length; i++)
+            {
+                MacwithColons = MacwithColons + MacAddress.Substring(i, 2) + ":";
+                i++;
+            }
+            MacwithColons = MacwithColons.Substring(0, MacwithColons.Length - 1);
+
+            return MacwithColons;
+
+        }
     }
 
         
@@ -1394,6 +1642,10 @@ namespace FW_Burn
 1:181>Start Cmd:FB: done
 1:181>Okay (0s)
 --------------------------------------------------------------------------------------------------------------------------
+for(int i=2;i<mac.Lenght; i=i+2) macnew = macnew.insert(i+insertcount++,":");
+
+
+
  * namespace ConsoleApplication1
 {
   using System;
