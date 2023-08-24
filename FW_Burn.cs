@@ -606,12 +606,6 @@ namespace FW_Burn
         }
                
 
-        static void Cmd_Error(object sender, DataReceivedEventArgs e)
-        {
-            //Console.WriteLine("Error from other process");
-            //Console.WriteLine(e.Data);
-        }
-
         private async Task RunWithRedirect(string arguments)
         {
             Process proc = new Process();
@@ -947,17 +941,20 @@ namespace FW_Burn
                         DialogResult mflag = MessageBox.Show("THIS MAIN BOARD ALREADY PAIRED! DO YOU WANT TO PAIR IT AGAIN?", "Warning", MessageBoxButtons.YesNo);
                         if (mflag == DialogResult.Yes)
                         {
-                            
+                            MB_Serial[0] = textMAIN1.Text;
                             ShowMAIN(0, 1); //verified serial number
+                            if (checkBox1.Checked)
+                                textMAC1.Focus();
+                            else
+                            {
+                                Cmd_Burn1.Enabled = true;
+                                textSOM2.Focus();
+                            }
                             //ShowLabel(0, 0);
                             //Cmd_Burn1.Enabled = true;
                             //Cmd_Burn1.Focus();
                         }
-
                     }
-                    
-
-
                 }
                 else
                 {
@@ -1010,6 +1007,48 @@ namespace FW_Burn
                 Regex gr = new Regex(pattern);
                 if (gr.IsMatch(textMAIN2.Text))
                 {
+                    int statMB = SQL_Manager.FindMB_Pair(connectSQLDB, textMAIN2.Text);
+                    if (statMB == -1 || statMB == 0)
+                    {
+                        MB_Serial[1] = textMAIN2.Text;
+                        ShowMAIN(1, 1);
+                        if (checkBox1.Checked)
+                            textMAC2.Focus();
+                        else
+                        {
+                            Cmd_Burn2.Enabled = true;
+                            textSOM3.Focus();
+                        }
+                    }
+                    else if (statMB == 1)
+                    {
+                        DialogResult mflag = MessageBox.Show("THIS MAIN BOARD ALREADY PAIRED! DO YOU WANT TO PAIR IT AGAIN?", "Warning", MessageBoxButtons.YesNo);
+                        if (mflag == DialogResult.Yes)
+                        {
+                            MB_Serial[1] = textMAIN2.Text;
+                            ShowMAIN(1, 1); //verified serial number
+                            if (checkBox1.Checked)
+                                textMAC2.Focus();
+                            else
+                            {
+                                Cmd_Burn2.Enabled = true;
+                                textSOM3.Focus();
+                            }
+                            //ShowLabel(0, 0);
+                            //Cmd_Burn1.Enabled = true;
+                            //Cmd_Burn1.Focus();
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("The MAINBOARD Serial is Wrong", "Warning");
+                    textMAIN2.Clear(); textMAIN2.Focus(); lbl_Info2.Text = ""; labelMAIN2.Text = "";
+                }
+                /*
+                Regex gr = new Regex(pattern);
+                if (gr.IsMatch(textMAIN2.Text))
+                {
                     MB_Serial[1] = textMAIN2.Text;
                     statflag[1] = SQL_Manager.FindMB_Status(connectSQLDB, MB_Serial[1]);
                     if (statflag[1] == 1)
@@ -1041,13 +1080,55 @@ namespace FW_Burn
                 {
                     MessageBox.Show("The MAIN BOARD Serial is Wrong", "Warning");
                     textMAIN2.Clear(); textMAIN2.Focus(); lbl_Info2.Text = ""; labelMAIN2.Text = "";
-                }
+                }*/
             }
         }
         private void TextMAIN3_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
             {
+                Regex gr = new Regex(pattern);
+                if (gr.IsMatch(textMAIN3.Text))
+                {
+                    int statMB = SQL_Manager.FindMB_Pair(connectSQLDB, textMAIN3.Text);
+                    if (statMB == -1 || statMB == 0)
+                    {
+                        MB_Serial[2] = textMAIN3.Text;
+                        ShowMAIN(2, 1);
+                        if (checkBox1.Checked)
+                            textMAC3.Focus();
+                        else
+                        {
+                            Cmd_Burn3.Enabled = true;
+                            textSOM4.Focus();
+                        }
+                    }
+                    else if (statMB == 1)
+                    {
+                        DialogResult mflag = MessageBox.Show("THIS MAIN BOARD ALREADY PAIRED! DO YOU WANT TO PAIR IT AGAIN?", "Warning", MessageBoxButtons.YesNo);
+                        if (mflag == DialogResult.Yes)
+                        {
+                            MB_Serial[2] = textMAIN3.Text;
+                            ShowMAIN(2, 1); //verified serial number
+                            if (checkBox1.Checked)
+                                textMAC3.Focus();
+                            else
+                            {
+                                Cmd_Burn3.Enabled = true;
+                                textSOM4.Focus();
+                            }
+                            //ShowLabel(0, 0);
+                            //Cmd_Burn1.Enabled = true;
+                            //Cmd_Burn1.Focus();
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("The MAINBOARD Serial is Wrong", "Warning");
+                    textMAIN3.Clear(); textMAIN3.Focus(); lbl_Info3.Text = ""; labelMAIN3.Text = "";
+                }
+                /*
                 Regex gr = new Regex(pattern);
                 if (gr.IsMatch(textMAIN3.Text))
                 {
@@ -1081,14 +1162,55 @@ namespace FW_Burn
                 {
                     MessageBox.Show("The MAIN BOARD Serial is Wrong", "Warning");
                     textMAIN3.Clear(); textMAIN3.Focus(); lbl_Info3.Text = ""; labelMAIN3.Text = "";
-                }
+                }*/
             }
         }
-
         private void TextMAIN4_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
             {
+                Regex gr = new Regex(pattern);
+                if (gr.IsMatch(textMAIN4.Text))
+                {
+                    int statMB = SQL_Manager.FindMB_Pair(connectSQLDB, textMAIN4.Text);
+                    if (statMB == -1 || statMB == 0)
+                    {
+                        MB_Serial[3] = textMAIN4.Text;
+                        ShowMAIN(3, 1);
+                        if (checkBox1.Checked)
+                            textMAC4.Focus();
+                        else
+                        {
+                            Cmd_Burn4.Enabled = true;
+                            //textSOM4.Focus();
+                        }
+                    }
+                    else if (statMB == 1)
+                    {
+                        DialogResult mflag = MessageBox.Show("THIS MAIN BOARD ALREADY PAIRED! DO YOU WANT TO PAIR IT AGAIN?", "Warning", MessageBoxButtons.YesNo);
+                        if (mflag == DialogResult.Yes)
+                        {
+                            MB_Serial[3] = textMAIN4.Text;
+                            ShowMAIN(3, 1); //verified serial number
+                            if (checkBox1.Checked)
+                                textMAC4.Focus();
+                            else
+                            {
+                                Cmd_Burn4.Enabled = true;
+                                //textSOM4.Focus();
+                            }
+                            //ShowLabel(0, 0);
+                            //Cmd_Burn1.Enabled = true;
+                            //Cmd_Burn1.Focus();
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("The MAINBOARD Serial is Wrong", "Warning");
+                    textMAIN4.Clear(); textMAIN4.Focus(); lbl_Info4.Text = ""; labelMAIN4.Text = "";
+                }
+                /*
                 Regex gr = new Regex(pattern);
                 if (gr.IsMatch(textMAIN4.Text))
                 {
@@ -1123,7 +1245,7 @@ namespace FW_Burn
                 {
                     MessageBox.Show("The MAIN BOARD Serial is Wrong", "Warning");
                     textMAIN4.Clear(); textMAIN4.Focus(); lbl_Info4.Text = ""; labelMAIN4.Text = "";
-                }
+                }*/
             }
         }
 
@@ -1163,12 +1285,8 @@ namespace FW_Burn
                     
                     //cmdline = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all C:\BurnImage\imx-boot-sd.bin-mainboard C:\BurnImage\scanner-scanner_image-0.1.2.img";
                     cmdline = Cmdtext(1, bootfile, imagefile);
-                    _=RunWithRedirect(cmdline);
-                   
-                    
+                    _=RunWithRedirect(cmdline);                   
                 }
-
-
             }
             else if(fmb == -1) 
             {
@@ -1321,11 +1439,8 @@ namespace FW_Burn
                     
                     //cmdline = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all C:\BurnImage\imx-boot-sd.bin-mainboard C:\BurnImage\scanner-scanner_image-0.1.2.img";
                     cmdline2 = Cmdtext(2, bootfile, imagefile);
-                    _=RunWithRedirect2(cmdline2);
-                   
+                    _=RunWithRedirect2(cmdline2);                   
                 }
-
-
             }
             else if (fmb == -1)
             {
@@ -1387,9 +1502,7 @@ namespace FW_Burn
             {
                 int p4 = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[3]);
                 if (p4 == 1)
-                {
-                     
-                        
+                {                       
                     SQL_Manager.UpdatePairing(connectSQLDB, MB_Serial[3], SOM_Serial[3], imagefw, 1, WIFI_Serial[3], usr);
                     Status4.Text = "";
                     ShowLabel(3, 1);
@@ -1525,9 +1638,7 @@ namespace FW_Burn
                     textMAC1.Clear(); textMAC1.Focus(); labelW1.Text = ""; Cmd_Burn1.Enabled = false;
                 }
             }
-        }
-
-        
+        }        
 
         private void TextMAC2_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -1587,7 +1698,7 @@ namespace FW_Burn
                     textMAC4.Text = WIFI_Serial[3];
                     ShowMAC(3, 1);
                     Cmd_Burn4.Enabled = true;
-                    //textSOM2.Focus();
+                    
 
                 }
                 else
