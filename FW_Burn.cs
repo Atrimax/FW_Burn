@@ -32,9 +32,9 @@ namespace FW_Burn
         string[] SOM_Serial = new string[4];
         string[] MB_Serial = new string[4];
         string[] WIFI_Serial = new string[4];
-        int[] statflag = new int[4];
+        //int[] statflag = new int[4];
 
-        string imagefile = System.Configuration.ConfigurationManager.AppSettings["imagefile"].ToString(); //@"C:\BurnImage\ight.img";
+        string imagefile = System.Configuration.ConfigurationManager.AppSettings["imagefile"].ToString(); 
         string bootfile = System.Configuration.ConfigurationManager.AppSettings["bootfile"].ToString();
 
                 
@@ -1317,7 +1317,7 @@ namespace FW_Burn
 
         private void Cmd_Login_Click(object sender, EventArgs e)
         {
-            int sd = -1;
+            int sd;// = -1;
             if (textBox1.Text != string.Empty && textBox2.Text != string.Empty)
             {
                 sd = SQL_Manager.Login_check(connectSQLDB, usr, pwd);
