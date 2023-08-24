@@ -185,7 +185,7 @@
             this.textSOM1.Name = "textSOM1";
             this.textSOM1.Size = new System.Drawing.Size(137, 22);
             this.textSOM1.TabIndex = 9;
-            this.textSOM1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textSOM1_KeyPress);
+            this.textSOM1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextSOM1_KeyPress);
             // 
             // textSOM2
             // 
@@ -194,7 +194,7 @@
             this.textSOM2.Name = "textSOM2";
             this.textSOM2.Size = new System.Drawing.Size(137, 22);
             this.textSOM2.TabIndex = 10;
-            this.textSOM2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textSOM2_KeyPress);
+            this.textSOM2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextSOM2_KeyPress);
             // 
             // textSOM3
             // 
@@ -203,7 +203,7 @@
             this.textSOM3.Name = "textSOM3";
             this.textSOM3.Size = new System.Drawing.Size(137, 22);
             this.textSOM3.TabIndex = 11;
-            this.textSOM3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textSOM3_KeyPress);
+            this.textSOM3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextSOM3_KeyPress);
             // 
             // textSOM4
             // 
@@ -212,7 +212,7 @@
             this.textSOM4.Name = "textSOM4";
             this.textSOM4.Size = new System.Drawing.Size(137, 22);
             this.textSOM4.TabIndex = 12;
-            this.textSOM4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textSOM4_KeyPress);
+            this.textSOM4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextSOM4_KeyPress);
             // 
             // lbl1
             // 
@@ -271,7 +271,7 @@
             this.textMAIN1.Name = "textMAIN1";
             this.textMAIN1.Size = new System.Drawing.Size(137, 22);
             this.textMAIN1.TabIndex = 19;
-            this.textMAIN1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textMAIN1_KeyPress);
+            this.textMAIN1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextMAIN1_KeyPress);
             // 
             // label6
             // 
@@ -290,7 +290,7 @@
             this.textMAIN2.Name = "textMAIN2";
             this.textMAIN2.Size = new System.Drawing.Size(137, 22);
             this.textMAIN2.TabIndex = 21;
-            this.textMAIN2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textMAIN2_KeyPress);
+            this.textMAIN2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextMAIN2_KeyPress);
             // 
             // textMAIN3
             // 
@@ -299,7 +299,7 @@
             this.textMAIN3.Name = "textMAIN3";
             this.textMAIN3.Size = new System.Drawing.Size(137, 22);
             this.textMAIN3.TabIndex = 22;
-            this.textMAIN3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textMAIN3_KeyPress);
+            this.textMAIN3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextMAIN3_KeyPress);
             // 
             // label7
             // 
@@ -328,7 +328,7 @@
             this.textMAIN4.Name = "textMAIN4";
             this.textMAIN4.Size = new System.Drawing.Size(137, 22);
             this.textMAIN4.TabIndex = 25;
-            this.textMAIN4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textMAIN4_KeyPress);
+            this.textMAIN4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextMAIN4_KeyPress);
             // 
             // label9
             // 
@@ -621,7 +621,7 @@
             this.textMAC1.Name = "textMAC1";
             this.textMAC1.Size = new System.Drawing.Size(137, 22);
             this.textMAC1.TabIndex = 66;
-            this.textMAC1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textMAC1_KeyPress);
+            this.textMAC1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextMAC1_KeyPress);
             // 
             // wlbl1
             // 
@@ -651,7 +651,7 @@
             this.textMAC2.Name = "textMAC2";
             this.textMAC2.Size = new System.Drawing.Size(137, 22);
             this.textMAC2.TabIndex = 63;
-            this.textMAC2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textMAC2_KeyPress);
+            this.textMAC2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextMAC2_KeyPress);
             // 
             // wlbl2
             // 
@@ -681,7 +681,7 @@
             this.textMAC3.Name = "textMAC3";
             this.textMAC3.Size = new System.Drawing.Size(137, 22);
             this.textMAC3.TabIndex = 60;
-            this.textMAC3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textMAC3_KeyPress);
+            this.textMAC3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextMAC3_KeyPress);
             // 
             // labelW3
             // 
@@ -711,7 +711,7 @@
             this.textMAC4.Name = "textMAC4";
             this.textMAC4.Size = new System.Drawing.Size(137, 22);
             this.textMAC4.TabIndex = 57;
-            this.textMAC4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textMAC4_KeyPress);
+            this.textMAC4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextMAC4_KeyPress);
             // 
             // wlbl4
             // 
@@ -733,7 +733,7 @@
             this.button4.TabIndex = 55;
             this.button4.Text = "PAIR 4 UNIT";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button4.Click += new System.EventHandler(this.Button4_Click);
             // 
             // button3
             // 
@@ -745,7 +745,7 @@
             this.button3.TabIndex = 54;
             this.button3.Text = "PAIR 3 UNIT";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // button2
             // 
@@ -757,7 +757,7 @@
             this.button2.TabIndex = 53;
             this.button2.Text = "PAIR 2 UNIT";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // button1
             // 
@@ -769,7 +769,7 @@
             this.button1.TabIndex = 52;
             this.button1.Text = "PAIR 1 UNIT";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // label12
             // 
@@ -816,7 +816,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(120, 22);
             this.textBox1.TabIndex = 53;
-            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox1_KeyPress);
             // 
             // textBox2
             // 
@@ -825,7 +825,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(142, 22);
             this.textBox2.TabIndex = 54;
-            this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
+            this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox2_KeyPress);
             // 
             // cmd_Login
             // 
@@ -836,7 +836,7 @@
             this.cmd_Login.TabIndex = 55;
             this.cmd_Login.Text = "LOGIN";
             this.cmd_Login.UseVisualStyleBackColor = true;
-            this.cmd_Login.Click += new System.EventHandler(this.cmd_Login_Click);
+            this.cmd_Login.Click += new System.EventHandler(this.Cmd_Login_Click);
             // 
             // checkBox1
             // 
@@ -847,7 +847,7 @@
             this.checkBox1.TabIndex = 56;
             this.checkBox1.Text = "WIFI Enable";
             this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
             // 
             // FW_Burn
             // 

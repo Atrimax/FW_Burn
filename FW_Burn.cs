@@ -21,11 +21,11 @@ namespace FW_Burn
 {
     public partial class FW_Burn : Form
     {
-        string connectSQLDB = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnectionString"].ToString();
-        string imagefw = System.Configuration.ConfigurationManager.AppSettings["imageversion"].ToString();
+        readonly string connectSQLDB = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnectionString"].ToString();
+        readonly string imagefw = System.Configuration.ConfigurationManager.AppSettings["imageversion"].ToString();
         //string ps_address = string.Empty;
-        string pattern = @"\AFI-\d{4}-MB\d{5}\Z";
-        string mac_pattern = @"\A[0-9A-Fa-f]{12}\Z"; //\A^[a-fA-F0-9]{12}\Z
+        readonly string pattern = @"\AFI-\d{4}-MB\d{5}\Z";
+        readonly string mac_pattern = @"\A[0-9A-Fa-f]{12}\Z"; //\A^[a-fA-F0-9]{12}\Z
 
         string usr = string.Empty;
         string pwd = string.Empty;
@@ -64,7 +64,7 @@ namespace FW_Burn
         {
             InitializeComponent();          
                         
-            var usbDevices = GetUSBDevices();
+            //var usbDevices = GetUSBDevices();
             labelSOM1.Text = string.Empty;
             this.ActiveControl = textBox1;
             textBox1.Focus();
@@ -506,7 +506,7 @@ namespace FW_Burn
             this.Dispose();
             Application.Exit(); 
         }      
-
+        /*
         static List<USBDeviceInfo> GetUSBDevices()
         {
             List<USBDeviceInfo> devices = new List<USBDeviceInfo>();
@@ -526,9 +526,9 @@ namespace FW_Burn
 
             collection.Dispose();
             return devices;
-        }
+        }*/
 
-        private void textSOM1_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextSOM1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if(e.KeyChar == 13)
             {
@@ -547,7 +547,7 @@ namespace FW_Burn
                 }                
             }
         }
-        private void textSOM2_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextSOM2_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
             {
@@ -566,7 +566,7 @@ namespace FW_Burn
                 }
             }
         }
-        private void textSOM3_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextSOM3_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
             {
@@ -585,7 +585,7 @@ namespace FW_Burn
                 }
             }
         }
-        private void textSOM4_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextSOM4_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
             {
@@ -606,7 +606,7 @@ namespace FW_Burn
         }
                
 
-        static void cmd_Error(object sender, DataReceivedEventArgs e)
+        static void Cmd_Error(object sender, DataReceivedEventArgs e)
         {
             //Console.WriteLine("Error from other process");
             //Console.WriteLine(e.Data);
@@ -616,7 +616,7 @@ namespace FW_Burn
         {
             Process proc = new Process();
         
-            int exitCode;
+            //int exitCode;
             
             ProcessStartInfo startInfo = new ProcessStartInfo();
             proc.StartInfo = startInfo;
@@ -627,9 +627,9 @@ namespace FW_Burn
             startInfo.StandardOutputEncoding = Encoding.UTF8;
             startInfo.CreateNoWindow = true;
 
-            proc.ErrorDataReceived += proc_DataReceived;
-            proc.OutputDataReceived += proc_DataReceived;
-            proc.Exited += new EventHandler(proc_Exited);
+            proc.ErrorDataReceived += Proc_DataReceived;
+            proc.OutputDataReceived += Proc_DataReceived;
+            proc.Exited += new EventHandler(Proc_Exited);
             proc.Start();
 
             proc.BeginOutputReadLine();
@@ -655,9 +655,9 @@ namespace FW_Burn
             startInfo2.StandardOutputEncoding = Encoding.UTF8;
             startInfo2.CreateNoWindow = true;
 
-            proc2.ErrorDataReceived += proc2_DataReceived;
-            proc2.OutputDataReceived += proc2_DataReceived;
-            proc2.Exited += new EventHandler(proc2_Exited);
+            proc2.ErrorDataReceived += Proc2_DataReceived;
+            proc2.OutputDataReceived += Proc2_DataReceived;
+            proc2.Exited += new EventHandler(Proc2_Exited);
             proc2.Start();
 
             proc2.BeginOutputReadLine();
@@ -682,9 +682,9 @@ namespace FW_Burn
             startInfo3.StandardOutputEncoding = Encoding.UTF8;
             startInfo3.CreateNoWindow = true;
 
-            proc3.ErrorDataReceived += proc3_DataReceived;
-            proc3.OutputDataReceived += proc3_DataReceived;
-            proc3.Exited += new EventHandler(proc3_Exited);
+            proc3.ErrorDataReceived += Proc3_DataReceived;
+            proc3.OutputDataReceived += Proc3_DataReceived;
+            proc3.Exited += new EventHandler(Proc3_Exited);
             proc3.Start();
 
             proc3.BeginOutputReadLine();
@@ -709,9 +709,9 @@ namespace FW_Burn
             startInfo4.StandardOutputEncoding = Encoding.UTF8;
             startInfo4.CreateNoWindow = true;
 
-            proc4.ErrorDataReceived += proc4_DataReceived;
-            proc4.OutputDataReceived += proc4_DataReceived;
-            proc4.Exited += new EventHandler(proc4_Exited);
+            proc4.ErrorDataReceived += Proc4_DataReceived;
+            proc4.OutputDataReceived += Proc4_DataReceived;
+            proc4.Exited += new EventHandler(Proc4_Exited);
             proc4.Start();
 
             proc4.BeginOutputReadLine();
@@ -791,7 +791,7 @@ namespace FW_Burn
             }
         }
 
-        void proc_DataReceived(object sender, DataReceivedEventArgs e)
+        void Proc_DataReceived(object sender, DataReceivedEventArgs e)
         {
             if (e.Data != null)
             {
@@ -816,7 +816,7 @@ namespace FW_Burn
                 //BeginInvoke(new Action(() => richTextBox1.Text += (Environment.NewLine + e.Data))); //textOut
         }
 
-        void proc2_DataReceived(object sender, DataReceivedEventArgs e2)
+        void Proc2_DataReceived(object sender, DataReceivedEventArgs e2)
         {
             if (e2.Data != null)
             {
@@ -841,7 +841,7 @@ namespace FW_Burn
             
         }
 
-        void proc3_DataReceived(object sender, DataReceivedEventArgs e3)
+        void Proc3_DataReceived(object sender, DataReceivedEventArgs e3)
         {
             if (e3.Data != null)
             {
@@ -866,7 +866,7 @@ namespace FW_Burn
 
         }
 
-        void proc4_DataReceived(object sender, DataReceivedEventArgs e4)
+        void Proc4_DataReceived(object sender, DataReceivedEventArgs e4)
         {
             if (e4.Data != null)
             {
@@ -893,7 +893,7 @@ namespace FW_Burn
 
 
         // Handle Exited event and display process information.
-        private void proc_Exited(object sender, System.EventArgs e)
+        private void Proc_Exited(object sender, System.EventArgs e)
         {
             //string stpak = String.Format("Exit time: {0}, Exit code: {1}, Elapsed time: {2}", proc.ExitTime, proc.ExitCode, Math.Round((proc.ExitTime - proc.StartTime).TotalMilliseconds));
                 
@@ -901,28 +901,28 @@ namespace FW_Burn
             
         }
 
-        private void proc2_Exited(object sender, System.EventArgs e)
+        private void Proc2_Exited(object sender, System.EventArgs e)
         {
             //string stpak = String.Format("Exit time: {0}, Exit code: {1}, Elapsed time: {2}", proc.ExitTime, proc.ExitCode, Math.Round((proc.ExitTime - proc.StartTime).TotalMilliseconds));
 
             bool rtt2 = eventHandled2.TrySetResult(true);
             
         }
-        private void proc3_Exited(object sender, System.EventArgs e)
+        private void Proc3_Exited(object sender, System.EventArgs e)
         {
             //string stpak = String.Format("Exit time: {0}, Exit code: {1}, Elapsed time: {2}", proc.ExitTime, proc.ExitCode, Math.Round((proc.ExitTime - proc.StartTime).TotalMilliseconds));
 
             bool rtt3 = eventHandled3.TrySetResult(true);
 
         }
-        private void proc4_Exited(object sender, System.EventArgs e)
+        private void Proc4_Exited(object sender, System.EventArgs e)
         {
             //string stpak = String.Format("Exit time: {0}, Exit code: {1}, Elapsed time: {2}", proc.ExitTime, proc.ExitCode, Math.Round((proc.ExitTime - proc.StartTime).TotalMilliseconds));
 
             bool rtt4 = eventHandled4.TrySetResult(true);
 
         }
-        private void textMAIN1_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextMAIN1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
             {
@@ -1003,7 +1003,7 @@ namespace FW_Burn
                 }*/
             }
         }
-        private void textMAIN2_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextMAIN2_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
             {
@@ -1044,7 +1044,7 @@ namespace FW_Burn
                 }
             }
         }
-        private void textMAIN3_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextMAIN3_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
             {
@@ -1085,7 +1085,7 @@ namespace FW_Burn
             }
         }
 
-        private void textMAIN4_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextMAIN4_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
             {
@@ -1127,7 +1127,7 @@ namespace FW_Burn
             }
         }
 
-        private string cmdtext(int unitnum, string boot, string image)
+        private string Cmdtext(int unitnum, string boot, string image)
         {
             string cmdtextstring = string.Empty;
             switch(unitnum)
@@ -1151,8 +1151,8 @@ namespace FW_Burn
         }
         private void Cmd_Burn1_Click(object sender, EventArgs e)
         {
-            
-            string cmdline = string.Empty;
+
+            string cmdline;// = string.Empty;
             int fmb = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[0]);
             if (fmb == 1)
             {
@@ -1162,7 +1162,7 @@ namespace FW_Burn
                     Cmd_Burn1.Enabled = false;
                     
                     //cmdline = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all C:\BurnImage\imx-boot-sd.bin-mainboard C:\BurnImage\scanner-scanner_image-0.1.2.img";
-                    cmdline = cmdtext(1, bootfile, imagefile);
+                    cmdline = Cmdtext(1, bootfile, imagefile);
                     _=RunWithRedirect(cmdline);
                    
                     
@@ -1173,13 +1173,13 @@ namespace FW_Burn
             else if(fmb == -1) 
             {
                 Cmd_Burn1.Enabled = false;
-                cmdline = cmdtext(1, bootfile, imagefile);
+                cmdline = Cmdtext(1, bootfile, imagefile);
                 _=RunWithRedirect(cmdline);
             }
             
         }
         //username
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if(e.KeyChar == 13)
             {
@@ -1188,7 +1188,7 @@ namespace FW_Burn
             }
         }
         //password
-        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
             {
@@ -1197,12 +1197,12 @@ namespace FW_Burn
             }
         }
 
-        private void cmd_Login_Click(object sender, EventArgs e)
+        private void Cmd_Login_Click(object sender, EventArgs e)
         {
             int sd = -1;
             if (textBox1.Text != string.Empty && textBox2.Text != string.Empty)
             {
-                sd = SQL_Manager.login_check(connectSQLDB, usr, pwd);
+                sd = SQL_Manager.Login_check(connectSQLDB, usr, pwd);
 
                 if (sd < 99 && sd > -1)
                 {
@@ -1222,13 +1222,13 @@ namespace FW_Burn
             else
             {
                 MessageBox.Show("No data entered", "Warning");
-                sd = -1;
+                //sd = -1;
                 textBox1.Clear(); textBox2.Clear(); textBox1.Focus();
             }
             
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
                         
             if(Status1.Text == "DONE")
@@ -1268,7 +1268,7 @@ namespace FW_Burn
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
             
             if (Status2.Text == "DONE")
@@ -1310,7 +1310,7 @@ namespace FW_Burn
 
         private void Cmd_Burn2_Click(object sender, EventArgs e)
         {
-            string cmdline2 = string.Empty;
+            string cmdline2;// = string.Empty;
             int fmb = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[1]);
             if (fmb == 1)
             {
@@ -1320,7 +1320,7 @@ namespace FW_Burn
                     Cmd_Burn2.Enabled = false;
                     
                     //cmdline = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all C:\BurnImage\imx-boot-sd.bin-mainboard C:\BurnImage\scanner-scanner_image-0.1.2.img";
-                    cmdline2 = cmdtext(2, bootfile, imagefile);
+                    cmdline2 = Cmdtext(2, bootfile, imagefile);
                     _=RunWithRedirect2(cmdline2);
                    
                 }
@@ -1335,12 +1335,12 @@ namespace FW_Burn
                 //int pair1 = BurnTest(bootfile, imagefile);
                 //await BurnTest1(bootfile, imagefile);
                 //cmdline = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all C:\BurnImage\imx-boot-sd.bin-mainboard C:\BurnImage\scanner-scanner_image-0.1.2.img";
-                cmdline2 = cmdtext(2, bootfile, imagefile);
+                cmdline2 = Cmdtext(2, bootfile, imagefile);
                 _=RunWithRedirect2(cmdline2);
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void Button3_Click(object sender, EventArgs e)
         {
             
             if (Status3.Text == "DONE")
@@ -1380,7 +1380,7 @@ namespace FW_Burn
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void Button4_Click(object sender, EventArgs e)
         {
             
             if (Status4.Text == "DONE")
@@ -1424,7 +1424,7 @@ namespace FW_Burn
 
         private void Cmd_Burn3_Click(object sender, EventArgs e)
         {
-            string cmdline3 = string.Empty;
+            string cmdline3;// = string.Empty;
             int fmb = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[2]);
             if (fmb == 1)
             {
@@ -1434,7 +1434,7 @@ namespace FW_Burn
                     Cmd_Burn3.Enabled = false;
                     
                     //cmdline = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all C:\BurnImage\imx-boot-sd.bin-mainboard C:\BurnImage\scanner-scanner_image-0.1.2.img";
-                    cmdline3 = cmdtext(3, bootfile, imagefile);
+                    cmdline3 = Cmdtext(3, bootfile, imagefile);
                     _=RunWithRedirect3(cmdline3);
                     
                 }
@@ -1446,14 +1446,14 @@ namespace FW_Burn
                 Cmd_Burn3.Enabled = false;
                 
                 //cmdline = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all C:\BurnImage\imx-boot-sd.bin-mainboard C:\BurnImage\scanner-scanner_image-0.1.2.img";
-                cmdline3 = cmdtext(3, bootfile, imagefile);
+                cmdline3 = Cmdtext(3, bootfile, imagefile);
                _= RunWithRedirect3(cmdline3);
             }
         }
 
         private void Cmd_Burn4_Click(object sender, EventArgs e)
         {
-            string cmdline4 = string.Empty;
+            string cmdline4;// = string.Empty;
             int fmb = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[3]);
             if (fmb == 1)
             {
@@ -1466,7 +1466,7 @@ namespace FW_Burn
                     //int pair1 = BurnTest(bootfile, imagefile);
                     //await BurnTest1(bootfile, imagefile);
                     //cmdline = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all C:\BurnImage\imx-boot-sd.bin-mainboard C:\BurnImage\scanner-scanner_image-0.1.2.img";
-                    cmdline4 = cmdtext(4, bootfile, imagefile);
+                    cmdline4 = Cmdtext(4, bootfile, imagefile);
                     _=RunWithRedirect4(cmdline4);
                     //SQL_Manager.UpdatePairing(connectSQLDB, MB_Serial[0], SOM_Serial[0], imagefw, pair1);
                 }
@@ -1481,12 +1481,12 @@ namespace FW_Burn
                 //int pair1 = BurnTest(bootfile, imagefile);
                 //await BurnTest1(bootfile, imagefile);
                 //cmdline = @"/C C:\BurnImage\uuu.exe -m 1:21 -m 1:181 -b emmc_all C:\BurnImage\imx-boot-sd.bin-mainboard C:\BurnImage\scanner-scanner_image-0.1.2.img";
-                cmdline4 = cmdtext(4, bootfile, imagefile);
+                cmdline4 = Cmdtext(4, bootfile, imagefile);
                 _=RunWithRedirect4(cmdline4);
             }
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox1.Checked) 
             {
@@ -1504,7 +1504,7 @@ namespace FW_Burn
             }
         }
 
-        private void textMAC1_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextMAC1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
             {
@@ -1512,7 +1512,7 @@ namespace FW_Burn
                 if (mc.IsMatch(textMAC1.Text))
                 {
 
-                    WIFI_Serial[0] = getFormatMac(textMAC1.Text).ToUpper();
+                    WIFI_Serial[0] = GetFormatMac(textMAC1.Text).ToUpper();
                     textMAC1.Text = WIFI_Serial[0];
                     ShowMAC(0, 1);
                     Cmd_Burn1.Enabled = true;
@@ -1529,7 +1529,7 @@ namespace FW_Burn
 
         
 
-        private void textMAC2_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextMAC2_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
             {
@@ -1537,7 +1537,7 @@ namespace FW_Burn
                 if (mc.IsMatch(textMAC2.Text))
                 {
 
-                    WIFI_Serial[1] = getFormatMac(textMAC2.Text).ToUpper();
+                    WIFI_Serial[1] = GetFormatMac(textMAC2.Text).ToUpper();
                     textMAC2.Text = WIFI_Serial[1];
                     ShowMAC(1, 1);
                     Cmd_Burn2.Enabled = true;
@@ -1552,7 +1552,7 @@ namespace FW_Burn
             }
         }
 
-        private void textMAC3_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextMAC3_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
             {
@@ -1560,7 +1560,7 @@ namespace FW_Burn
                 if (mc.IsMatch(textMAC3.Text))
                 {
 
-                    WIFI_Serial[2] = getFormatMac(textMAC3.Text).ToUpper();
+                    WIFI_Serial[2] = GetFormatMac(textMAC3.Text).ToUpper();
                     textMAC3.Text = WIFI_Serial[2];
                     ShowMAC(2, 1);
                     Cmd_Burn3.Enabled = true;
@@ -1575,7 +1575,7 @@ namespace FW_Burn
             }
         }
 
-        private void textMAC4_KeyPress(object sender, KeyPressEventArgs e)
+        private void TextMAC4_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
             {
@@ -1583,7 +1583,7 @@ namespace FW_Burn
                 if (mc.IsMatch(textMAC4.Text))
                 {
 
-                    WIFI_Serial[3] = getFormatMac(textMAC4.Text).ToUpper();
+                    WIFI_Serial[3] = GetFormatMac(textMAC4.Text).ToUpper();
                     textMAC4.Text = WIFI_Serial[3];
                     ShowMAC(3, 1);
                     Cmd_Burn4.Enabled = true;
@@ -1598,7 +1598,7 @@ namespace FW_Burn
             }
         }
 
-        public string getFormatMac(string MacAddress)
+        public string GetFormatMac(string MacAddress)
         {
             string MacwithColons = "";
             for (int i = 0; i < MacAddress.Length; i++)

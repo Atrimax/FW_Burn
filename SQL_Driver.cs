@@ -24,11 +24,11 @@ namespace FW_Burn
 
         public int FindMB_Status(string connectDB, string MBSerial)
         {
-            string query = string.Empty;
+            
             int findmain = -1;
             bool mbflag = false;
 
-            query = "SELECT TOP(1) Final_Result FROM PCBA_Test WHERE Board_SN='" + MBSerial + "' ORDER BY Date DESC";
+            string query = "SELECT TOP(1) Final_Result FROM PCBA_Test WHERE Board_SN='" + MBSerial + "' ORDER BY Date DESC";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectDB))
@@ -73,8 +73,8 @@ namespace FW_Burn
         public int FindMB_Pair(string connectDB, string MBSerial)
         {
             int pairstat = -1;
-            string query = string.Empty;
-            query = "SELECT Pair_Status FROM Parts_Pair WHERE MB_SN='" + MBSerial + "'";
+            
+            string query = "SELECT Pair_Status FROM Parts_Pair WHERE MB_SN='" + MBSerial + "'";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectDB))
@@ -105,8 +105,8 @@ namespace FW_Burn
 
         public void UpdatePairing(string connectDB, string mbsn, string somsn, string somfwver, int pairstatus, string wifimac, string opername)
         {
-            string query = string.Empty;
-            query  = query = "UPDATE Parts_Pair SET SOM_FW_VER=@SOM_FW_VER, SOM_SN=@SOM_SN, Pair_Status=@Pair_Status, Wifi_SN=@Wifi_SN, Operator_FW=@Operator_FW, Date_Pair=@Date_Pair WHERE MB_SN='" + mbsn + "'";
+            
+            string query = "UPDATE Parts_Pair SET SOM_FW_VER=@SOM_FW_VER, SOM_SN=@SOM_SN, Pair_Status=@Pair_Status, Wifi_SN=@Wifi_SN, Operator_FW=@Operator_FW, Date_Pair=@Date_Pair WHERE MB_SN='" + mbsn + "'";
             using (SqlConnection conn = new SqlConnection(connectDB))
             {
                 try
@@ -135,8 +135,8 @@ namespace FW_Burn
 
         public void SAVE_Pairing(string connectDB, string mbsn, string somsn, string somfwver, int pairstatus, string wifimac, string opername)
         {
-            string query = string.Empty;
-            query = "INSERT INTO Parts_Pair (MB_SN, SOM_FW_VER, SOM_SN, Pair_Status, Wifi_SN, Operator_FW, Date_Pair) VALUES (@MB_SN, @SOM_FW_VER, @SOM_SN, @Pair_Status, @Wifi_SN, @Operator_FW, @Date_Pair)";
+            
+            string query = "INSERT INTO Parts_Pair (MB_SN, SOM_FW_VER, SOM_SN, Pair_Status, Wifi_SN, Operator_FW, Date_Pair) VALUES (@MB_SN, @SOM_FW_VER, @SOM_SN, @Pair_Status, @Wifi_SN, @Operator_FW, @Date_Pair)";
             //@Wifi_SN, @Operator_FW, @Date_Pair)";
             try
             { 
@@ -189,7 +189,7 @@ namespace FW_Burn
         }
 
         //check login name and password vs db data, return status of user
-        public int login_check(string connectDB, string userl, string passl)
+        public int Login_check(string connectDB, string userl, string passl)
         {
             int status = -1;
 
@@ -222,7 +222,8 @@ namespace FW_Burn
             catch (Exception ex)
             {
                 //MessageBox.Show(ex.ToString(), "Warning");
-                status = 99;
+                status = 99; ex.Message.ToString();
+
             }
 
             return status;
