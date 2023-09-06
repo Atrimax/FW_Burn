@@ -82,6 +82,14 @@ namespace FW_Burn
             else { MessageBox.Show("Image/Boot file not EXISTS!!!", "Warning"); }
             
             bool connectflag = SQL_Manager.DBConnected(connectSQLDB);
+            if (checkBox1.Checked)
+            {
+                textMAC1.Enabled = true;
+                textMAC2.Enabled = true;
+                textMAC3.Enabled = true;
+                textMAC4.Enabled = true;
+            }
+
             if(connectflag) 
             {
                 label4.ForeColor = Color.Green;
@@ -932,28 +940,31 @@ namespace FW_Burn
                             textMAC1.Focus();
                         else
                         {
+                            ShowLabel(0, 0);
                             Cmd_Burn1.Enabled = true;
                             textSOM2.Focus();
                         }
                     }
                     else if (statMB == 1)
                     {
-                        DialogResult mflag = MessageBox.Show("THIS MAIN BOARD ALREADY PAIRED! DO YOU WANT TO PAIR IT AGAIN?", "Warning", MessageBoxButtons.YesNo);
-                        if (mflag == DialogResult.Yes)
-                        {
+                        
+                        //DialogResult mflag = MessageBox.Show("THIS MAIN BOARD ALREADY PAIRED! DO YOU WANT TO PAIR IT AGAIN?", "Warning", MessageBoxButtons.YesNo);
+                        //if (mflag == DialogResult.Yes)
+                        //{
                             MB_Serial[0] = textMAIN1.Text;
                             ShowMAIN(0, 1); //verified serial number
                             if (checkBox1.Checked)
                                 textMAC1.Focus();
                             else
                             {
+                                ShowLabel(0, 0);
                                 Cmd_Burn1.Enabled = true;
                                 textSOM2.Focus();
                             }
                             //ShowLabel(0, 0);
                             //Cmd_Burn1.Enabled = true;
                             //Cmd_Burn1.Focus();
-                        }
+                        //}
                     }
                 }
                 else
@@ -1016,28 +1027,31 @@ namespace FW_Burn
                             textMAC2.Focus();
                         else
                         {
+                            ShowLabel(1, 0);
                             Cmd_Burn2.Enabled = true;
                             textSOM3.Focus();
                         }
                     }
                     else if (statMB == 1)
                     {
-                        DialogResult mflag = MessageBox.Show("THIS MAIN BOARD ALREADY PAIRED! DO YOU WANT TO PAIR IT AGAIN?", "Warning", MessageBoxButtons.YesNo);
-                        if (mflag == DialogResult.Yes)
-                        {
+                        
+                        //DialogResult mflag = MessageBox.Show("THIS MAIN BOARD ALREADY PAIRED! DO YOU WANT TO PAIR IT AGAIN?", "Warning", MessageBoxButtons.YesNo);
+                        //if (mflag == DialogResult.Yes)
+                        //{
                             MB_Serial[1] = textMAIN2.Text;
                             ShowMAIN(1, 1); //verified serial number
                             if (checkBox1.Checked)
                                 textMAC2.Focus();
                             else
                             {
+                                ShowLabel(1, 0);
                                 Cmd_Burn2.Enabled = true;
                                 textSOM3.Focus();
                             }
                             //ShowLabel(0, 0);
                             //Cmd_Burn1.Enabled = true;
                             //Cmd_Burn1.Focus();
-                        }
+                        //}
                     }
                 }
                 else
@@ -1099,28 +1113,31 @@ namespace FW_Burn
                             textMAC3.Focus();
                         else
                         {
+                            ShowLabel(2, 0);
                             Cmd_Burn3.Enabled = true;
                             textSOM4.Focus();
                         }
                     }
                     else if (statMB == 1)
                     {
-                        DialogResult mflag = MessageBox.Show("THIS MAIN BOARD ALREADY PAIRED! DO YOU WANT TO PAIR IT AGAIN?", "Warning", MessageBoxButtons.YesNo);
-                        if (mflag == DialogResult.Yes)
-                        {
+                        
+                        //DialogResult mflag = MessageBox.Show("THIS MAIN BOARD ALREADY PAIRED! DO YOU WANT TO PAIR IT AGAIN?", "Warning", MessageBoxButtons.YesNo);
+                        //if (mflag == DialogResult.Yes)
+                        //{
                             MB_Serial[2] = textMAIN3.Text;
                             ShowMAIN(2, 1); //verified serial number
                             if (checkBox1.Checked)
                                 textMAC3.Focus();
                             else
                             {
+                                ShowLabel(2, 0);
                                 Cmd_Burn3.Enabled = true;
                                 textSOM4.Focus();
                             }
                             //ShowLabel(0, 0);
                             //Cmd_Burn1.Enabled = true;
                             //Cmd_Burn1.Focus();
-                        }
+                        //}
                     }
                 }
                 else
@@ -1181,28 +1198,31 @@ namespace FW_Burn
                             textMAC4.Focus();
                         else
                         {
+                            ShowLabel(3, 0);
                             Cmd_Burn4.Enabled = true;
                             //textSOM4.Focus();
                         }
                     }
                     else if (statMB == 1)
                     {
-                        DialogResult mflag = MessageBox.Show("THIS MAIN BOARD ALREADY PAIRED! DO YOU WANT TO PAIR IT AGAIN?", "Warning", MessageBoxButtons.YesNo);
-                        if (mflag == DialogResult.Yes)
-                        {
+                        
+                        //DialogResult mflag = MessageBox.Show("THIS MAIN BOARD ALREADY PAIRED! DO YOU WANT TO PAIR IT AGAIN?", "Warning", MessageBoxButtons.YesNo);
+                        //if (mflag == DialogResult.Yes)
+                        //{
                             MB_Serial[3] = textMAIN4.Text;
                             ShowMAIN(3, 1); //verified serial number
                             if (checkBox1.Checked)
                                 textMAC4.Focus();
                             else
                             {
+                                ShowLabel(3, 0);
                                 Cmd_Burn4.Enabled = true;
                                 //textSOM4.Focus();
                             }
                             //ShowLabel(0, 0);
                             //Cmd_Burn1.Enabled = true;
                             //Cmd_Burn1.Focus();
-                        }
+                        //}
                     }
                 }
                 else
@@ -1628,6 +1648,7 @@ namespace FW_Burn
                     WIFI_Serial[0] = GetFormatMac(textMAC1.Text).ToUpper();
                     textMAC1.Text = WIFI_Serial[0];
                     ShowMAC(0, 1);
+                    ShowLabel(0, 0);
                     Cmd_Burn1.Enabled = true;
                     textSOM2.Focus();
 
@@ -1651,6 +1672,7 @@ namespace FW_Burn
                     WIFI_Serial[1] = GetFormatMac(textMAC2.Text).ToUpper();
                     textMAC2.Text = WIFI_Serial[1];
                     ShowMAC(1, 1);
+                    ShowLabel(1, 0);
                     Cmd_Burn2.Enabled = true;
                     textSOM3.Focus();
 
@@ -1674,6 +1696,7 @@ namespace FW_Burn
                     WIFI_Serial[2] = GetFormatMac(textMAC3.Text).ToUpper();
                     textMAC3.Text = WIFI_Serial[2];
                     ShowMAC(2, 1);
+                    ShowLabel(2, 0);
                     Cmd_Burn3.Enabled = true;
                     textSOM4.Focus();
 
@@ -1697,8 +1720,8 @@ namespace FW_Burn
                     WIFI_Serial[3] = GetFormatMac(textMAC4.Text).ToUpper();
                     textMAC4.Text = WIFI_Serial[3];
                     ShowMAC(3, 1);
+                    ShowLabel(3, 0);
                     Cmd_Burn4.Enabled = true;
-                    
 
                 }
                 else
