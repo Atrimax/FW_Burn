@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BigQuery_Driver.cs" />
     <Compile Include="FW_Burn.cs">
       <SubType>Form</SubType>
     </Compile>
