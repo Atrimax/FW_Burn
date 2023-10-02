@@ -321,7 +321,7 @@ namespace FW_Burn
                     else if (state == 1)
                     {
                         labelMAIN1.ForeColor = Color.Green;
-                        labelMAIN1.Text = "PASSED";
+                        labelMAIN1.Text = "VERIFIED";
                         textMAIN1.Enabled = false;
                     }
                     else
@@ -340,7 +340,7 @@ namespace FW_Burn
                     else if (state == 1)
                     {
                         labelMAIN2.ForeColor = Color.Green;
-                        labelMAIN2.Text = "PASSED";
+                        labelMAIN2.Text = "VERIFIED";
                         textMAIN2.Enabled = false;
                     }
                     else
@@ -359,7 +359,7 @@ namespace FW_Burn
                     else if (state == 1)
                     {
                         labelMAIN3.ForeColor = Color.Green;
-                        labelMAIN3.Text = "PASSED";
+                        labelMAIN3.Text = "VERIFIED";
                         textMAIN3.Enabled = false;
                     }
                     else
@@ -378,7 +378,7 @@ namespace FW_Burn
                     else if (state == 1)
                     {
                         labelMAIN4.ForeColor = Color.Green;
-                        labelMAIN4.Text = "PASSED";
+                        labelMAIN4.Text = "VERIFIED";
                         textMAIN4.Enabled = false;
                     }
                     else

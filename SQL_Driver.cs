@@ -89,6 +89,8 @@ namespace FW_Burn
                             pairstat = (int)dt["Pair_Status"];
                         }
                     }
+                    else
+                        pairstat = -1;
                     
 
                 }
