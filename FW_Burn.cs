@@ -236,7 +236,7 @@ namespace FW_Burn
                 if (cnum.Contains("DONE"))
                 {
                     this.Status1.Text = cnum;
-                    this.button1.Enabled = true;
+                    this.button5.Enabled = true;
                 }
                 else
                     this.Status1.Text = cnum + "%";
@@ -1365,46 +1365,7 @@ namespace FW_Burn
             }
             
         }
-
-        private void Button1_Click(object sender, EventArgs e)
-        {
-                        
-            if(Status1.Text == "DONE")
-            {
-                int  p1 = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[0]);
-                if(p1 == 1)
-                {
-                    SQL_Manager.UpdatePairing(connectSQLDB, MB_Serial[0], SOM_Serial[0], imagefw, 1, WIFI_Serial[0], usr);
-                    Status1.Text = "";
-                    ShowLabel(0, 1);
-                    textSOM1.Clear();
-                    textMAIN1.Clear();
-                    textMAC1.Clear();
-                    progressBar1.Value = 0;
-                    labelSOM1.Text = "";
-                    labelMAIN1.Text = "";
-                    if (checkBox1.Checked) labelW1.Text = "";
-                }
-                else if(p1 == -1)
-                {
-                    SQL_Manager.SAVE_Pairing(connectSQLDB, MB_Serial[0], SOM_Serial[0], imagefw, 1, WIFI_Serial[0], usr);
-                    Status1.Text = "";
-                    ShowLabel(0, 1);
-                    textSOM1.Clear();
-                    textMAIN1.Clear();
-                    textMAC1.Clear();
-                    progressBar1.Value = 0;
-                    labelSOM1.Text = "";
-                    labelMAIN1.Text = "";
-                    if (checkBox1.Checked) labelW1.Text = "";
-                }
-                button1.Enabled = false;
-                textSOM1.Enabled = true;
-                textMAIN1.Enabled = true;
-                if (checkBox1.Checked) textMAC1.Enabled = true;
-                
-            }
-        }
+        
 
         private void Button2_Click(object sender, EventArgs e)
         {
@@ -1744,6 +1705,45 @@ namespace FW_Burn
 
             return MacwithColons;
 
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (Status1.Text == "DONE")
+            {
+                int p1 = SQL_Manager.FindMB_Pair(connectSQLDB, MB_Serial[0]);
+                if (p1 == 1)
+                {
+                    SQL_Manager.UpdatePairing(connectSQLDB, MB_Serial[0], SOM_Serial[0], imagefw, 1, WIFI_Serial[0], usr);
+                    Status1.Text = "";
+                    ShowLabel(0, 1);
+                    textSOM1.Clear();
+                    textMAIN1.Clear();
+                    textMAC1.Clear();
+                    progressBar1.Value = 0;
+                    labelSOM1.Text = "";
+                    labelMAIN1.Text = "";
+                    if (checkBox1.Checked) labelW1.Text = "";
+                }
+                else if (p1 == -1)
+                {
+                    SQL_Manager.SAVE_Pairing(connectSQLDB, MB_Serial[0], SOM_Serial[0], imagefw, 1, WIFI_Serial[0], usr);
+                    Status1.Text = "";
+                    ShowLabel(0, 1);
+                    textSOM1.Clear();
+                    textMAIN1.Clear();
+                    textMAC1.Clear();
+                    progressBar1.Value = 0;
+                    labelSOM1.Text = "";
+                    labelMAIN1.Text = "";
+                    if (checkBox1.Checked) labelW1.Text = "";
+                }
+                button5.Enabled = false;
+                textSOM1.Enabled = true;
+                textMAIN1.Enabled = true;
+                if (checkBox1.Checked) textMAC1.Enabled = true;
+
+            }
         }
     }
 

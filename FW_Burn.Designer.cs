@@ -74,6 +74,7 @@
             this.Status3 = new System.Windows.Forms.Label();
             this.Status4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button5 = new System.Windows.Forms.Button();
             this.labelW1 = new System.Windows.Forms.Label();
             this.textMAC1 = new System.Windows.Forms.TextBox();
             this.wlbl1 = new System.Windows.Forms.Label();
@@ -89,7 +90,6 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -534,6 +534,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.labelW1);
             this.groupBox1.Controls.Add(this.textMAC1);
             this.groupBox1.Controls.Add(this.wlbl1);
@@ -549,7 +550,6 @@
             this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.Cmd_Burn1);
@@ -602,6 +602,18 @@
             this.groupBox1.TabIndex = 50;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "BURN STATION:";
+            // 
+            // button5
+            // 
+            this.button5.Enabled = false;
+            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
+            this.button5.Location = new System.Drawing.Point(955, 40);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(90, 77);
+            this.button5.TabIndex = 69;
+            this.button5.Text = "PAIR 1 UNIT";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // labelW1
             // 
@@ -758,18 +770,6 @@
             this.button2.Text = "PAIR 2 UNIT";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.Button2_Click);
-            // 
-            // button1
-            // 
-            this.button1.Enabled = false;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.button1.Location = new System.Drawing.Point(955, 40);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(91, 77);
-            this.button1.TabIndex = 52;
-            this.button1.Text = "PAIR 1 UNIT";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // label12
             // 
@@ -934,7 +934,7 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        
         private System.Windows.Forms.TextBox textMAC4;
         private System.Windows.Forms.Label wlbl4;
         private System.Windows.Forms.Label wlbl3;
@@ -948,6 +948,7 @@
         private System.Windows.Forms.TextBox textMAC1;
         private System.Windows.Forms.Label wlbl1;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button button5;
     }
 }
 
