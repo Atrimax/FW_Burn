@@ -931,7 +931,7 @@ namespace FW_Burn
             {
                 Regex gr = new Regex(pattern);
                 Regex gr1 = new Regex(pattern1);
-                if (gr.IsMatch(textMAIN1.Text) || gr1.IsMatch(pattern1))
+                if (gr.IsMatch(textMAIN1.Text) || gr1.IsMatch(textMAIN1.Text))
                 {
                     int statMB = SQL_Manager.FindMB_Pair(connectSQLDB, textMAIN1.Text);
                     if(statMB == -1 || statMB == 0)
