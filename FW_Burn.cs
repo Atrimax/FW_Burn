@@ -1019,7 +1019,7 @@ namespace FW_Burn
             {
                 Regex gr = new Regex(pattern);
                 Regex gr1 = new Regex(pattern1);
-                if (gr.IsMatch(textMAIN2.Text) || gr1.IsMatch(pattern1))
+                if (gr.IsMatch(textMAIN2.Text) || gr1.IsMatch(textMAIN2.Text))
                 {
                     int statMB = SQL_Manager.FindMB_Pair(connectSQLDB, textMAIN2.Text);
                     if (statMB == -1 || statMB == 0)
@@ -1106,7 +1106,7 @@ namespace FW_Burn
             {
                 Regex gr = new Regex(pattern);
                 Regex gr1 = new Regex(pattern1);
-                if (gr.IsMatch(textMAIN3.Text) || gr1.IsMatch(pattern1))
+                if (gr.IsMatch(textMAIN3.Text) || gr1.IsMatch(textMAIN3.Text))
                 {
                     int statMB = SQL_Manager.FindMB_Pair(connectSQLDB, textMAIN3.Text);
                     if (statMB == -1 || statMB == 0)
@@ -1192,7 +1192,7 @@ namespace FW_Burn
             {
                 Regex gr = new Regex(pattern);
                 Regex gr1 = new Regex(pattern1);
-                if (gr.IsMatch(textMAIN4.Text) || gr1.IsMatch(pattern1))
+                if (gr.IsMatch(textMAIN4.Text) || gr1.IsMatch(textMAIN4.Text))
                 {
                     int statMB = SQL_Manager.FindMB_Pair(connectSQLDB, textMAIN4.Text);
                     if (statMB == -1 || statMB == 0)
