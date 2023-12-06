@@ -25,6 +25,7 @@ namespace FW_Burn
         readonly string imagefw = System.Configuration.ConfigurationManager.AppSettings["imageversion"].ToString();
         //string ps_address = string.Empty;
         readonly string pattern = @"\AFI-\d{4}-MB\d{5}\Z";
+        readonly string pattern1 = @"\AFI-\d{4}-\d{2}MB\d{5}\Z";
         readonly string mac_pattern = @"\A[0-9A-Fa-f]{12}\Z"; //\A^[a-fA-F0-9]{12}\Z
 
         string usr = string.Empty;
@@ -929,7 +930,8 @@ namespace FW_Burn
             if (e.KeyChar == 13)
             {
                 Regex gr = new Regex(pattern);
-                if (gr.IsMatch(textMAIN1.Text))
+                Regex gr1 = new Regex(pattern1);
+                if (gr.IsMatch(textMAIN1.Text) || gr1.IsMatch(pattern1))
                 {
                     int statMB = SQL_Manager.FindMB_Pair(connectSQLDB, textMAIN1.Text);
                     if(statMB == -1 || statMB == 0)
@@ -1016,7 +1018,8 @@ namespace FW_Burn
             if (e.KeyChar == 13)
             {
                 Regex gr = new Regex(pattern);
-                if (gr.IsMatch(textMAIN2.Text))
+                Regex gr1 = new Regex(pattern1);
+                if (gr.IsMatch(textMAIN2.Text) || gr1.IsMatch(pattern1))
                 {
                     int statMB = SQL_Manager.FindMB_Pair(connectSQLDB, textMAIN2.Text);
                     if (statMB == -1 || statMB == 0)
@@ -1102,7 +1105,8 @@ namespace FW_Burn
             if (e.KeyChar == 13)
             {
                 Regex gr = new Regex(pattern);
-                if (gr.IsMatch(textMAIN3.Text))
+                Regex gr1 = new Regex(pattern1);
+                if (gr.IsMatch(textMAIN3.Text) || gr1.IsMatch(pattern1))
                 {
                     int statMB = SQL_Manager.FindMB_Pair(connectSQLDB, textMAIN3.Text);
                     if (statMB == -1 || statMB == 0)
@@ -1187,7 +1191,8 @@ namespace FW_Burn
             if (e.KeyChar == 13)
             {
                 Regex gr = new Regex(pattern);
-                if (gr.IsMatch(textMAIN4.Text))
+                Regex gr1 = new Regex(pattern1);
+                if (gr.IsMatch(textMAIN4.Text) || gr1.IsMatch(pattern1))
                 {
                     int statMB = SQL_Manager.FindMB_Pair(connectSQLDB, textMAIN4.Text);
                     if (statMB == -1 || statMB == 0)
